@@ -3,6 +3,7 @@ import { View, Text, Image, ScrollView, ImageBackground } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import PrimaryButton from "../components/PrimaryButton";
 import { icons, images } from "../constants";
+import { router } from "expo-router";
 
 const Welcome = () => {
   return (
@@ -11,7 +12,7 @@ const Welcome = () => {
         <Image source={images.background_home} className="w-full h-full border border-white" resizeMode="cover" />
       </View>
 
-      <ScrollView className="w-full absolute top-1/2 left-0 right-0 px-4"> 
+      <ScrollView className="w-full absolute top-[50%] left-0 right-0 px-4"> 
         <View className="items-center"> 
           <View className="w-[70px] h-[70px] rounded-full items-center justify-center bg-white mb-5"> 
             <Image 
@@ -33,7 +34,10 @@ const Welcome = () => {
           <PrimaryButton 
           title="Continue with email"  
           textStyles="!text-black" 
-          iconStart={<Image source={icons.email} className="w-[24px] h-[24px] ml-6" resizeMode="contain" />}
+          handlePress={() => router.push("/login")}
+          iconStart={ 
+            <Image source={icons.email} className="w-[24px] h-[24px] ml-6" resizeMode="contain" /> 
+          }
           containerStyles="w-full !bg-white" 
           />
         </View>

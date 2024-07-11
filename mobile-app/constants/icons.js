@@ -12,6 +12,9 @@ import eyeHide from "../assets/icons/eye-hide.png";
 import eye from "../assets/icons/eye.png";
 import play from "../assets/icons/play.png";
 import email from "../assets/icons/email.png";
+import email_input from "../assets/icons/email-input.png";
+import lock_input from "../assets/icons/lock-input.png";
+import user from "../assets/icons/user.png";
 
 export default {
   play,
@@ -27,5 +30,8 @@ export default {
   logout,
   eyeHide,
   eye,
-  email
+  email,
+  email_input,
+  lock_input,
+  user
 };

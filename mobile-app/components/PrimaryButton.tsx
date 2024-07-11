@@ -1,14 +1,5 @@
 import { View, Text, TouchableOpacity, ActivityIndicator } from 'react-native'
 
-type PrimaryButtonType= {  
-  title: string
-  handlePress?: () => void
-  containerStyles?: string
-  textStyles?: string
-  isLoading?: boolean
-  iconStart?: React.ReactNode
-  iconEnd?: React.ReactNode
-}
 const PrimaryButton = ({
   title,
   handlePress,
@@ -22,7 +13,7 @@ const PrimaryButton = ({
     <TouchableOpacity
       onPress={handlePress}
       activeOpacity={0.7}
-      className={`bg-black rounded-2xl min-h-[62px] flex flex-row justify-between items-center ${containerStyles} ${
+      className={`bg-primary rounded-[14px] min-h-[58px] flex flex-row justify-between items-center ${containerStyles} ${
         isLoading ? "opacity-50" : ""
       }`}
       disabled={isLoading}

@@ -3,6 +3,13 @@ module.exports = {
   content: ["./app/**/*.{js,jsx,ts,tsx}", "./components/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: { 
+      colors: {
+        primary: "#000000",
+        secondary: "#4970FF",
+        semiLight: "#EDEDED",
+        netral: "#7B7B8B",
+        semiDark: "#373636",
+      },
       fontFamily: {
         pthin: ["Poppins-Thin", "sans-serif"],
         pextralight: ["Poppins-ExtraLight", "sans-serif"],
