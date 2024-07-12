@@ -17,7 +17,7 @@ const Register = () => {
       >
         <Image  
         source={images.logo} 
-        className='w-[135px] h-[43px] mb-6'  
+        className='w-[135px] h-[43px] mb-5'  
         resizeMode='contain'  
         />
 

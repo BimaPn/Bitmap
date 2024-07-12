@@ -12,9 +12,9 @@ const Welcome = () => {
         <Image source={images.background_home} className="w-full h-full border border-white" resizeMode="cover" />
       </View>
 
-      <ScrollView className="w-full absolute top-[50%] left-0 right-0 px-4"> 
+      <ScrollView className="w-full absolute top-[48%] left-0 right-0 px-4"> 
         <View className="items-center"> 
-          <View className="w-[70px] h-[70px] rounded-full items-center justify-center bg-white mb-5"> 
+          <View className="w-[70px] h-[70px] rounded-full items-center justify-center bg-white mb-6"> 
             <Image 
             className="w-[60%] h-[60%]"   
             source={images.logoSmall}
@@ -36,13 +36,23 @@ const Welcome = () => {
           textStyles="!text-black" 
           handlePress={() => router.push("/login")}
           iconStart={ 
-            <Image source={icons.email} className="w-[24px] h-[24px] ml-6" resizeMode="contain" /> 
+            <Image source={icons.email} className="w-[24px] h-[24px] ml-6 -mt-[2px]" resizeMode="contain" /> 
           }
           containerStyles="w-full !bg-white" 
           />
+
+          <PrimaryButton 
+          title="Continue to home"  
+          textStyles="!text-black" 
+          handlePress={() => router.push("/home")}
+          iconStart={ 
+            <Image source={icons.email} className="w-[24px] h-[24px] ml-6 -mt-[2px]" resizeMode="contain" /> 
+          }
+          containerStyles="w-full !bg-white" 
+          />
+
         </View>
       </ScrollView>
-      <Text className="mb-10">Fuck you bitch</Text> 
 
       <StatusBar backgroundColor="#000000" style="light" />
         

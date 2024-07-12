@@ -18,7 +18,7 @@ const Login = () => {
 
         <Image  
         source={images.logo} 
-        className='w-[135px] h-[43px] mb-6'  
+        className='w-[135px] h-[43px] mb-5'  
         resizeMode='contain'  
         />
 
@@ -43,7 +43,7 @@ const Login = () => {
         </View>
 
         <View className='flex-row justify-end mt-3'> 
-          <Text className='font-pmedium text-base text-secondary'>Forget password?</Text>
+          <Text className='font-pmedium text-[15px] text-secondary'>Forget password?</Text>
         </View>
 
         <PrimaryButton title='Log In' containerStyles='mt-6' />

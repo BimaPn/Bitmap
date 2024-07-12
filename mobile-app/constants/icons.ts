@@ -1,0 +1,27 @@
+import home from "../assets/icons/home.png";
+import home_active from "../assets/icons/home-active.png";
+import search from "../assets/icons/search.png";
+import eyeHide from "../assets/icons/eye-hide.png";
+import eye from "../assets/icons/eye.png";
+import email from "../assets/icons/email.png";
+import email_input from "../assets/icons/email-input.png";
+import lock_input from "../assets/icons/lock-input.png";
+import user from "../assets/icons/user.png";
+import create from "../assets/icons/create.png";
+import notification from "../assets/icons/notification.png"
+import notification_active from "../assets/icons/notification-active.png"
+
+export default {
+  home,
+  home_active,
+  search,
+  eyeHide,
+  eye,
+  email,
+  email_input,
+  lock_input,
+  user,
+  create,
+  notification,
+  notification_active
+};
