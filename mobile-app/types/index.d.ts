@@ -1,3 +1,13 @@
+type TabIconType = {  
+  icon: ImageSourcePropType
+  activeIcon?: ImageSourcePropType
+  resizeMode?: "contain" | "cover"
+  focused: boolean
+  showBorderBottom?: boolean
+  iconStyles?: string
+  containerStyles?: string
+}
+
 type PrimaryButtonType= {  
   title: string
   handlePress?: () => void

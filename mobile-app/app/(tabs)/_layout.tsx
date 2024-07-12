@@ -1,71 +1,24 @@
-import { Tabs } from 'expo-router'
+import { Tabs, usePathname } from 'expo-router'
 import { View, Text, Image, ImageSourcePropType } from 'react-native'
 import { icons, images } from '../../constants'
-
-type TabIconType = {  
-  icon: ImageSourcePropType
-  activeIcon?: ImageSourcePropType
-  resizeMode?: "contain" | "cover"
-  focused: boolean
-  showBorderBottom?: boolean
-  iconStyles?: string
-  containerStyles?: string
-}
-
-const TabIcon = ({ icon, activeIcon, focused, resizeMode, showBorderBottom=true, iconStyles, containerStyles }:TabIconType) => {
-  return (
-    <View className={`flex items-center justify-center gap-2`}>
-      <View className={`relative ${containerStyles}`}> 
-        {!activeIcon && (  
-          <Image
-            source={icon}
-            resizeMode={resizeMode ?? "contain"}
-            className={`w-[26px] h-[26px] ${iconStyles}`}
-          />
-        )}
-
-        {(activeIcon && !focused) && (  
-          <Image
-            source={icon}
-            resizeMode={resizeMode ?? "contain"}
-            className={`w-[26px] h-[26px] ${iconStyles}`}
-          />
-        )}
-
-        {(activeIcon && focused) && ( 
-          <Image
-            source={activeIcon}
-            resizeMode={resizeMode ?? "contain"}
-            className={`w-[26px] h-[26px] ${iconStyles}`}
-          />
-        )}
-
-        {(focused && showBorderBottom) && (  
-          <View className='absolute -bottom-[10px] left-0 right-0 flex-row justify-center'> 
-            <View className='w-[70%] h-[3px] rounded-full bg-black' />
-          </View> 
-        )}
-      </View>
-      
-
-
-     </View>
-  );
-};
-
+import HomeHeader from '../../components/HomeHeader'
+import TabIcon from '../../components/TabIcon'
 
 const TabsLayout = () => {
+  const hide = usePathname().includes("create")
   return (
   <> 
     <Tabs 
     screenOptions={{ 
       tabBarShowLabel: false,
       tabBarStyle: { 
+        display: hide ? "none":"flex",
         backgroundColor: "#FFFFFF",
         height: 74,
         borderTopLeftRadius: 22,
         borderTopRightRadius: 22,
-        paddingBottom: 4
+        paddingBottom: 4,
+        elevation: 0,
       }
     }}  
     > 
@@ -73,7 +26,13 @@ const TabsLayout = () => {
       name='home'
       options={{  
         title:"home",
-        headerShown: false,
+        headerTitle: () => ( 
+          <HomeHeader />
+        ),
+        headerTitleAlign:"center",
+        headerStyle: {
+          elevation: 0,
+        },
         tabBarIcon: ({ color, focused }) => (
           <TabIcon
             icon={icons.home}
