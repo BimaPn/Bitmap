@@ -1,7 +1,18 @@
 import { router, usePathname } from "expo-router"
+import { useEffect, useState } from "react"
 import { Text, TouchableOpacity, View } from "react-native"
 
 const HomeHeader = () => { 
+  const [pathActive, setPathActive] = useState<"trending"|"following">("trending")
+  const path = usePathname()
+  useEffect(() => {
+    if(path.includes("/home/trending")) {
+      setPathActive("trending")
+    }
+    if(path.includes("/home/following")) {
+      setPathActive("following")
+    }
+  },[path])
   return ( 
     <View className='flex-row space-x-5'> 
       <TouchableOpacity 
@@ -9,7 +20,7 @@ const HomeHeader = () => {
       className="relative font-pmedium text-base"  
       > 
         <Text className="font-pmedium text-[15px]">Trending</Text>
-        {usePathname() === "/home/trending" && ( 
+        {pathActive === "trending" && ( 
           <BottomBorder />
         )}
       </TouchableOpacity>
@@ -19,7 +30,7 @@ const HomeHeader = () => {
       onPress={() => router.push("/home/following")}
       > 
         <Text className="font-pmedium text-[15px]">Following</Text>
-        {usePathname() === "/home/following" && ( 
+        {pathActive === "following" && ( 
           <BottomBorder />
         )}
       </TouchableOpacity>

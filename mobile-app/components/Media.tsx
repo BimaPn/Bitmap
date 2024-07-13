@@ -1,29 +1,19 @@
-import { View, Text, ImageSourcePropType, Image, StyleSheet } from 'react-native'
+import { View, Text, Image } from 'react-native'
+import DynamicImage from './DynamicImage'
 
 type MediaType = { 
-  source: ImageSourcePropType
+  uri: string 
   containerStyles?: string
 }
-const Media = ({source, containerStyles}:MediaType) => {
+const Media = ({uri, containerStyles}:MediaType) => {
     return (
-    <View  className='border'> 
-
-      <Image
-        source={source}
-        className='w-full flex-1'
-        resizeMode="contain"
+    <View className={`flex-1 ${containerStyles}`}> 
+      <DynamicImage
+      uri={uri}
       />
     </View>
 
   );
 }
-const styles = StyleSheet.create({
-  container: {
-    flexDirection:"row"
-  },
-  image: {
-    width:28
-  },
-});
 
 export default Media

@@ -1,7 +1,7 @@
 import { ActivityIndicator, Image, ImageSourcePropType, StyleSheet } from "react-native";
 import { useState, useEffect } from "react";
 
-const DynamicImage = ({ uri }:{uri: string}) => {
+const DynamicImage = ({ uri, className }:{uri: string, className?: string}) => {
   const [ratio, setRatio] = useState<null|number>(null);
 
   useEffect(() => {
