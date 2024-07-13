@@ -13,13 +13,11 @@ const Categories = () => {
 
       <View className='flex-1 flex flex-row flex-wrap -mx-1'>
         {categories.map((item, i) => ( 
-        <View className='w-1/2 p-1'> 
+        <View key={i} className='w-1/2 p-1'> 
           <CategoryPreview uri={item.image} name={item.name}  />
         </View>
-
         ))} 
       </View>
-
     </View>
   )
 }
