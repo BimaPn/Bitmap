@@ -6,7 +6,7 @@ const Following = () => {
   return (
     <MasonryFlashList
       contentContainerStyle={{ 
-        paddingHorizontal: 12,
+        paddingHorizontal: 8,
         backgroundColor: "#FFFFFF",
       }}
       data={imagesExample}

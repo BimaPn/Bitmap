@@ -1,8 +1,8 @@
 import { Tabs, usePathname } from 'expo-router'
-import { View, Text, Image, ImageSourcePropType } from 'react-native'
 import { icons, images } from '../../constants'
 import HomeHeader from '../../components/HomeHeader'
 import TabIcon from '../../components/TabIcon'
+import { StatusBar } from 'expo-status-bar'
 
 const TabsLayout = () => {
   const hide = usePathname().includes("create")
@@ -106,6 +106,8 @@ const TabsLayout = () => {
       }}  
       />
     </Tabs>
+
+    <StatusBar backgroundColor="#FFFFFF" style="dark" />
   </>
   )
 }

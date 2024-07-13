@@ -8,11 +8,11 @@ import { router } from "expo-router";
 const Welcome = () => {
   return (
     <SafeAreaView className="bg-black w-full h-full relative">
-      <View className="w-full h-[55%] px-4"> 
+      <View className="w-full h-[55%] px-3"> 
         <Image source={images.background_home} className="w-full h-full border border-white" resizeMode="cover" />
       </View>
 
-      <ScrollView className="w-full absolute top-[48%] left-0 right-0 px-4"> 
+      <ScrollView className="w-full absolute top-[48%] left-0 right-0 px-3"> 
         <View className="items-center"> 
           <View className="w-[70px] h-[70px] rounded-full items-center justify-center bg-white mb-6"> 
             <Image 

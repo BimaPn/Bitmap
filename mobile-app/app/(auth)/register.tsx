@@ -10,7 +10,7 @@ const Register = () => {
   <SafeAreaView className='bg-white h-full'> 
     <ScrollView> 
       <View 
-      className='w-full h-full flex justify-center px-4' 
+      className='w-full h-full flex justify-center px-3' 
       style={{
             minHeight: Dimensions.get("window").height - 100,
           }}
