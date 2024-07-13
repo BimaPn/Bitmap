@@ -10,8 +10,10 @@ import user from "../assets/icons/user.png";
 import create from "../assets/icons/create.png";
 import notification from "../assets/icons/notification.png"
 import notification_active from "../assets/icons/notification-active.png"
+import menu from "../assets/icons/menu.png";
 
 export default {
+  menu,
   home,
   home_active,
   search,
