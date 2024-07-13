@@ -11,8 +11,6 @@ const ProfilePage = () => {
         <Header />
         <UserContent /> 
       </ScrollView>
-
-
     </SafeAreaView> 
   )
 }

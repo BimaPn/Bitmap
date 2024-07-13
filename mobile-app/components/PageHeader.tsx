@@ -15,7 +15,7 @@ const PageHeader = (props:PageHeaderType) => {
   } = props
 
   return (
-    <View className={`flex-1 p-3 ${containerStyles}`}>
+    <View className={`flex-1 p-3 mb-3 ${containerStyles}`}>
       <Text className={`font-psemibold text-xl ${titleStyles}`}>{title}</Text>
     </View>
   )
