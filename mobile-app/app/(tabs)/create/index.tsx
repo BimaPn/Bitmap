@@ -1,13 +1,14 @@
 import { View, Text, SafeAreaView, ScrollView } from 'react-native'
-import React from 'react'
+import FormField from '../../../components/FormField'
 
 const CreatePost = () => {
   return (
-    <SafeAreaView> 
+    <SafeAreaView className='h-full bg-white'> 
      <ScrollView> 
-      <View> 
-        <Text>This is create page</Text>
-      </View>
+        <View> 
+          <Text>This is create page</Text>
+          <FormField title='Title' placeholder='Add a title' />
+        </View>
      </ScrollView>
     </SafeAreaView>
   )
