@@ -45,11 +45,10 @@ const Landing = () => {
               creators. Let’s get started.
             </p>
           </div>
-
           <PrimaryButton
             title="Continue with email"
             textStyles="text-black"
-            handlePress={() => history.push("/login")}
+            path={"/login"}
             iconStart={
               <img
                 src={icons.email}
@@ -64,7 +63,7 @@ const Landing = () => {
           <PrimaryButton
             title="Continue to home"
             textStyles="text-black"
-            handlePress={() => history.push("/home")}
+            path={"/home"}
             iconStart={
               <img
                 src={icons.email}

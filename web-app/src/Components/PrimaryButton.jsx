@@ -1,5 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
+import { Link } from "react-router-dom"
 
 const PrimaryButton = ({
   title,
@@ -9,9 +10,11 @@ const PrimaryButton = ({
   isLoading,
   iconStart,
   iconEnd,
+  path,
 }) => {
   return (
-    <button
+    <Link
+      to={path}
       onClick={handlePress}
       className={`bg-primary rounded-[14px] min-h-[58px] flex justify-between items-center ${containerStyles} ${
         isLoading ? "opacity-50" : ""
@@ -39,7 +42,7 @@ const PrimaryButton = ({
           <span className="loader"></span>
         </div>
       )}
-    </button>
+    </Link>
   )
 }
 
@@ -51,6 +54,7 @@ PrimaryButton.propTypes = {
   isLoading: PropTypes.bool,
   iconStart: PropTypes.element,
   iconEnd: PropTypes.element,
+  path: PropTypes.string,
 }
 
 // PrimaryButton.defaultProps = {
