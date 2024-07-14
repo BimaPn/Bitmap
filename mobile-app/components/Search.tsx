@@ -13,7 +13,7 @@ const Search = (props:SearchType) => {
   return (
     <View className={`space-y-2 ${otherStyles}`}>
 
-      <View className="w-full h-16 px-4 bg-black-100 rounded-[14px] bg-semiLight focus:border-2 focus:border-secondary flex flex-row items-center">
+      <View className="w-full h-14 px-4 bg-black-100 rounded-[14px] bg-semiLight focus:border-2 focus:border-secondary flex flex-row items-center">
         <View className="mr-2"> 
           <Image source={icons.searchInput} className="w-[24px] h-[24px]" resizeMode="contain" />
         </View>

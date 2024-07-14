@@ -26,3 +26,9 @@ type FormFieldType = {
   iconStart?: React.ReactNode
   otherStyles?: string
 }
+
+type FormPickerType={
+  children: React.ReactNode
+  containerStyles?: string
+  title: string
+}

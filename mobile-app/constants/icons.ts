@@ -12,6 +12,9 @@ import notification from "../assets/icons/notification.png"
 import notification_active from "../assets/icons/notification-active.png"
 import menu from "../assets/icons/menu.png";
 import searchInput from "../assets/icons/search-input.png";
+import left_dark from "../assets/icons/left-dark.png";
+import left_light from "../assets/icons/left-light.png";
+import edit_light from "../assets/icons/edit-light.png";
 
 export default {
   menu,
@@ -27,5 +30,8 @@ export default {
   user,
   create,
   notification,
-  notification_active
+  notification_active,
+  left_light,
+  left_dark,
+  edit_light
 };

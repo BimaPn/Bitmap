@@ -3,6 +3,8 @@ import { icons, images } from '../../constants'
 import HomeHeader from '../../components/HomeHeader'
 import TabIcon from '../../components/TabIcon'
 import { StatusBar } from 'expo-status-bar'
+import { Text, View } from 'react-native'
+import BackButton from '../../components/BackButton'
 
 const TabsLayout = () => {
   const hide = usePathname().includes("create")
@@ -61,7 +63,15 @@ const TabsLayout = () => {
       name='create'
       options={{  
         title:"create",
-        headerShown: false,
+        headerStyle: {
+          elevation: 0,
+        },
+        headerTitleAlign:  "center",
+        headerTitle:() => <Text className='font-pmedium text-base'>Create post</Text>,
+        headerLeft:() => (  
+          
+         <BackButton /> 
+        ),
         tabBarIcon: ({ color, focused }) => (
           <TabIcon
             icon={icons.create}
