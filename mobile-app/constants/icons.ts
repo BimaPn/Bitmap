@@ -14,6 +14,7 @@ import menu from "../assets/icons/menu.png";
 import searchInput from "../assets/icons/search-input.png";
 import left_dark from "../assets/icons/left-dark.png";
 import left_light from "../assets/icons/left-light.png";
+import edit_light from "../assets/icons/edit-light.png";
 
 export default {
   menu,
@@ -32,4 +33,5 @@ export default {
   notification_active,
   left_light,
   left_dark,
+  edit_light
 };
