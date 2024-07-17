@@ -1,7 +1,7 @@
 import { imagesExample } from '../../../constants/images'
 import { MasonryFlashList } from '@shopify/flash-list';
-import Media from '../../../components/Media';
 import DynamicImage from '../../../components/DynamicImage';
+import Post from '../../../components/Post';
 
 const Trending = () => {
   return (
@@ -14,7 +14,11 @@ const Trending = () => {
       keyExtractor={(item) => item.id}
       numColumns={2}
       renderItem={({ item }) => ( 
-        <Media uri={item.image} containerStyles='m-1' /> 
+        <Post
+        id={item.id}
+        image={item.image} 
+        containerStyles='m-1' 
+        /> 
       )}
       estimatedItemSize={200}
     />
