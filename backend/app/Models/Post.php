@@ -43,4 +43,20 @@ class Post extends Model
         return $uuid;
     }
 
+    public function likes()
+{
+    return $this->belongsToMany(User::class, 'likes', 'post_id', 'user_id');
+}
+
+public function saves()
+{
+    return $this->belongsToMany(User::class, 'saves', 'post_id', 'user_id');
+}
+
+public function creator()
+{
+    return $this->belongsTo(User::class, 'user_id');
+}
+
+
 }

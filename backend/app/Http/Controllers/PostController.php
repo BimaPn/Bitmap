@@ -50,13 +50,6 @@ class PostController extends Controller
 
         return redirect()->route('posts.index')->with('success', 'Post created successfully.');
     }
-    /**
-     * Display the specified resource.
-     */
-    public function show(Post $post)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -90,8 +83,82 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Post $post)
+    public function destroy(Post $id)
     {
-        //
+        $post = Post::findOrFail($id);
+        $post->delete();
+
+        return redirect()->route('posts.index')->with('success', 'Post deleted successfully.');
+
     }
+    public function like($id)
+    {
+        $post = Post::findOrFail($id);
+        $post->likes()->attach(Auth::id());
+
+        return response()->json(['message' => 'Post liked successfully.'], 200);
+    }
+
+    public function savePost($id)
+    {
+        $post = Post::findOrFail($id);
+        $post->saves()->attach(Auth::id());
+
+        return response()->json(['message' => 'Post saved successfully.'], 200);
+    }
+
+    public function show($id)
+    {
+        $post = Post::with('creator')->findOrFail($id);
+
+        return response()->json($post, 200);
+    }
+
+    public function getPreviewPosts()
+    {
+        $posts = Post::select('id as post_id', 'image_path as image', 'user_id')
+                    ->with(['creator:id,avatar,name,username'])
+                    ->simplePaginate(15);
+
+        return response()->json($posts, 200);
+    }
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+
+        $posts = Post::where('title', 'LIKE', "%{$query}%")
+                    ->orWhere('description', 'LIKE', "%{$query}%")
+                    ->simplePaginate(15);
+
+        return response()->json($posts, 200);
+    }
+
+    public function getUserPosts($userId)
+    {
+        $posts = Post::where('user_id', $userId)
+                    ->simplePaginate(15);
+
+        return response()->json($posts, 200);
+    }
+
+    public function getTrendingPosts()
+    {
+        $posts = Post::withCount('likes')
+                    ->orderBy('likes_count', 'desc')
+                    ->simplePaginate(15);
+
+        return response()->json($posts, 200);
+    }
+    public function getFollowingUserPosts()
+    {
+        $followingUserIds = Auth::user()->follows()->pluck('id');
+        $posts = Post::whereIn('user_id', $followingUserIds)
+                    ->simplePaginate(15);
+
+        return response()->json($posts, 200);
+}
+
+
+
+
 }
