@@ -47,14 +47,14 @@ const Login = () => {
 
       <div className="flex-1 flex font-pmedium font-medium bg-white items-center justify-center">
         <div className="w-[350px] flex flex-col items-center justify-center">
-          <TitlePage title="Log In" textStyles="self-start text-[30px]" />
+          <TitlePage title="Log In" textStyles="self-start text-2xl mb-4" />
           <FormField
             title="Email"
             placeholder="Enter your email"
             iconStart={
               <img src={icons.email_input} className="w-[26px] h-[26px]" />
             }
-            otherStyles="my-3 w-full"
+            otherStyles="mb-4 w-full"
           />
           <FormField
             title="Password"
