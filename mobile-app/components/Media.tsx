@@ -1,4 +1,4 @@
-import { View, Text, Image } from 'react-native'
+import { View } from 'react-native'
 import DynamicImage from './DynamicImage'
 
 type MediaType = { 

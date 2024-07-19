@@ -1,5 +1,6 @@
-import { View, Text, Image } from 'react-native'
+import { View, Text, Image, TouchableOpacity } from 'react-native'
 import { images } from '../constants'
+import { router } from 'expo-router'
 
 type NotificationItemType = { 
   id: string
@@ -15,6 +16,9 @@ const NotificationItem = ({notification, className}:{notification: NotificationI
   } = notification 
 
   return (
+      <TouchableOpacity 
+      onPress={() => router.push(`/users/abang`)}
+      > 
       <View  
       className={`flex-row justify-between items-center space-x-1 px-2 py-[9px] rounded-xl mb-2
       ${unread && "bg-blue-50"} ${className}`} 
@@ -38,8 +42,8 @@ const NotificationItem = ({notification, className}:{notification: NotificationI
 
           </View>
         </View>
-
       </View>
+      </TouchableOpacity>
   )
 }
 

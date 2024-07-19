@@ -16,6 +16,7 @@ const DynamicImage = ({ uri, className }:{uri: string, className?: string}) => {
     <Image
       source={{ uri: uri }}
       style={[styles.image, { aspectRatio: ratio }]}
+      className={`${className}`}
     />
   );
 };
@@ -23,7 +24,6 @@ const DynamicImage = ({ uri, className }:{uri: string, className?: string}) => {
 const styles = StyleSheet.create({
   image: {
     width: "100%",
-    borderRadius: 15,
   },
 });
 

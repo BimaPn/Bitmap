@@ -1,10 +1,10 @@
-import { View, Text, Image, ScrollView } from 'react-native'
-import { SafeAreaView } from 'react-native-safe-area-context'
+import { Image, ScrollView, Text, View } from 'react-native'
 import ProfileMenu from '../../components/ProfileMenu'
 import { images } from '../../constants'
+import { SafeAreaView } from 'react-native-safe-area-context'
 import UserContent from '../../components/user/UserContent'
 
-const ProfilePage = () => {
+const UserProfileDetailPage = () => {
   return (
     <SafeAreaView> 
       <ScrollView className='h-full bg-white px-3'> 
@@ -53,4 +53,5 @@ const Header = () => {
  )
 }
 
-export default ProfilePage
+export default UserProfileDetailPage
+
