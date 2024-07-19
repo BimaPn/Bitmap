@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { View, Text, Animated, TouchableOpacity, Dimensions, StyleSheet } from 'react-native'
 import UserPosts from './UserPosts';
 import UserCollections from './UserCollections';
+import { icons } from '../../constants';
 
 const { width } = Dimensions.get('window');
 
@@ -18,7 +19,7 @@ const UserContent = () => {
       changeActive={(val) => setActive(val)} 
       />
       
-      <View className='mt-5'> 
+      <View className='mt-4'> 
 
       {active === "posts" && ( 
         <UserPosts />
@@ -58,18 +59,18 @@ const Switch = (props:SwitchButton) => {
   };
   return ( 
       <View className='flex-1 px-2'>
-        <View className='h-[60px] bg-gray-200 rounded-xl flex-row relative'>
+        <View className='h-[48px] border-b border-gray-300 flex-row relative'>
           <Animated.View 
           style={[{ transform: [{ translateX }] }]} 
-          className="absolute w-1/2 h-full rounded-xl bg-white border border-gray-300"  
+          className="absolute -bottom-[1px] w-1/2 h-full border-b-2 border-black"  
           />
           <TouchableOpacity
-          className={`flex-1 justify-center items-center`}
+          className={`flex-1 flex-row justify-center items-center gap-[3px]`}
             style={[active === 'posts' && styles.activeButton]}
             onPress={() => handleSwitch('posts')}
           >
             <Text 
-            className={`${active === "posts" ? "text-secondary" : "text-gray-500"} font-psemibold`} 
+            className={`${active === "posts" ? "text-black font-psemibold" : "text-gray-400 font-pmedium"} text-base`} 
             >Posts</Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -78,7 +79,7 @@ const Switch = (props:SwitchButton) => {
             onPress={() => handleSwitch('collections')}
           >
             <Text 
-            className={`${active === "collections" ? "text-secondary" : "text-gray-500"} font-psemibold`} 
+            className={`${active === "collections" ? "text-black font-psemibold" : "text-gray-400 font-pmedium"} text-base`} 
             >Collections</Text>
           </TouchableOpacity>
         </View>

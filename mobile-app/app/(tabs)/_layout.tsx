@@ -66,10 +66,9 @@ const TabsLayout = () => {
         headerStyle: {
           elevation: 0,
         },
-        headerTitleAlign:  "center",
+        headerTitleAlign: "center",
         headerTitle:() => <Text className='font-pmedium text-base'>Create post</Text>,
         headerLeft:() => (  
-          
          <BackButton /> 
         ),
         tabBarIcon: ({ color, focused }) => (

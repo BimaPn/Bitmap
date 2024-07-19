@@ -15,8 +15,14 @@ import searchInput from "../assets/icons/search-input.png";
 import left_dark from "../assets/icons/left-dark.png";
 import left_light from "../assets/icons/left-light.png";
 import edit_light from "../assets/icons/edit-light.png";
+import more_dark from "../assets/icons/more-dark.png";
+import picture from "../assets/icons/picture.png";
+import collections from "../assets/icons/collections.png";
 
 export default {
+  picture,
+  collections,
+  more_dark,
   menu,
   home,
   home_active,
