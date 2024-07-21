@@ -44,7 +44,14 @@ const RootLayout = () => {
         <Stack.Screen name="search/[query]" options={{ headerShown: false }} />
         <Stack.Screen name="posts/[id]" options={{ headerShown: false }} />
         <Stack.Screen 
-        name="users/[username]" 
+        name="users/[username]/index" 
+        options={{ 
+        headerShown: false,
+        }}
+        />
+
+        <Stack.Screen 
+        name="users/[username]/following" 
         options={{ 
         headerShown: false,
         }}

@@ -1,16 +1,16 @@
 import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native'
-import ProfileMenu from '../../components/ProfileMenu'
-import { icons, images } from '../../constants'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import UserContent from '../../components/user/UserContent'
-import BackButton from '../../components/BackButton'
+import BackHeader from '../../../components/BackHeader'
+import UserContent from '../../../components/user/UserContent'
+import { icons, images } from '../../../constants'
+import { router } from 'expo-router'
 
 const UserProfileDetailPage = () => {
   return (
     <SafeAreaView> 
       <ScrollView stickyHeaderIndices={[0]} className='h-full bg-white'> 
 
-        <Header />
+        <BackHeader title="User's Profile" />
 
         <View className='px-3 pt-3'>
           <UserInfo />
@@ -19,20 +19,6 @@ const UserProfileDetailPage = () => {
 
       </ScrollView>
     </SafeAreaView> 
-  )
-}
-
-const Header = () => {
-  return ( 
-    <View className='flex-row justify-between items-center py-4 bg-white px-1'> 
-      <View className='w-1/3 flex-row justify-start'> 
-        <BackButton />
-      </View>
-      <View className='w-1/3'> 
-        <Text className='text-center font-pmedium text-base'>User's profile</Text>
-      </View>
-      <View className='w-1/3'/> 
-    </View>
   )
 }
 
@@ -62,14 +48,22 @@ const UserInfo = () => {
           <Text className='text-xl font-psemibold'>8</Text>
           <Text className='text-netral text-sm'>Media</Text>
         </View>
-        <View className='w-[25%] items-center'> 
+
+        <TouchableOpacity  
+        onPress={() => router.push(`/users/udin/following`)} 
+        className='w-[25%] items-center' 
+        > 
           <Text className='text-xl font-psemibold'>506k</Text>
           <Text className='text-netral text-sm'>Followers</Text>
-        </View>
-        <View className='w-[25%] items-center'> 
+        </TouchableOpacity>
+
+        <TouchableOpacity  
+        onPress={() => router.push(`/users/udin/following`)} 
+        className='w-[25%] items-center' 
+        > 
           <Text className='text-xl font-psemibold'>271</Text>
           <Text className='text-netral text-sm'>Following</Text>
-        </View>
+        </TouchableOpacity>
       </View> 
       
       <View className='w-full flex-row items-center justify-center space-x-2'>
@@ -89,4 +83,3 @@ const UserInfo = () => {
 }
 
 export default UserProfileDetailPage
-
