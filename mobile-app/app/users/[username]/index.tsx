@@ -50,7 +50,7 @@ const UserInfo = () => {
         </View>
 
         <TouchableOpacity  
-        onPress={() => router.push(`/users/udin/following`)} 
+        onPress={() => router.push(`/users/udin/followers`)} 
         className='w-[25%] items-center' 
         > 
           <Text className='text-xl font-psemibold'>506k</Text>

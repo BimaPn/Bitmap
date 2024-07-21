@@ -49,9 +49,14 @@ const RootLayout = () => {
         headerShown: false,
         }}
         />
-
         <Stack.Screen 
         name="users/[username]/following" 
+        options={{ 
+        headerShown: false,
+        }}
+        />
+        <Stack.Screen 
+        name="users/[username]/followers" 
         options={{ 
         headerShown: false,
         }}

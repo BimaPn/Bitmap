@@ -3,11 +3,11 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import BackHeader from '../../../components/BackHeader'
 import UserItem from '../../../components/user/UserItem'
 
-const UserFollowing = () => {
+const UserFollowers = () => {
   return (
     <SafeAreaView> 
       <ScrollView className='h-full bg-white' stickyHeaderIndices={[0]}> 
-        <BackHeader title='25k Following' />
+        <BackHeader title='25k Followers' />
 
         <View className='px-3 mt-3'> 
           {[1,2,3,4,5,6,7,8].map((item) => ( 
@@ -21,5 +21,4 @@ const UserFollowing = () => {
   )
 }
 
-
-export default UserFollowing 
+export default UserFollowers
