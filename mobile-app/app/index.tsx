@@ -22,7 +22,7 @@ const Welcome = () => {
             />
           </View>
 
-          <View className="space-y-3 mb-8"> 
+          <View className="space-y-3 mb-10"> 
             <Text className="text-white font-psemibold text-center text-2xl"> 
               Discover thousands of {'\n'} Photos for your inspiration
             </Text>
