@@ -8,7 +8,7 @@ const Categories = () => {
     <View  className='mt-5'>
       <View className='flex-row items-center justify-between mb-[10px]'> 
         <Text className='text-lg font-pmedium'>Popular Categories</Text>
-        <Link href={`/test`} className='text-secondary text-[15px] font-pmedium'>See all</Link>
+        <Link href={`/categories`} className='text-secondary text-[15px] font-pmedium'>See all</Link>
       </View>
 
       <View className='flex-1 flex flex-row flex-wrap -mx-1'>
