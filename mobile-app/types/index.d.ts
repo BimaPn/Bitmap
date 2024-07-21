@@ -25,6 +25,7 @@ type FormFieldType = {
   handleChangeText?: (val: string) => void
   iconStart?: React.ReactNode
   otherStyles?: string
+  inputStyles?: string
 }
 
 type FormPickerType={

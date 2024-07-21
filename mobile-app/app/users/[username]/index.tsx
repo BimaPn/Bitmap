@@ -75,8 +75,6 @@ const UserInfo = () => {
         </TouchableOpacity>
       </View>
 
-
-
     </View>
  </>
  )
