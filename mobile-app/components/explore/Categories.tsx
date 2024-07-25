@@ -1,5 +1,5 @@
-import { Link } from 'expo-router'
-import { View, Text, Image} from 'react-native'
+import { Link, router } from 'expo-router'
+import { View, Text, Image, TouchableOpacity} from 'react-native'
 import { categories } from '../../constants/images'
 import { LinearGradient } from 'expo-linear-gradient'
 
@@ -39,7 +39,7 @@ export const CategoryPreview = (props:CategoryPreviewType) => {
   } = props
 
   return( 
-    <View className={`relative ${containerStyles} rounded-2xl overflow-hidden`}>
+    <TouchableOpacity onPress={() => router.push(`categories/test`)} className={`relative ${containerStyles} rounded-2xl overflow-hidden`}>
       <Image 
       source={{ uri }} 
       style={{ width:"100%", aspectRatio: 4/3 }} 
@@ -53,7 +53,7 @@ export const CategoryPreview = (props:CategoryPreviewType) => {
       colors={['rgba(0,0,0,0.8)', 'transparent']}
       className='absolute top-0 left-0 right-0 h-[60%] z-0'
       />
-    </View>
+    </TouchableOpacity>
   )
 }
 
