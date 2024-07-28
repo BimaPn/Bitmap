@@ -34,7 +34,7 @@ const Welcome = () => {
           <PrimaryButton 
           title="Continue with email"  
           textStyles="!text-black" 
-          handlePress={() => router.push("/home")}
+          handlePress={() => router.push("/login")}
           iconStart={ 
             <Image source={icons.email} className="w-[24px] h-[24px] ml-6 -mt-[2px]" resizeMode="contain" /> 
           }

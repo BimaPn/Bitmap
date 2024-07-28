@@ -1,19 +1,18 @@
 import { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, Image, TextInputProps } from "react-native";
 import { icons } from "../constants";
+import { Control, Controller } from "react-hook-form";
 
 const FormField = ({
   title,
-  value,
   placeholder,
-  handleChangeText,
   otherStyles,
   inputStyles,
   iconStart,
   ...props
 }:FormFieldType & TextInputProps) => {
   const [showPassword, setShowPassword] = useState(false);
-
+  const isPasswordField = title.toLowerCase().includes(`password`)
   return (
     <View className={`space-y-2 ${otherStyles}`}>
       <Text className="text-base text-semiDark font-pmedium">{title}</Text>
@@ -27,16 +26,14 @@ const FormField = ({
           </View>
         )} 
         <TextInput
-          className="flex-1 text-black font-pmedium text-base h-14"
-          value={value}
           placeholder={placeholder}
+          className="flex-1 text-black font-pmedium text-base h-14"
           placeholderTextColor="#7B7B8B"
-          onChangeText={handleChangeText}
-          secureTextEntry={title === "Password" && !showPassword}
+          secureTextEntry={isPasswordField && !showPassword}
           {...props}
         />
 
-        {title === "Password" && (
+        {isPasswordField && (
           <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
             <Image
               source={!showPassword ? icons.eye : icons.eyeHide}
@@ -49,6 +46,21 @@ const FormField = ({
     </View>
   );
 };
+
+export const ControlFormField = ({formFieldProps, ...props}:{formFieldProps: FormFieldType, name: string, control: Control }) => {
+  return (
+  <Controller 
+  {...props}
+  render={({ field: { onChange, value } }) => (
+    <FormField 
+    value={value}
+    onChangeText={onChange}
+      {...formFieldProps} 
+    />
+  )}
+  />
+  )
+}
 
 export default FormField;
 

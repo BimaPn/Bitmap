@@ -20,12 +20,10 @@ type PrimaryButtonType= {
 
 type FormFieldType = {  
   title: string
-  value?: string
-  placeholder: string
-  handleChangeText?: (val: string) => void
   iconStart?: React.ReactNode
   otherStyles?: string
   inputStyles?: string
+  placeholder?: string
 }
 
 type FormPickerType={
