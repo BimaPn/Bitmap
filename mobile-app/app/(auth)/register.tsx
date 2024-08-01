@@ -6,6 +6,7 @@ import FormField, { ControlFormField } from '../../components/FormField'
 import { Link } from 'expo-router'
 import { useForm } from "react-hook-form"
 import axios from 'axios'
+import { useEffect } from 'react'
 
 const Register = () => {
   return (
@@ -44,6 +45,7 @@ const RegisterForm = () => {
   const { 
     control,
     handleSubmit,
+    setError,
     formState: { errors }
   } = useForm({ 
     defaultValues: {
@@ -55,7 +57,7 @@ const RegisterForm = () => {
   })
 
   const onSubmit = handleSubmit((data) => { 
-    axios.post(`http://192.168.107.132:8000/api/register`,
+    axios.post(`${process.env.EXPO_PUBLIC_API_URL}/api/register`,
     { ...data, password_confirmation: data.password },
     {withCredentials:true})
     .then((res) => {
@@ -64,8 +66,16 @@ const RegisterForm = () => {
       })
     .catch((err) => {
       console.log(err.response.data)
+      const errorResponse = err.response.data
+      for(const error in errorResponse) {
+        setError(`${error}` as any, { type: "custom", message: errorResponse[error][0] })
+      }
     })
   }) 
+
+  useEffect(() => {
+    console.log(errors)
+  },[errors])
 
   return (
   <> 
@@ -80,7 +90,8 @@ const RegisterForm = () => {
         iconStart: (
           <Image source={icons.user} className="w-[26px] h-[26px] -mt-[6px]" resizeMode="contain" />
         ),
-        otherStyles: 'mb-4'
+        otherStyles: 'mb-4',
+        errorMessage: errors.name?.message
       }}  
       />
 
@@ -93,7 +104,8 @@ const RegisterForm = () => {
         iconStart: (
           <Image source={icons.user} className="w-[26px] h-[26px] -mt-[6px]" resizeMode="contain" />
         ),
-        otherStyles: 'mb-4'
+        otherStyles: 'mb-4',
+        errorMessage: errors.username?.message
       }}  
       />
 
@@ -106,7 +118,8 @@ const RegisterForm = () => {
         iconStart: (
           <Image source={icons.email_input} className="w-[26px] h-[26px]" resizeMode="contain" />
         ),
-        otherStyles: 'mb-4'
+        otherStyles: 'mb-4',
+        errorMessage: errors.email?.message
       }}  
       />
 
@@ -119,7 +132,8 @@ const RegisterForm = () => {
         iconStart: (
           <Image source={icons.lock_input} className="w-[26px] h-[26px] -mt-1" resizeMode="contain" />
         ),
-        otherStyles: 'mb-4'
+        otherStyles: 'mb-4',
+        errorMessage: errors.password?.message
       }}  
       />
 

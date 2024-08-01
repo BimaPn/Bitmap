@@ -24,6 +24,7 @@ type FormFieldType = {
   otherStyles?: string
   inputStyles?: string
   placeholder?: string
+  errorMessage?: string
 }
 
 type FormPickerType={
