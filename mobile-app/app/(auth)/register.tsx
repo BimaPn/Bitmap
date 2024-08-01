@@ -3,10 +3,10 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { icons, images } from '../../constants'
 import PrimaryButton from '../../components/PrimaryButton'
 import FormField, { ControlFormField } from '../../components/FormField'
-import { Link } from 'expo-router'
+import { Link, router } from 'expo-router'
 import { useForm } from "react-hook-form"
 import axios from 'axios'
-import { useEffect } from 'react'
+import Toast from 'react-native-toast-message'
 
 const Register = () => {
   return (
@@ -61,9 +61,13 @@ const RegisterForm = () => {
     { ...data, password_confirmation: data.password },
     {withCredentials:true})
     .then((res) => {
-      console.log(`success`)
-      console.log(res.data)
-      })
+      Toast.show({
+        type: 'success',
+        text1: 'Registration Successful!',
+        text2: 'Your account has been created.'
+      });
+      router.replace("/login")
+    })
     .catch((err) => {
       console.log(err.response.data)
       const errorResponse = err.response.data
@@ -72,10 +76,6 @@ const RegisterForm = () => {
       }
     })
   }) 
-
-  useEffect(() => {
-    console.log(errors)
-  },[errors])
 
   return (
   <> 

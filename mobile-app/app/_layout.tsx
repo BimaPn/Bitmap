@@ -4,6 +4,7 @@ import "react-native-url-polyfill/auto";
 import { SplashScreen, Stack } from "expo-router";
 import { Provider } from "react-redux";
 import { store } from "../redux/store/store";
+import Toast from 'react-native-toast-message';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -38,6 +39,7 @@ const RootLayout = () => {
   }
 
   return (
+    <> 
     <Provider store={store}>
       <Stack>
         <Stack.Screen name="index" options={{ headerShown: false }} />
@@ -79,6 +81,10 @@ const RootLayout = () => {
         />
       </Stack>
     </Provider>
+    
+    <Toast />
+    </>
+
   );
 };
 
