@@ -3,13 +3,57 @@ import { View, Text, Image, ScrollView, ImageBackground } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import PrimaryButton from "../components/PrimaryButton";
 import { icons, images } from "../constants";
-import { router } from "expo-router";
-import { useEffect } from "react";
+import { Redirect, router } from "expo-router";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getItemAsync } from 'expo-secure-store';
+import { setAuth, clearAuth } from '../redux/slice/authSlice';
 
 const Welcome = () => {
+  const { isAuthenticated } = useSelector((state : any) => state.auth);
+  const dispatch = useDispatch();
+  const [loading, setloading] = useState(true)
+
   useEffect(() => {
-    console.log("welcome")
-    },[])
+    const checkToken = async () => {
+      try {
+        const accessToken = await getItemAsync('access_token');
+
+        if(accessToken) {
+          console.log(accessToken)
+          dispatch(setAuth({ accessToken }))
+          setloading(false)
+        }else {
+          dispatch(clearAuth())
+          setloading(false)
+        }
+
+      } catch(err) {
+        console.log(err)
+      }
+    }
+
+    checkToken()
+
+  },[])
+
+  if(loading) {
+    return ( 
+      <View> 
+        <Text>Loading....</Text>
+      </View>
+    )
+  }
+  if(!loading && isAuthenticated) {
+    return <Redirect href={`/home/trending`} />
+  }
+
+  return (!loading && !isAuthenticated) && (
+    <IntroductionPage />
+  );
+};
+
+const IntroductionPage = () => {
   return (
     <SafeAreaView className="bg-black w-full h-full relative">
       <View className="w-full h-[55%] px-3"> 
@@ -51,7 +95,7 @@ const Welcome = () => {
       <StatusBar backgroundColor="#000000" style="light" />
         
     </SafeAreaView>
-  );
-};
+  )
+}
 
 export default Welcome;

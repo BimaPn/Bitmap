@@ -1,11 +1,50 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import { Redirect, Stack } from "expo-router"
+import { useSelector } from "react-redux";
 
 const LoggedUserLayout = () => {
+  const { isAuthenticated } = useSelector((state : any) => state.auth);
+
+  if(!isAuthenticated) {
+    return <Redirect href={`/login`} />
+  }
   return (
-    <View>
-      <Text>LoggedUserLayout</Text>
-    </View>
+     <Stack>
+        <Stack.Screen name="(tabs)" options={{ headerShown: false, contentStyle:{backgroundColor: "#FFFFFF"} }} />
+        <Stack.Screen name="search/[query]" options={{ headerShown: false }} />
+        <Stack.Screen name="posts/[id]" options={{ headerShown: false }} />
+        <Stack.Screen name="categories/[slug]" options={{ headerShown: false }} />
+
+        <Stack.Screen 
+        name="categories/index" 
+        options={{ 
+        headerShown: false,
+        }}
+        />
+        <Stack.Screen 
+        name="profile/edit" 
+        options={{ 
+        headerShown: false,
+        }}
+        />
+        <Stack.Screen 
+        name="users/[username]/index" 
+        options={{ 
+        headerShown: false,
+        }}
+        />
+        <Stack.Screen 
+        name="users/[username]/following" 
+        options={{ 
+        headerShown: false,
+        }}
+        />
+        <Stack.Screen 
+        name="users/[username]/followers" 
+        options={{ 
+        headerShown: false,
+        }}
+        />
+      </Stack>
   )
 }
 

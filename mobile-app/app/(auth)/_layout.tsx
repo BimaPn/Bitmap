@@ -1,9 +1,14 @@
-import { View, Text } from 'react-native'
-import React from 'react'
-import { Stack } from 'expo-router'
+import { Redirect, Stack } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
+import { useSelector } from 'react-redux'
 
 const AuthLayout = () => {
+  const { isAuthenticated } = useSelector((state : any) => state.auth);
+
+  if(isAuthenticated) {
+    return <Redirect href={`/home`} />
+  }
+
   return (
       <>
       <Stack>

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { setAuth } from '../redux/slice/authSlice';
-
+import * as SecureStore from 'expo-secure-store';
 
 interface LoginCredentials {
   email: string;
@@ -21,12 +21,23 @@ const useAuth = () => {
       const response = await axios.post(`${process.env.EXPO_PUBLIC_API_URL}/api/login`,
       { ...credentials })
       console.log("success")
-      const auth = response.data
-      dispatch(setAuth({ auth }))
+      console.log(response.data)
+      const accessToken = response.data.access_token
+      saveToken(accessToken)
+      dispatch(setAuth({ accessToken }))
+
       return { ok: true }
+
     } catch (error: any) {
       console.log("error")
       return { ok: false, error: error.response.data.errors };
+    }
+  };
+  const saveToken = async (token: string) => {
+    try {
+      await SecureStore.setItemAsync('access_token', token);
+    } catch (error) {
+      console.error('Failed to save token:', error);
     }
 };
 
@@ -34,3 +45,9 @@ const useAuth = () => {
 };
 
 export default useAuth;
+
+
+
+
+
+
