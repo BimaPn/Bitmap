@@ -1,9 +1,9 @@
 import { View, Text, ScrollView } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import PageHeader from '../../components/PageHeader'
-import Search from '../../components/Search'
-import Categories from '../../components/explore/Categories'
-import Collections from '../../components/explore/Collections'
+import PageHeader from '../../../components/PageHeader'
+import Search from '../../../components/Search'
+import Categories from '../../../components/explore/Categories'
+import Collections from '../../../components/explore/Collections'
 
 const ExplorePage = () => {
   return (

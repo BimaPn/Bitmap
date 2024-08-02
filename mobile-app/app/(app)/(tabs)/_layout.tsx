@@ -1,10 +1,10 @@
 import { Tabs, usePathname } from 'expo-router'
-import { icons, images } from '../../constants'
-import HomeHeader from '../../components/HomeHeader'
-import TabIcon from '../../components/TabIcon'
-import { StatusBar } from 'expo-status-bar'
 import { Text, View } from 'react-native'
-import BackButton from '../../components/BackButton'
+import HomeHeader from '../../../components/HomeHeader'
+import TabIcon from '../../../components/TabIcon'
+import { icons, images } from '../../../constants'
+import BackButton from '../../../components/BackButton'
+import { StatusBar } from 'expo-status-bar'
 
 const TabsLayout = () => {
   const hide = usePathname().includes("create")

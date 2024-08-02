@@ -1,9 +1,9 @@
 import { View, Text, Image, ScrollView, TouchableOpacity } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import ProfileMenu from '../../components/ProfileMenu'
-import { icons, images } from '../../constants'
-import UserContent from '../../components/user/UserContent'
+import ProfileMenu from '../../../components/ProfileMenu'
+import UserContent from '../../../components/user/UserContent'
 import { router } from 'expo-router'
+import { icons, images } from '../../../constants'
 
 const ProfilePage = () => {
   return (

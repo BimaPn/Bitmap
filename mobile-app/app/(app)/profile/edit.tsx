@@ -1,9 +1,9 @@
-import { View, Text, ScrollView, Image, TouchableOpacity } from 'react-native'
+import { View, ScrollView, Image } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import BackHeader from '../../components/BackHeader'
-import PrimaryButton from '../../components/PrimaryButton'
-import FormField from '../../components/FormField'
-import { icons, images } from '../../constants'
+import BackHeader from '../../../components/BackHeader'
+import { images } from '../../../constants'
+import FormField from '../../../components/FormField'
+import PrimaryButton from '../../../components/PrimaryButton'
 
 const ProfileEdit = () => {
   return (

@@ -58,8 +58,7 @@ const RegisterForm = () => {
 
   const onSubmit = handleSubmit((data) => { 
     axios.post(`${process.env.EXPO_PUBLIC_API_URL}/api/register`,
-    { ...data, password_confirmation: data.password },
-    {withCredentials:true})
+    { ...data, password_confirmation: data.password })
     .then((res) => {
       Toast.show({
         type: 'success',
@@ -69,7 +68,6 @@ const RegisterForm = () => {
       router.replace("/login")
     })
     .catch((err) => {
-      console.log(err.response.data)
       const errorResponse = err.response.data
       for(const error in errorResponse) {
         setError(`${error}` as any, { type: "custom", message: errorResponse[error][0] })

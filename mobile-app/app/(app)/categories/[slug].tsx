@@ -1,9 +1,9 @@
 import { View, Text, ScrollView } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import BackHeader from '../../components/BackHeader'
 import { MasonryFlashList } from '@shopify/flash-list'
-import { imagesExample } from '../../constants/images'
-import Post from '../../components/Post'
+import BackHeader from '../../../components/BackHeader'
+import { imagesExample } from '../../../constants/images'
+import Post from '../../../components/Post'
 
 const CategoryDetail = () => {
   return (

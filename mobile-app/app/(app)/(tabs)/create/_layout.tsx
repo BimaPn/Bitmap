@@ -1,5 +1,4 @@
-import { router, Stack } from 'expo-router'
-import { View, Text } from 'react-native'
+import { Stack } from 'expo-router'
 
 const CreateLayout = () => {
   return (

@@ -4,8 +4,12 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import PrimaryButton from "../components/PrimaryButton";
 import { icons, images } from "../constants";
 import { router } from "expo-router";
+import { useEffect } from "react";
 
 const Welcome = () => {
+  useEffect(() => {
+    console.log("welcome")
+    },[])
   return (
     <SafeAreaView className="bg-black w-full h-full relative">
       <View className="w-full h-[55%] px-3"> 

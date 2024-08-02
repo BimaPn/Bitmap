@@ -2,9 +2,9 @@ import { useLocalSearchParams } from 'expo-router';
 import { useEffect, useRef, useState } from 'react';
 import { View, Text, Image, ScrollView, Animated, Dimensions } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import images, { imagesExample } from '../../constants/images';
-import DynamicImage from '../../components/DynamicImage';
-import FollowButton from '../../components/FollowButton';
+import images, { imagesExample } from '../../../constants/images';
+import DynamicImage from '../../../components/DynamicImage';
+import FollowButton from '../../../components/FollowButton';
 
 const { width, height } = Dimensions.get("screen")
 

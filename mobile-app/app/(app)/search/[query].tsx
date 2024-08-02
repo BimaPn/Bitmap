@@ -1,10 +1,10 @@
 import { View, Text, SafeAreaView, FlatList } from 'react-native'
-import Search from '../../components/Search'
 import { useLocalSearchParams } from 'expo-router';
 import { MasonryFlashList } from '@shopify/flash-list';
-import { imagesExample } from '../../constants/images';
-import Media from '../../components/Media';
-import BackButton from '../../components/BackButton';
+import BackButton from '../../../components/BackButton';
+import Search from '../../../components/Search';
+import Media from '../../../components/Media';
+import { imagesExample } from '../../../constants/images';
 
 const Query = () => {
   const { query } = useLocalSearchParams();

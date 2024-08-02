@@ -1,9 +1,9 @@
 import { View, Text, SafeAreaView, ScrollView, Image, TouchableOpacity } from 'react-native'
-import FormField from '../../../components/FormField'
 import { Picker } from '@react-native-picker/picker'
-import FormPicker, { FormPickerItem } from '../../../components/FormPicker'
-import { icons, images } from '../../../constants'
-import PrimaryButton from '../../../components/PrimaryButton'
+import { icons } from '../../../../constants'
+import FormField from '../../../../components/FormField'
+import FormPicker, { FormPickerItem } from '../../../../components/FormPicker'
+import PrimaryButton from '../../../../components/PrimaryButton'
 
 const CreatePost = () => {
   return (
@@ -14,7 +14,7 @@ const CreatePost = () => {
             <TouchableOpacity className='absolute top-0 right-0 z-10 p-2'> 
               <View className='bg-black/50 w-7 h-7 items-center justify-center rounded-full'> 
                 <Image source={icons.edit_light} className='w-[65%] h-[65%]' resizeMode='contain' />
-              </View>
+              </View> 
             </TouchableOpacity>
             <Image 
             source={{ uri:"https://i.ibb.co.com/xjGCwM1/nature.jpg"}}
@@ -37,7 +37,7 @@ const CreatePost = () => {
           placeholder='Add a description' 
           otherStyles='mb-4'
           />
-          <FormPicker  
+          <FormPicker
           title='Category' 
           > 
             <FormPickerItem label='Animals' value={`animals`} />

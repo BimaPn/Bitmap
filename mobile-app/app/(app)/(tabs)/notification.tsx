@@ -1,9 +1,8 @@
-import { View, Text, Image, FlatList } from 'react-native'
+import {  FlatList } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { images } from '../../constants'
-import NotificationItem from '../../components/NotificationItem'
-import { notificationDummies } from '../../constants/dummy'
-import PageHeader from '../../components/PageHeader'
+import { notificationDummies } from '../../../constants/dummy'
+import NotificationItem from '../../../components/NotificationItem'
+import PageHeader from '../../../components/PageHeader'
 
 const Notification = () => {
   return (
@@ -12,7 +11,7 @@ const Notification = () => {
       data={notificationDummies}   
       keyExtractor={(_, i) => `${i}`}
       renderItem={({item}) => ( 
-        <NotificationItem  
+        <NotificationItem
         notification={item} 
         className=''
         />

@@ -1,13 +1,12 @@
-import { imagesExample } from '../../../constants/images'
-import { MasonryFlashList } from '@shopify/flash-list';
-import DynamicImage from '../../../components/DynamicImage';
-import Post from '../../../components/Post';
+import { MasonryFlashList } from "@shopify/flash-list"
+import { imagesExample } from "../../../../constants/images"
+import Post from "../../../../components/Post"
 
-const Trending = () => {
+const Following = () => {
   return (
     <MasonryFlashList
       contentContainerStyle={{ 
-        paddingHorizontal: 12,
+        paddingHorizontal: 8,
         backgroundColor: "#FFFFFF",
       }}
       data={imagesExample}
@@ -25,4 +24,4 @@ const Trending = () => {
   )
 }
 
-export default Trending
+export default Following

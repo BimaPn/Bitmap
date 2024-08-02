@@ -1,9 +1,9 @@
 import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import BackHeader from '../../../components/BackHeader'
-import UserContent from '../../../components/user/UserContent'
-import { icons, images } from '../../../constants'
 import { router } from 'expo-router'
+import BackHeader from '../../../../components/BackHeader'
+import UserContent from '../../../../components/user/UserContent'
+import { icons, images } from '../../../../constants'
 
 const UserProfileDetailPage = () => {
   return (

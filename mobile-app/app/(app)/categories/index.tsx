@@ -1,8 +1,8 @@
 import { View, Text, FlatList } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import BackHeader from '../../components/BackHeader'
-import { categories } from '../../constants/images'
-import { CategoryPreview } from '../../components/explore/Categories'
+import { categories } from '../../../constants/images'
+import BackHeader from '../../../components/BackHeader'
+import { CategoryPreview } from '../../../components/explore/Categories'
 
 const CategoriesPage = () => {
   return (
