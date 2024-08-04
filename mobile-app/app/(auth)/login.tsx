@@ -7,6 +7,7 @@ import { Link, router } from 'expo-router'
 import { useForm } from 'react-hook-form'
 import axios from 'axios'
 import useAuth from '../../hooks/useAuth'
+import { useState } from 'react'
 
 const Login = () => {
   return (
@@ -53,9 +54,12 @@ const LoginForm = () => {
     }
   })
 
+  const [loading, setloading] = useState(false)
+
   const { login } = useAuth()
 
   const onSubmit = handleSubmit( async (data) => { 
+    setloading(true)
     const result = await login(data)
     const errorResponse = result.error
 
@@ -63,6 +67,7 @@ const LoginForm = () => {
       router.push("/home")
     }
     if(errorResponse) {
+      setloading(false)
       for(const error in errorResponse) {
         setError(`${error}` as any, { type: "custom", message: errorResponse[error][0] })
       }
@@ -108,6 +113,7 @@ const LoginForm = () => {
 
       <PrimaryButton  
       title='Log In'  
+      isLoading={loading}
       handlePress={onSubmit}
       containerStyles='mt-6' 
       />

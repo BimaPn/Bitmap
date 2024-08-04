@@ -21,12 +21,15 @@ const PrimaryButton = ({
       <View className='w-[15%]'> 
       {iconStart}
       </View>
+      
+      {!isLoading && ( 
+        <View> 
+          <Text className={`text-white font-psemibold text-[17px] ${textStyles}`}>
+            {title}
+          </Text>
+        </View>
+      )}
 
-      <View> 
-        <Text className={`text-white font-psemibold text-[17px] ${textStyles}`}>
-          {title}
-        </Text>
-      </View>
 
       <View className='w-[15%]'> 
       {iconEnd}

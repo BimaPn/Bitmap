@@ -7,6 +7,7 @@ import { Link, router } from 'expo-router'
 import { useForm } from "react-hook-form"
 import axios from 'axios'
 import Toast from 'react-native-toast-message'
+import { useState } from 'react'
 
 const Register = () => {
   return (
@@ -55,8 +56,11 @@ const RegisterForm = () => {
       password: "",
     }
   })
+    
+  const [loading, setloading] = useState(false)
 
   const onSubmit = handleSubmit((data) => { 
+    setloading(true)
     axios.post(`${process.env.EXPO_PUBLIC_API_URL}/api/register`,
     { ...data, password_confirmation: data.password })
     .then((res) => {
@@ -68,6 +72,7 @@ const RegisterForm = () => {
       router.replace("/login")
     })
     .catch((err) => {
+      setloading(false)
       const errorResponse = err.response.data
       for(const error in errorResponse) {
         setError(`${error}` as any, { type: "custom", message: errorResponse[error][0] })
@@ -139,6 +144,7 @@ const RegisterForm = () => {
 
     <PrimaryButton  
     title='Register'  
+    isLoading={loading}
     handlePress={onSubmit}
     containerStyles='mt-6' 
     />
