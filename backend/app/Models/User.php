@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\File;
 
 class User extends Authenticatable
 {
@@ -47,6 +48,22 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    // Custom methods
+
+    public function deleteAvatar ()
+    {
+        if($this->avatar != url('/storage/users/default.jpg'))
+        {
+            $path = parse_url($this->avatar);
+            $storagePath = public_path();
+            $fullPath = $storagePath . str_replace('/','\\',$path['path']);
+            File::delete($fullPath);
+        }
+    }
+
+    // Relationships
+
     public function followers()
     {
         return $this->belongsToMany(User::class, 'follows', 'followed_id', 'follower_id');
@@ -57,6 +74,25 @@ class User extends Authenticatable
         return $this->belongsToMany(User::class, 'follows', 'follower_id', 'followed_id');
     }
 
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+
+    public function likes()
+    {
+        return $this->belongsToMany(Post::class, 'likes', 'user_id', 'post_id');
+    }
+
+    public function saves()
+    {
+        return $this->belongsToMany(Post::class, 'saves', 'user_id', 'post_id');
+    }
+
+    public function follows()
+    {
+        return $this->belongsToMany(User::class, 'follows', 'user_id', 'followed_user_id');
+    }
     /**
      * The attributes that should be cast.
      *
@@ -65,25 +101,5 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
-    public function posts()
-{
-    return $this->hasMany(Post::class);
-}
-
-public function likes()
-{
-    return $this->belongsToMany(Post::class, 'likes', 'user_id', 'post_id');
-}
-
-public function saves()
-{
-    return $this->belongsToMany(Post::class, 'saves', 'user_id', 'post_id');
-}
-
-public function follows()
-{
-    return $this->belongsToMany(User::class, 'follows', 'user_id', 'followed_user_id');
-}
 
 }
