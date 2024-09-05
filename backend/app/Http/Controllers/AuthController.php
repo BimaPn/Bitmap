@@ -29,7 +29,14 @@ class AuthController extends Controller
             ]);
         }
 
-        return $user->createToken('token-name')->plainTextToken;
+        $token = $user->createToken('auth_token')->plainTextToken;
+        return response()->json([
+            "id" => $user->id,
+            "name" => $user->name,
+            "username" => $user->username,
+            "avatar" => $user->avatar,
+            "access_token" => $token,
+        ]);
     }
 
     public function logout(Request $request)
@@ -42,8 +49,8 @@ class AuthController extends Controller
     {
         // Validasi input
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
-            'username' => 'required|string|max:255',
+            'name' => 'required|string|min:4|max:255',
+            'username' => 'required|string|min:4|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
         ]);

@@ -15,7 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('username');
+            $table->string("avatar")->default(env("APP_URL","localhost:8000") . "/storage/images/users/default.jpg");
             $table->string('email')->unique();
+            $table->string("bio")->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
