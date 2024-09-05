@@ -18,6 +18,7 @@ import edit_light from "../assets/icons/edit-light.png";
 import more_dark from "../assets/icons/more-dark.png";
 import picture from "../assets/icons/picture.png";
 import collections from "../assets/icons/collections.png";
+import camera from "../assets/icons/camera.png";
 
 export default {
   picture,
@@ -39,5 +40,6 @@ export default {
   notification_active,
   left_light,
   left_dark,
-  edit_light
+  edit_light,
+  camera
 };

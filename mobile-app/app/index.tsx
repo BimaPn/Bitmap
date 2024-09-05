@@ -8,10 +8,12 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getItemAsync } from 'expo-secure-store';
 import { setAuth, clearAuth } from '../redux/slice/authSlice';
+import useAuth from "../hooks/useAuth";
 
 const Welcome = () => {
   const { isAuthenticated } = useSelector((state : any) => state.auth);
   const dispatch = useDispatch();
+  const { getUser } = useAuth()
   const [loading, setloading] = useState(true)
 
   useEffect(() => {
@@ -20,9 +22,11 @@ const Welcome = () => {
         const accessToken = await getItemAsync('access_token');
 
         if(accessToken) {
-          console.log(accessToken)
           dispatch(setAuth({ accessToken }))
-          setloading(false)
+          const user = await getUser()
+
+            setloading(false)
+
         }else {
           dispatch(clearAuth())
           setloading(false)
@@ -34,7 +38,6 @@ const Welcome = () => {
     }
 
     checkToken()
-
   },[])
 
   if(loading) {

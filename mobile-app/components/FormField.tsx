@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, Image, TextInputProps } from "react-native";
 import { icons } from "../constants";
-import { Control, Controller } from "react-hook-form";
+import { Control, Controller, ControllerProps } from "react-hook-form";
 
 const FormField = ({
   title,
@@ -9,6 +9,7 @@ const FormField = ({
   otherStyles,
   inputStyles,
   iconStart,
+  inputClassName,
   ...props
 }:FormFieldType & TextInputProps) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -29,7 +30,7 @@ const FormField = ({
         )} 
         <TextInput
           placeholder={placeholder}
-          className="flex-1 text-black font-pmedium text-base h-14"
+          className={`flex-1 text-black font-pmedium text-base h-14 ${inputClassName}`}
           placeholderTextColor="#7B7B8B"
           secureTextEntry={isPasswordField && !showPassword}
           {...props}
@@ -52,10 +53,11 @@ const FormField = ({
   );
 };
 
-export const ControlFormField = ({formFieldProps, ...props}:{formFieldProps: FormFieldType, name: string, control: Control }) => {
+export const ControlFormField = ({formFieldProps, ...props}:{formFieldProps: (FormFieldType & TextInputProps) } & Omit<ControllerProps,"render">) => {
   return (
   <Controller 
   {...props}
+  rules={props.rules}
   render={({ field: { onChange, value } }) => (
     <FormField 
     value={value}

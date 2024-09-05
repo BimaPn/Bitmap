@@ -4,13 +4,17 @@ import ProfileMenu from '../../../components/ProfileMenu'
 import UserContent from '../../../components/user/UserContent'
 import { router } from 'expo-router'
 import { icons, images } from '../../../constants'
+import Logout from '../../../components/Logout'
+import { useSelector } from 'react-redux'
 
 const ProfilePage = () => {
   return (
     <SafeAreaView> 
       <ScrollView className='h-full bg-white px-3'> 
         <View className='items-end'> 
-          <ProfileMenu /> 
+          <Logout> 
+            <ProfileMenu /> 
+          </Logout>
         </View>
         <UserInfo />
         <UserContent /> 
@@ -20,25 +24,29 @@ const ProfilePage = () => {
 }
 
 const UserInfo = () => { 
- return( 
+  const { user } = useSelector((state : any) => state.auth);
+
+ return user && ( 
  <> 
     <View className='items-center mb-3'> 
       <Image
-      source={images.user}
+      source={{ uri: user.avatar }}
       className='w-32 h-32 rounded-full'
       resizeMode='cover'
       />
 
       <View className='mt-4'>  
-        <Text className='text-[22px] font-psemibold'>Emily Johnson</Text>
-        <Text className='text-netral text-center text-[15px] -mt-[3px]'>@emily_43</Text>
+        <Text className='text-[22px] font-psemibold'>{ user.name }</Text>
+        <Text className='text-netral text-center text-[15px] -mt-[3px]'>@{user.username}</Text>
       </View>
 
-      <View className='pt-2'> 
-        <Text className='text-base text-center'>
-        Influencers and content creators can leverage Ahrefs’ Social Media Bio Generator to 
-        </Text>
-      </View>
+      {user.bio && (
+        <View className='pt-2'> 
+          <Text className='text-base text-center'>
+            { user.username } 
+          </Text>
+        </View>
+      )}
 
       <View className='w-full flex-row items-center justify-evenly mt-4 mb-4'> 
         <View className='w-[25%] items-center'> 
@@ -83,12 +91,7 @@ const UserInfo = () => {
             </Text>
           </View>
         </TouchableOpacity>
-
-        <TouchableOpacity className='p-[10px] rounded-xl border border-gray-300'> 
-          <Image source={icons.more_dark} className='w-6 h-6' resizeMode='contain' />
-        </TouchableOpacity>
       </View>
-
 
     </View>
  </>

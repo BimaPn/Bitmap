@@ -15,7 +15,8 @@ type PrimaryButtonType= {
   textStyles?: string
   isLoading?: boolean
   iconStart?: React.ReactNode
-  iconEnd?: React.ReactNode
+  iconEnd?: React.ReactNode,
+  disable?: boolean
 }
 
 type FormFieldType = {  
@@ -25,6 +26,7 @@ type FormFieldType = {
   inputStyles?: string
   placeholder?: string
   errorMessage?: string
+  inputClassName?: string
 }
 
 type FormPickerType={

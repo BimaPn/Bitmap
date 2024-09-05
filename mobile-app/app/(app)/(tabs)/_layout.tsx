@@ -5,9 +5,12 @@ import TabIcon from '../../../components/TabIcon'
 import { icons, images } from '../../../constants'
 import BackButton from '../../../components/BackButton'
 import { StatusBar } from 'expo-status-bar'
+import { useSelector } from 'react-redux'
 
 const TabsLayout = () => {
   const hide = usePathname().includes("create")
+  const { user } = useSelector((state : any) => state.auth);
+
   return (
   <> 
     <Tabs 
@@ -104,7 +107,7 @@ const TabsLayout = () => {
         headerShown: false,
         tabBarIcon: ({ color, focused }) => (
           <TabIcon
-            icon={images.user}
+            icon={user ? { uri: user.avatar } : images.user}
             focused={focused}
             resizeMode='cover'
             showBorderBottom={false}

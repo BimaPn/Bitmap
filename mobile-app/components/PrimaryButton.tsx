@@ -7,20 +7,24 @@ const PrimaryButton = ({
   textStyles,
   isLoading,
   iconStart,
-  iconEnd
+  iconEnd,
+  disable
 }:PrimaryButtonType) => {
   return (
     <TouchableOpacity
       onPress={handlePress}
       activeOpacity={0.7}
       className={`bg-primary rounded-[14px] min-h-[58px] flex flex-row justify-between items-center ${containerStyles} ${
-        isLoading ? "opacity-50" : ""
+        (disable || isLoading) ? "opacity-50" : ""
       }`}
-      disabled={isLoading}
+      disabled={isLoading || disable}
     >
-      <View className='w-[15%]'> 
-      {iconStart}
-      </View>
+      {!isLoading && (
+        <View className='w-[15%]'> 
+        {iconStart}
+        </View>
+      )}
+
       
       {!isLoading && ( 
         <View> 
@@ -31,16 +35,18 @@ const PrimaryButton = ({
       )}
 
 
-      <View className='w-[15%]'> 
-      {iconEnd}
-      </View>
+      {!isLoading && (
+        <View className='w-[15%]'> 
+        {iconEnd}
+        </View>
+      )}
 
       {isLoading && (
         <ActivityIndicator
           animating={isLoading}
           color="#fff"
           size="small"
-          className="ml-2"
+          className="ml-2 mx-auto text-center"
         />
       )}
     </TouchableOpacity>

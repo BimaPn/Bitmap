@@ -1,7 +1,9 @@
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
-import { setAuth } from '../redux/slice/authSlice';
+import { setAuth, clearAuth, setUser,  } from '../redux/slice/authSlice';
 import * as SecureStore from 'expo-secure-store';
+import { router } from 'expo-router';
+import ApiClient from '../api/axios/ApiClient';
 
 interface LoginCredentials {
   email: string;
@@ -21,11 +23,10 @@ const useAuth = () => {
       const response = await axios.post(`${process.env.EXPO_PUBLIC_API_URL}/api/login`,
       { ...credentials })
       console.log("success")
-      console.log(response.data)
       const accessToken = response.data.access_token
       saveToken(accessToken)
       dispatch(setAuth({ accessToken }))
-
+      await getUser()
       return { ok: true }
 
     } catch (error: any) {
@@ -33,15 +34,43 @@ const useAuth = () => {
       return { ok: false, error: error.response.data.errors };
     }
   };
+  const getUser = async () => {
+
+    const exist = await ApiClient().get(`${process.env.EXPO_PUBLIC_API_URL}/api/user`)
+    .then((res) => {
+      const user = res.data
+      dispatch(setUser({ user }))
+      return true
+    })
+    .catch((err) => {
+      console.log(err)
+
+      return false 
+    })
+
+    return exist
+
+  }
+  const logout = async () => {
+    try {
+      await SecureStore.deleteItemAsync('access_token');
+
+      dispatch(clearAuth());
+
+      router.navigate("/login")
+    } catch (error) {
+      console.error('Failed to logout:', error);
+    }
+  }
   const saveToken = async (token: string) => {
     try {
       await SecureStore.setItemAsync('access_token', token);
     } catch (error) {
       console.error('Failed to save token:', error);
     }
-};
+  };
 
-  return { login };
+  return { login, logout, getUser };
 };
 
 export default useAuth;
