@@ -10,6 +10,7 @@ const FormField = ({
   inputStyles,
   iconStart,
   inputClassName,
+  bottomLabel,
   ...props
 }:FormFieldType & TextInputProps) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -19,7 +20,7 @@ const FormField = ({
       <Text className="text-base text-semiDark font-pmedium">{title}</Text>
 
       <View className={`w-full h-14 px-4 rounded-[14px] bg-semiLight  
-       flex flex-row items-center 
+       flex flex-row items-center relative
        ${props.errorMessage ? "border-2 border-red-400" : "focus:border-2 focus:border-secondary" }
        ${inputStyles}`}
        >
@@ -45,6 +46,10 @@ const FormField = ({
             />
           </TouchableOpacity>
         )}
+        <View className="absolute bottom-2 right-4"> 
+          {bottomLabel && bottomLabel}
+        </View>
+
       </View>
       {props.errorMessage && ( 
         <Text className="text-red-500 font-pmedium">{props.errorMessage}</Text>

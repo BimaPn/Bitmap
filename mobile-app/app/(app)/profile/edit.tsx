@@ -8,10 +8,15 @@ import { useSelector } from 'react-redux'
 import { useForm } from 'react-hook-form'
 import * as ImagePicker from 'expo-image-picker';
 import { UpdateUserProps } from '../../../types/auth'
+import ApiClient from '../../../api/axios/ApiClient'
+import { useState } from 'react'
+import Toast from 'react-native-toast-message'
 
+const FormData = global.FormData
 
 const ProfileEdit = () => {
   const { user } = useSelector((state : any) => state.auth);
+  const [loading, setloading] = useState(false)
 
   const { 
     control,
@@ -35,8 +40,49 @@ const ProfileEdit = () => {
   
   const bioLength = bio ? bio.length : 0
 
-  const onSubmit = handleSubmit((data) => { 
-    console.log(data)
+  const onSubmit = handleSubmit( async (data) => { 
+
+    setloading(true)
+
+    const formData = new FormData()
+
+    if(data.avatar) {
+
+      formData.append("avatar", {
+        uri: data.avatar.uri,
+        type: data.avatar.mimeType,
+        name: data.avatar.fileName
+      } as unknown as Blob)
+    }
+
+    formData.append("name",data.name)
+    if(data.bio) formData.append("bio", data.bio)
+    formData.append("_method", "PUT")
+
+    await ApiClient().post("/api/user/update", formData,{ 
+      headers: {
+        "Content-Type": 'multipart/form-data',
+      }
+    })
+    .then((res) => {
+      Toast.show({
+        type: 'success',
+        text1: 'User Updated!',
+        text2: 'Your account has been updated.'
+      });
+      console.log(res.data)
+      setloading(false)
+    })
+    .catch((err) => {
+      const errorResponse = err.response.data.errors
+      console.log(err.response.data)
+
+      for(const error in errorResponse) {
+        setError(`${error}` as any, { type: "custom", message: errorResponse[error][0] })
+      }
+
+      setloading(false)
+    })
   }) 
 
   const pickImage = async () => {
@@ -78,6 +124,12 @@ const ProfileEdit = () => {
           </View>
         </View>
 
+        {errors.avatar?.message && (
+          <View className='mt-4'>
+            <Text className="text-red-500 font-pmedium text-center">{errors.avatar.message as string}</Text>
+          </View>
+        )}
+
         <View className='p-3 mt-3'> 
           <ControlFormField  
           name='name'
@@ -86,6 +138,7 @@ const ProfileEdit = () => {
             title:'name',
             placeholder:'Your name',
             otherStyles: 'mb-4',
+            errorMessage: errors.name?.message
           }}  
           rules={{ required: true, min:4 }}
           />
@@ -113,18 +166,19 @@ const ProfileEdit = () => {
               placeholder:'Your bio',
               otherStyles: 'mb-4',
               inputStyles: "!h-24 !items-start",
-              inputClassName: "!h-full !pb-6 ",
+              inputClassName: "!h-full !pb-6 !pt-4",
               style: {
                 textAlignVertical: "top"
               },
               numberOfLines: 10,
               multiline: true,
+              bottomLabel: (
+                <Text className='text-xs font-medium text-gray-600'>{bioLength} / 150</Text>
+              ),
+              errorMessage: errors.bio?.message
             }}  
             rules={{ required: true, min:4, max:150 }}
             />
-            <View className='absolute bottom-6 right-4'>
-              <Text className='text-xs font-medium text-gray-600'>{bioLength} / 150</Text>
-            </View>
           </View>
 
         </View>
@@ -134,6 +188,7 @@ const ProfileEdit = () => {
         <PrimaryButton
         title='Edit' 
         handlePress={onSubmit}
+        isLoading={loading}
         containerStyles='!w-fit !min-h-[50px]' textStyles='!text-[15px]'  
         />
        </View>

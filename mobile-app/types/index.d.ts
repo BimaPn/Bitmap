@@ -27,6 +27,7 @@ type FormFieldType = {
   placeholder?: string
   errorMessage?: string
   inputClassName?: string
+  bottomLabel?: React.ReactNode
 }
 
 type FormPickerType={
