@@ -23,6 +23,8 @@ class User extends Authenticatable
         'name',
         'username',
         'email',
+        "bio",
+        "avatar",
         'password',
     ];
 
@@ -57,9 +59,11 @@ class User extends Authenticatable
         {
             $path = parse_url($this->avatar);
             $storagePath = public_path();
-            $fullPath = $storagePath . str_replace('/','\\',$path['path']);
+            $fullPath = $storagePath . str_replace('\\','/',$path['path']);
             File::delete($fullPath);
+            return $fullPath;
         }
+        return "empty";
     }
 
     // Relationships

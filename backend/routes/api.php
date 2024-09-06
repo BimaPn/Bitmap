@@ -8,15 +8,6 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
 
 
-Route::post('/register', [AuthController::class, 'register']);
-
-Route::post('login', [AuthController::class, 'login']);
-Route::middleware('auth:sanctum')->post('logout', [AuthController::class, 'logout']);
-
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
-
 // Follow routes
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/follow/{user}', [FollowController::class, 'follow']);
@@ -38,3 +29,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::resource('posts', PostController::class)->except(['create', 'edit']);
     Route::post('/posts/{id}/comments', [CommentController::class, 'store']);
 });
+
+require __DIR__.'/auth.php';

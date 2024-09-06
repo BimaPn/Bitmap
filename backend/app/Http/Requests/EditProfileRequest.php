@@ -23,7 +23,7 @@ class EditProfileRequest extends FormRequest
     {
         return [
             "name" => "required|string|min:4|max:50",
-            "avatar" => "nullable|image|mimes:jpeg.jpg,png,webp|max:2048",
+            "avatar" => "nullable|image|max:2048",
             "bio" => "nullable|string|min:4|max:150"
         ];
     }
