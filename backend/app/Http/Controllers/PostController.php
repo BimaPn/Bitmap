@@ -143,11 +143,12 @@ class PostController extends Controller
 
     public function getTrendingPosts()
     {
-        $posts = Post::withCount('likes')
-                    ->orderBy('likes_count', 'desc')
-                    ->simplePaginate(15);
+        $posts = Post::latest()->paginate(15);
 
-        return response()->json($posts, 200);
+        return response()->json([
+            "message" => "success",
+            "posts" => $posts->items()
+        ]);
     }
     public function getFollowingUserPosts()
     {

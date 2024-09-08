@@ -14,9 +14,9 @@ class DummySeeder extends Seeder
     public function run(): void
     {
         $user = \App\Models\User::factory()->create([
-            'name' => 'daddy',
-            'username' => 'daddy12',
-            'email' => 'daddy@gmail.com',
+            'name' => 'Richard',
+            'username' => 'richard12',
+            'email' => 'richard@gmail.com',
         ]);
 
         Post::create([
