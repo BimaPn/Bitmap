@@ -9,6 +9,7 @@ const Media = ({uri, containerStyles}:MediaType) => {
     return (
     <View className={`flex-1 ${containerStyles}`}> 
       <DynamicImage
+      isRounded
       uri={uri}
       />
     </View>

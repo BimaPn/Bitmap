@@ -1,7 +1,7 @@
 import { ActivityIndicator, Image, ImageSourcePropType, LayoutChangeEvent, StyleSheet } from "react-native";
 import { useState, useEffect } from "react";
 
-const DynamicImage = ({ uri, getHeight, className }:{uri: string, getHeight?: (height: number) => void, className?: string}) => {
+const DynamicImage = ({ uri, getHeight, isRounded = false, className }:{uri: string, isRounded?: boolean, getHeight?: (height: number) => void, className?: string}) => {
   const [ratio, setRatio] = useState<null|number>(null);
 
   useEffect(() => {
@@ -27,7 +27,7 @@ const DynamicImage = ({ uri, getHeight, className }:{uri: string, getHeight?: (h
       source={{ uri: uri }}
       style={[styles.image, { aspectRatio: ratio }]}
       onLayout={onLayout}
-      className={`${className}`}
+      className={`${isRounded && "rounded-lg"} ${className}`}
     />
   );
 };

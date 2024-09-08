@@ -31,7 +31,7 @@ const PostDetail = () => {
   };
 
   return (
-    <SafeAreaView className='-mt-[2px]'> 
+    <SafeAreaView className='-mt-[2px] bg-white'> 
       <ScrollView 
       stickyHeaderIndices={[0]} 
       onScroll={handleScroll} 
@@ -57,18 +57,18 @@ const PostDetail = () => {
               resizeMode='contain' />
             </View>
           </View>
-            <LinearGradient
-            colors={['rgba(0,0,0,0.40)', 'transparent']}
-            className='absolute top-0 left-0 right-0 h-16 z-[4]'
-            />
+
+          <LinearGradient
+          colors={['rgba(0,0,0,0.40)', 'transparent']}
+          className='absolute top-0 left-0 right-0 h-16 z-[4]'
+          />
+
           <DynamicImage 
           uri={post.image} 
           getHeight={(height) => setimageHeight(height)}
           className='!rounded-none' 
           />
         </View>
-
-
 
         <PostDescription />
 
