@@ -20,7 +20,7 @@ class ProfileController extends Controller
 
         return response()->json([
             "message" => "success",
-            "user" => $user
+            "user" => $user->getInfo()
         ]);
 
     }

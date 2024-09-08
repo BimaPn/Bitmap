@@ -13,7 +13,7 @@ Route::post('login', [AuthController::class, 'login']);
 
 Route::middleware('auth:sanctum')->group(function () {
   Route::get('/user', function (Request $request) {
-    return $request->user();
+    return $request->user()->getInfo();
   });
   Route::post('logout', [AuthController::class, 'logout']);
   Route::put("/user/update", [ProfileController::class, "editProfile"]);

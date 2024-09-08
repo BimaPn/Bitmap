@@ -5,24 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 
 class Post extends Model
 {
-    use HasFactory;
+    use HasFactory, HasUuids;
 
-    public function comments()
-    {
-        return $this->hasMany(Comment::class);
-    }
-    protected $fillable = [
-        'user_id',
-        'title',
-        'description',
-        'image_path',
-        'category_id',
-        'uuid'
-    ];
+
+    protected $guarded = ["id"];
 
     protected static function boot()
     {
@@ -33,30 +24,27 @@ class Post extends Model
         });
     }
 
-    public static function generateUuid()
+
+
+    // public function comments()
+    // {
+    //     return $this->hasMany(Comment::class);
+    // }
+
+    // public function likes()
+    // {
+    //     return $this->belongsToMany(User::class, 'likes', 'post_id', 'user_id');
+    // }
+    //
+    // public function saves()
+    // {
+    //     return $this->belongsToMany(User::class, 'saves', 'post_id', 'user_id');
+    // }
+
+    public function creator()
     {
-    do  {
-        $uuid = Str::random(7);
-        }
-    while (self::where('uuid', $uuid)->exists());
-
-        return $uuid;
+        return $this->belongsTo(User::class, 'user_id');
     }
-
-    public function likes()
-{
-    return $this->belongsToMany(User::class, 'likes', 'post_id', 'user_id');
-}
-
-public function saves()
-{
-    return $this->belongsToMany(User::class, 'saves', 'post_id', 'user_id');
-}
-
-public function creator()
-{
-    return $this->belongsTo(User::class, 'user_id');
-}
 
 
 }

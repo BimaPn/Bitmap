@@ -8,10 +8,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\File;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, HasApiTokens;
+    use HasFactory, Notifiable, HasApiTokens, HasUuids;
 
 
     /**
@@ -52,6 +53,18 @@ class User extends Authenticatable
     }
 
     // Custom methods
+
+    public function getInfo ()
+    {
+        return [
+            "id" => $this->id,
+            "name" => $this->name,
+            "email" => $this->email,
+            "username" => $this->username,
+            "avatar" => $this->avatar,
+            "bio"=> $this->bio
+        ];
+    }
 
     public function deleteAvatar ()
     {
