@@ -8,8 +8,6 @@ import empty from "../assets/images/empty.png";
 import background_home from "../assets/images/background-home.png";
 import user from "../assets/images/user.jpg";
 
-
-
 export const categories =  [ 
   {
     name: "Nature",

@@ -107,7 +107,7 @@ const TabsLayout = () => {
         headerShown: false,
         tabBarIcon: ({ color, focused }) => (
           <TabIcon
-            icon={user ? { uri: user.avatar } : images.user}
+            icon={user && user.avatar ? { uri: user.avatar } : images.user}
             focused={focused}
             resizeMode='cover'
             showBorderBottom={false}

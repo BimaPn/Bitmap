@@ -30,7 +30,7 @@ const UserInfo = () => {
  <> 
     <View className='items-center mb-3'> 
       <Image
-      source={{ uri: user.avatar }}
+      source={user.avatar ? { uri: user.avatar } : images.user}
       className='w-32 h-32 rounded-full'
       resizeMode='cover'
       />

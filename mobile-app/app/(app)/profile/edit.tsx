@@ -56,6 +56,7 @@ const ProfileEdit = () => {
         name: data.avatar.fileName
       } as unknown as Blob)
     }
+    console.log(watch("avatar"))
 
     formData.append("name",data.name)
     if(data.bio) formData.append("bio", data.bio)
@@ -109,11 +110,23 @@ const ProfileEdit = () => {
 
         <View className='flex-1 items-center relative mt-4'>
           <View className='relative'>
-            <Image
-            source={{ uri: avatar ? avatar.uri : user.avatar }}
-            resizeMode='cover'
-            className='w-32 h-32 rounded-full'
-            />
+
+            {(!user.avatar) && (
+              <Image
+              source={avatar ? { uri: avatar } : images.user}
+              resizeMode='cover'
+              className='w-32 h-32 rounded-full'
+              />
+            )}
+
+            {(user.avatar) && ( 
+              <Image
+              source={{ uri: avatar ? avatar.uri : user.avatar }}
+              resizeMode='cover'
+              className='w-32 h-32 rounded-full'
+              />
+            )}
+
             <View className='h-fit absolute bottom-0 right-0'> 
                <TouchableOpacity 
                onPress={pickImage}
