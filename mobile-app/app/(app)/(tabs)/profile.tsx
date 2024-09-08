@@ -43,7 +43,7 @@ const UserInfo = () => {
       {user.bio && (
         <View className='pt-2'> 
           <Text className='text-base text-center'>
-            { user.username } 
+            { user.bio } 
           </Text>
         </View>
       )}

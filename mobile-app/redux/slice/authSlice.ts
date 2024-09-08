@@ -1,9 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { AuthUser } from "../../types/auth";
 
 type AuthState = {
   accessToken: null | string
   isAuthenticated: boolean,
-  user: AuthUser | null
+  user: Omit<AuthUser, "access_token"> | null
 }
 
 const initialState: AuthState = {

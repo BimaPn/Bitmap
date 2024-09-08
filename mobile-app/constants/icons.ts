@@ -19,8 +19,16 @@ import more_dark from "../assets/icons/more-dark.png";
 import picture from "../assets/icons/picture.png";
 import collections from "../assets/icons/collections.png";
 import camera from "../assets/icons/camera.png";
+import like from "../assets/icons/like.png";
+import download from "../assets/icons/download.png";
+import bookmark from "../assets/icons/bookmark.png";
+import share from "../assets/icons/share.png";
 
 export default {
+  share,
+  like,
+  download,
+  bookmark,
   picture,
   collections,
   more_dark,

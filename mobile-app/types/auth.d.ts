@@ -5,6 +5,7 @@ interface AuthUser {
   username: string
   email: string
   avatar: string
+  bio?: string
   access_token: string
 }
 

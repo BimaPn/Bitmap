@@ -4,6 +4,7 @@ import { setAuth, clearAuth, setUser,  } from '../redux/slice/authSlice';
 import * as SecureStore from 'expo-secure-store';
 import { router } from 'expo-router';
 import ApiClient from '../api/axios/ApiClient';
+import { AuthUser } from '../types/auth';
 
 interface LoginCredentials {
   email: string;
@@ -30,6 +31,7 @@ const useAuth = () => {
       return { ok: true }
 
     } catch (error: any) {
+      console.log(error.response.data)
       console.log("error")
       return { ok: false, error: error.response.data.errors };
     }
@@ -51,6 +53,11 @@ const useAuth = () => {
     return exist
 
   }
+
+  const updateUser = async (data: Omit<AuthUser, "access_token">) => {
+    dispatch(setUser({ user: data }))
+  }
+
   const logout = async () => {
     try {
       await SecureStore.deleteItemAsync('access_token');
@@ -70,7 +77,7 @@ const useAuth = () => {
     }
   };
 
-  return { login, logout, getUser };
+  return { login, logout, getUser, updateUser };
 };
 
 export default useAuth;

@@ -2,7 +2,7 @@ import { router } from 'expo-router'
 import { Image, TouchableOpacity } from 'react-native'
 import { icons } from '../constants'
 
-const BackButton = ({containerStyles}:{containerStyles?: string}) => {
+const BackButton = ({containerStyles, tintColor="black"}:{containerStyles?: string, tintColor?: string}) => {
   const redirect = () => {
     router.back()
   }
@@ -11,6 +11,9 @@ const BackButton = ({containerStyles}:{containerStyles?: string}) => {
       <Image 
       source={icons.left_dark} 
       className='w-5 h-5'
+      style={{ 
+        tintColor
+      }}
       resizeMode='contain'
       />
     </TouchableOpacity>

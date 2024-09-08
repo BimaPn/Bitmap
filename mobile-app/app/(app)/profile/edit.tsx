@@ -11,11 +11,13 @@ import { UpdateUserProps } from '../../../types/auth'
 import ApiClient from '../../../api/axios/ApiClient'
 import { useState } from 'react'
 import Toast from 'react-native-toast-message'
+import useAuth from '../../../hooks/useAuth'
 
 const FormData = global.FormData
 
 const ProfileEdit = () => {
   const { user } = useSelector((state : any) => state.auth);
+  const { updateUser } = useAuth()
   const [loading, setloading] = useState(false)
 
   const { 
@@ -65,12 +67,14 @@ const ProfileEdit = () => {
       }
     })
     .then((res) => {
+      updateUser(res.data.user)
+
       Toast.show({
         type: 'success',
         text1: 'User Updated!',
         text2: 'Your account has been updated.'
       });
-      console.log(res.data)
+
       setloading(false)
     })
     .catch((err) => {
