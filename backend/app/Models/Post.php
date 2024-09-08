@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 
@@ -18,10 +17,6 @@ class Post extends Model
     protected static function boot()
     {
         parent::boot();
-
-        static::creating(function ($post) {
-            $post->uuid = static::generateUuid();
-        });
     }
 
 
