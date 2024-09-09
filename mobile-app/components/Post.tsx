@@ -13,6 +13,7 @@ const Post = (props: PostType & {containerStyles?: string}) => {
   }
   return (
     <TouchableOpacity  
+    activeOpacity={1}
     onPress={openDetail}  
     className={`flex-1 ${containerStyles}`} 
     > 

@@ -1,5 +1,5 @@
 import { useLocalSearchParams } from 'expo-router';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { View, Text, Image, ScrollView, TouchableOpacity, NativeSyntheticEvent, NativeScrollEvent } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import images, { imagesExample } from '../../../constants/images';
@@ -9,16 +9,32 @@ import { icons } from '../../../constants';
 import PostsRecommendations from '../../../components/PostsRecommendations';
 import BackButton from '../../../components/BackButton';
 import { LinearGradient } from 'expo-linear-gradient';
+import ApiClient from '../../../api/axios/ApiClient';
 
 
 const PostDetail = () => {
-
   const { id } = useLocalSearchParams();
-  const [post, setpost] = useState<PostType | undefined>(imagesExample.find((post) => post.id === id as string))
-  const [imageHeight, setimageHeight] = useState(300)
+
+  const [imageHeight, setimageHeight] = useState(500)
   const [scrolled, setscrolled] = useState(false)
 
-  if(!post) return null
+  const [post, setpost] = useState<null | PostProps>(null)
+
+  useEffect(() => {
+    const getPost = async () => {
+      ApiClient().get(`/api/posts/${id}/get`)
+      .then((res) => {
+        const post = res.data.post
+        setpost(post)
+      })
+      .catch((err) => {
+        console.log(err.response)
+      })
+    }
+
+    getPost()
+  },[])
+
 
   const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     const yOffset = (event.nativeEvent.contentOffset.y) + 40;
@@ -46,31 +62,10 @@ const PostDetail = () => {
           </View>
         </View>
 
-        <View className='relative'>
+        {post && (
+        <PostContent post={post} setimageHeight={setimageHeight} />
+        )}
 
-          <View className='w-full flex-row justify-end items-center absolute top-0 z-[5] py-5'>
-            <View className='pr-4'>
-              <Image 
-              source={icons.more_dark} 
-              className='w-5 h-5' 
-              tintColor={"white"}  
-              resizeMode='contain' />
-            </View>
-          </View>
-
-          <LinearGradient
-          colors={['rgba(0,0,0,0.40)', 'transparent']}
-          className='absolute top-0 left-0 right-0 h-16 z-[4]'
-          />
-
-          <DynamicImage 
-          uri={post.image} 
-          getHeight={(height) => setimageHeight(height)}
-          className='!rounded-none' 
-          />
-        </View>
-
-        <PostDescription />
 
         <View className='mt-2'>
           <View className='mx-3 mb-3 border-t border-gray-300 pt-4'>
@@ -86,32 +81,64 @@ const PostDetail = () => {
   )
 }
 
+const PostContent = ({ post, setimageHeight }: { post: PostProps, setimageHeight: (height: number) => void }) => {
+  return (
+    <> 
+      <View className='relative'>
 
-const PostDescription = () => {
+        <View className='w-full flex-row justify-end items-center absolute top-0 z-[5] py-5'>
+          <View className='pr-4'>
+            <Image 
+            source={icons.more_dark} 
+            className='w-5 h-5' 
+            tintColor={"white"}  
+            resizeMode='contain' />
+          </View>
+        </View>
+
+        <LinearGradient
+        colors={['rgba(0,0,0,0.40)', 'transparent']}
+        className='absolute top-0 left-0 right-0 h-16 z-[4]'
+        />
+
+        <DynamicImage 
+        uri={post.media} 
+        getHeight={(height) => setimageHeight(height)}
+        className='!rounded-none' 
+        />
+      </View>
+
+      <PostDescription post={post} />
+    </> 
+  )
+}
+
+
+const PostDescription = ({ post }: { post: PostProps }) => {
   return (
     <View className='p-3 pt-4'> 
 
       <View className='flex-row justify-between items-center'> 
-        <UserInfo /> 
+        <UserInfo creator={post.creator} /> 
         <PostActions />
       </View>
 
       <View className='space-y-[7px] mt-5'> 
-        <Text className='font-pmedium text-lg leading-[24px]'>Stupid eagle killed my fucking grandpa</Text>
+        <Text className='font-pmedium text-lg leading-[24px]'>{post.title}</Text>
         <Text className='leading-6'> 
-        When it tried to kill my grandpa, i shooted a photo of the eagle before I continue to watch the bird that trying to kill my grandpa. 
+        {post.description} 
         </Text>
       </View>
     </View>
   )
 }
 
-const UserInfo = () => {
+const UserInfo = ({ creator }: { creator: PostCreatorProps }) => {
   return ( 
     <View className='flex-row items-center gap-2'> 
-      <Image source={images.user} className='w-12 h-12 rounded-full' resizeMode='cover' />
+      <Image source={{ uri: creator.avatar }} className='w-12 h-12 rounded-full' resizeMode='cover' />
       <View> 
-        <Text className='font-medium text-base'>Jackie Chan</Text>
+        <Text className='font-medium text-base'>{creator.name}</Text>
         <Text className='text-xs'>98k Followers</Text>
       </View>
     </View>
