@@ -21,6 +21,15 @@ class PostController extends Controller
         return response()->json($posts, 200);
     }
 
+    public function getPost (Post $post)
+    {
+        $post->load("creator:id,name,username,avatar")->only(["id","title","description","creator"]);
+        return response()->json([
+            "post" => $post
+        ]);
+
+    }
+
     /**
      * Store a newly created resource in storage.
      */

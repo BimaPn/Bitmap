@@ -7,6 +7,7 @@ use App\Http\Controllers\PostController;
 Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/posts/trending', [PostController::class, 'getTrendingPosts']);
+    Route::get('/posts/{post}/get', [PostController::class, 'getPost']);
     // Route::put('/posts/{id}', [PostController::class, 'update']);
     // Route::delete('/posts/{id}', [PostController::class, 'destroy']);
     // Route::post('/posts/{id}/like', [PostController::class, 'like']);
