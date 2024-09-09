@@ -152,7 +152,7 @@ class PostController extends Controller
 
     public function getTrendingPosts()
     {
-        $posts = Post::latest()->paginate(15);
+        $posts = Post::select("id", "media")->latest()->paginate(15);
 
         return response()->json([
             "message" => "success",
