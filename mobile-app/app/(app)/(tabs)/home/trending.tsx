@@ -5,13 +5,14 @@ import { useEffect, useState } from 'react';
 import ApiClient from '../../../../api/axios/ApiClient';
 
 const Trending = () => {
-  const [posts, setposts] = useState<PostProps[] | null>(null)
+  const [posts, setposts] = useState<PostPreviewProps[] | null>(null)
 
   useEffect(() => {
     const getPosts = async () => {
       ApiClient().get(`/api/posts/trending`)
       .then((res) => {
-        setposts(res.data.posts)
+        const posts = res.data.posts
+        setposts(posts)
       })
       .catch((err) => {
         console.log(err.response)
@@ -31,7 +32,7 @@ const Trending = () => {
       renderItem={({ item }) => ( 
         <Post
         id={item.id}
-        image={item.media} 
+        media={item.media} 
         containerStyles='m-1' 
         /> 
       )}

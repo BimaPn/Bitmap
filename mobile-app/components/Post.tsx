@@ -2,10 +2,10 @@ import { Text, TouchableOpacity } from 'react-native'
 import Media from './Media'
 import { router } from 'expo-router'
 
-const Post = (props: PostType & {containerStyles?: string}) => {
+const Post = (props: PostPreviewProps & {containerStyles?: string}) => {
   const {
     id,
-    image,
+    media,
     containerStyles
   } = props
   const openDetail = () => {
@@ -17,7 +17,7 @@ const Post = (props: PostType & {containerStyles?: string}) => {
     onPress={openDetail}  
     className={`flex-1 ${containerStyles}`} 
     > 
-      <Media uri={image} containerStyles='rounded-[15px]' />
+      <Media uri={media} containerStyles='rounded-[15px]' />
     </TouchableOpacity>
   )
 }

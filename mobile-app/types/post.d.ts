@@ -12,7 +12,7 @@ type PostCreatorProps = {
   avatar: string
 }
 
-type PostType = { 
-  id: string | number
-  image: string
+type PostPreviewProps = { 
+  id: string
+  media: string
 }
