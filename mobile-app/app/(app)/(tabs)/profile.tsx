@@ -6,8 +6,11 @@ import { router } from 'expo-router'
 import { icons, images } from '../../../constants'
 import Logout from '../../../components/Logout'
 import { useSelector } from 'react-redux'
+import { useState } from 'react'
+import Modal from '../../../components/Modal'
 
 const ProfilePage = () => {
+  const [toggle, settoggle] = useState(false)
   return (
     <SafeAreaView> 
       <ScrollView className='h-full bg-white px-3'> 
@@ -15,7 +18,14 @@ const ProfilePage = () => {
           <Logout> 
             <ProfileMenu /> 
           </Logout>
-        </View>
+          <TouchableOpacity onPress={() => settoggle((prev) => !prev)}>
+            <Text>Toggle Button</Text>
+          </TouchableOpacity>
+          {toggle && (
+            <Modal visible={toggle} onClose={() => settoggle(false)} /> 
+          )}
+
+        </View> 
         <UserInfo />
         <UserContent /> 
       </ScrollView>
