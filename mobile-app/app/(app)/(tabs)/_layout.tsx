@@ -1,5 +1,4 @@
-import { Tabs, usePathname } from 'expo-router'
-import { Text, View } from 'react-native'
+import { router, Tabs } from 'expo-router'
 import HomeHeader from '../../../components/HomeHeader'
 import TabIcon from '../../../components/TabIcon'
 import { icons, images } from '../../../constants'
@@ -8,7 +7,6 @@ import { StatusBar } from 'expo-status-bar'
 import { useSelector } from 'react-redux'
 
 const TabsLayout = () => {
-  const hide = usePathname().includes("create")
   const { user } = useSelector((state : any) => state.auth);
 
   return (
@@ -17,7 +15,6 @@ const TabsLayout = () => {
     screenOptions={{ 
       tabBarShowLabel: false,
       tabBarStyle: { 
-        display: hide ? "none":"flex",
         backgroundColor: "#FFFFFF",
         height: 74,
         borderTopLeftRadius: 22,
@@ -70,10 +67,6 @@ const TabsLayout = () => {
           elevation: 0,
         },
         headerTitleAlign: "center",
-        headerTitle:() => <Text className='font-pmedium text-base'>Create post</Text>,
-        headerLeft:() => (  
-         <BackButton /> 
-        ),
         tabBarIcon: ({ color, focused }) => (
           <TabIcon
             icon={icons.create}
@@ -83,6 +76,12 @@ const TabsLayout = () => {
           />
         ),
       }}  
+              listeners={({ navigation }) => ({
+          tabPress: (e) => {
+            e.preventDefault()
+            router.push("modals/create")
+          },
+        })}
       />
 
       <Tabs.Screen 

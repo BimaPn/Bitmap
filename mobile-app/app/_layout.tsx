@@ -5,6 +5,9 @@ import { Redirect, SplashScreen, Stack, usePathname } from "expo-router";
 import { Provider, useSelector } from "react-redux";
 import { store } from "../redux/store/store";
 import Toast from 'react-native-toast-message';
+import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -41,11 +44,15 @@ const RootLayout = () => {
   return (
     <> 
     <Provider store={store}>
-      <Stack>
-        <Stack.Screen name="index" options={{ headerShown: false }} />
-        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-        <Stack.Screen name="(app)" options={{ headerShown: false }} />
-      </Stack>
+      <GestureHandlerRootView style={{ flex: 1 }}> 
+        <BottomSheetModalProvider> 
+          <Stack>
+            <Stack.Screen name="index" options={{ headerShown: false }} />
+            <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+            <Stack.Screen name="(app)" options={{ headerShown: false }} />
+          </Stack>
+        </BottomSheetModalProvider>
+      </GestureHandlerRootView>
     </Provider>
     
     <Toast />
