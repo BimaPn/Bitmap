@@ -1,13 +1,13 @@
 import { View, Text, SafeAreaView, ScrollView, Image, TouchableOpacity } from 'react-native'
 import { Picker } from '@react-native-picker/picker'
-import { icons } from '../../../../constants'
-import FormField from '../../../../components/FormField'
-import FormPicker, { FormPickerItem } from '../../../../components/FormPicker'
-import PrimaryButton from '../../../../components/PrimaryButton'
+import FormField from '../../../components/FormField'
+import { icons } from '../../../constants'
+import FormPicker, { FormPickerItem } from '../../../components/FormPicker'
+import PrimaryButton from '../../../components/PrimaryButton'
 
 const CreatePost = () => {
   return (
-    <SafeAreaView className='h-full bg-white flex-1'> 
+    <SafeAreaView className=' bg-white flex-1'> 
      <ScrollView> 
         <View className='flex-1 items-center relative mt-4'>
           <View className='relative'>

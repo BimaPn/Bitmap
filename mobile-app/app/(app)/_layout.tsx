@@ -44,7 +44,14 @@ const LoggedUserLayout = () => {
         headerShown: false,
         }}
         />
-  <Stack.Screen name="modals/create" options={{ headerShown:false, presentation:"transparentModal" }} />
+        <Stack.Screen 
+        name="create/index" 
+        options={{ 
+        headerShown: false,
+        }}
+        />
+
+        <Stack.Screen name="modals/create" options={{ headerShown:false, presentation:"transparentModal" }} />
 
       </Stack>
   )

@@ -60,7 +60,7 @@ const TabsLayout = () => {
       />
 
       <Tabs.Screen 
-      name='create'
+      name='null'
       options={{  
         title:"create",
         headerStyle: {
@@ -76,12 +76,12 @@ const TabsLayout = () => {
           />
         ),
       }}  
-              listeners={({ navigation }) => ({
-          tabPress: (e) => {
-            e.preventDefault()
-            router.push("modals/create")
-          },
-        })}
+      listeners={({ navigation }) => ({
+        tabPress: (e) => {
+          e.preventDefault()
+          router.push("modals/create")
+        },
+      })}
       />
 
       <Tabs.Screen 
