@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePostRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -33,31 +34,22 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StorePostRequest $request)
     {
-        $validator = Validator::make($request->all(), [
-            'title' => 'required|string|max:255',
-            'description' => 'nullable|string|max:255',
-            'image_path' => 'required|string|max:255',
-            'category_id' => 'required|exists:categories,id',
-        ]);
+        $validatedData = $request->validated();
 
-        if ($validator->fails()) {
-            return redirect()->back()
-                             ->withErrors($validator)
-                             ->withInput();
+        $user = auth()->user();
+        if($request->file('media')){
+            $validatedData['media'] = url('/storage/'.$request->file('media')->store('/posts'));
         }
 
-        $post = new Post();
-        $post->user_id = Auth::id();
-        $post->title = $request->title;
-        $post->description = $request->description;
-        $post->image_path = $request->image_path;
-        $post->category_id = $request->category_id;
+        $validatedData["user_id"] = $user->id;
 
-        $post->save();
+        Post::create($validatedData);
 
-        return redirect()->route('posts.index')->with('success', 'Post created successfully.');
+        return response()->json([
+            "message" => "successfully created a post."
+        ]);
     }
 
     /**
