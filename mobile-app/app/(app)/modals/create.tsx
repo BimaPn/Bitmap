@@ -47,7 +47,7 @@ const Create = () => {
             </View>
 
             <View className="flex-row justify-center gap-4 mb-6">
-                <TouchableOpacity className="gap-[6px]" onPress={() => pathNavigate("create")}>
+                <TouchableOpacity className="gap-[6px]" onPress={() => pathNavigate("create/post")}>
                   <View className="w-20 aspect-square justify-center items-center bg-gray-200 rounded-lg">
                     <MaterialIcons name="image" size={40} color="black" />
                   </View>

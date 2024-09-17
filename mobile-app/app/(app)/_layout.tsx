@@ -45,7 +45,7 @@ const LoggedUserLayout = () => {
         }}
         />
         <Stack.Screen 
-        name="create/index" 
+        name="create/post" 
         options={{ 
         headerShown: false,
         }}

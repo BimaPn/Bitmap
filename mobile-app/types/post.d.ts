@@ -16,3 +16,9 @@ type PostPreviewProps = {
   id: string
   media: string
 }
+
+type CategoryProps = {
+  id: number
+  name: string
+  slug: string
+}

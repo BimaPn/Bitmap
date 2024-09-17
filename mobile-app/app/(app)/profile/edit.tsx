@@ -56,7 +56,6 @@ const ProfileEdit = () => {
         name: data.avatar.fileName
       } as unknown as Blob)
     }
-    console.log(watch("avatar"))
 
     formData.append("name",data.name)
     if(data.bio) formData.append("bio", data.bio)
