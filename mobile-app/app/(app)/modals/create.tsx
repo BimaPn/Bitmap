@@ -47,14 +47,20 @@ const Create = () => {
             </View>
 
             <View className="flex-row justify-center gap-4 mb-6">
-                <TouchableOpacity className="gap-[6px]" onPress={() => pathNavigate("create/post")}>
+                <TouchableOpacity 
+                className="gap-[6px]" 
+                onPress={() => pathNavigate("create/post")}
+                >
                   <View className="w-20 aspect-square justify-center items-center bg-gray-200 rounded-lg">
                     <MaterialIcons name="image" size={40} color="black" />
                   </View>
                   <Text className="text-center font-pmedium">Post</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity className="gap-[6px]"> 
+                <TouchableOpacity  
+                className="gap-[6px]" 
+                onPress={() => pathNavigate("create/collection")}
+                > 
                   <View className="w-20 aspect-square justify-center items-center bg-gray-200 rounded-lg">
                      <Ionicons name="grid" size={38} color="black" /> 
                   </View>
