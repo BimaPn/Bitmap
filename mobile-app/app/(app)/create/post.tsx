@@ -158,11 +158,17 @@ const CreatePost = ({categories}:{categories: CategoryProps[]}) => {
                 <MaterialIcons name="image" size={65} color={"gray"} />
               </View>
             )}
-            
+
           </View>
         </View>
 
-        <View className='p-3 mt-3'> 
+        {errors.media?.message && (
+          <View className='mt-4'>
+            <Text className="text-red-500 font-pmedium text-center">{errors.media.message}</Text>
+          </View>
+        )}
+
+        <View className='p-3 mt-2'> 
           <ControlFormField
           name='title'
           control={control as any}

@@ -1,10 +1,32 @@
 import { Link, router } from 'expo-router'
 import { View, Text, Image, TouchableOpacity} from 'react-native'
-import { categories } from '../../constants/images'
 import { LinearGradient } from 'expo-linear-gradient'
+import { useEffect, useState } from 'react'
+import ApiClient from '../../api/axios/ApiClient'
 
 const Categories = () => {
-  return (
+  const [categories, setcategories] = useState<CategoryProps[] | null>(null)
+  useEffect(() => {
+    const getCategories = async () => {
+      ApiClient().get(`/api/categories/popular`)
+      .then((res) => {
+        setcategories(res.data.categories)
+      })
+      .catch((err) => {
+        console.log(err.response)
+      })
+    }
+    getCategories()
+  },[])
+
+  if(!categories) {
+    return (
+    <View>
+      <Text>Loading...</Text>
+    </View>
+    )
+  }
+  return categories && (
     <View  className='mt-5'>
       <View className='flex-row items-center justify-between mb-[10px]'> 
         <Text className='text-lg font-pmedium'>Popular Categories</Text>
@@ -14,7 +36,7 @@ const Categories = () => {
       <View className='flex-1 flex flex-row flex-wrap -mx-1'>
         {categories.map((item, i) => ( 
         <View key={i} className='w-1/2 p-1'> 
-          <CategoryPreview uri={item.image} name={item.name}  />
+          <CategoryPreview uri={item.thumbnail} name={item.name}  />
         </View>
         ))} 
       </View>

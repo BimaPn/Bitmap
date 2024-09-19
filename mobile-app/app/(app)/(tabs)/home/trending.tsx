@@ -3,6 +3,7 @@ import { imagesExample } from '../../../../constants/images';
 import Post from '../../../../components/Post';
 import { useEffect, useState } from 'react';
 import ApiClient from '../../../../api/axios/ApiClient';
+import { Text, View } from 'react-native';
 
 const Trending = () => {
   const [posts, setposts] = useState<PostPreviewProps[] | null>(null)
@@ -20,6 +21,14 @@ const Trending = () => {
     }
     getPosts()
   },[])
+
+  if(!posts) {
+    return (
+    <View>
+      <Text>Loading</Text>
+    </View>
+    )
+  }
   return posts && (
     <MasonryFlashList
       contentContainerStyle={{ 

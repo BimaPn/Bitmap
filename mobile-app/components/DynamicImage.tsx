@@ -1,4 +1,4 @@
-import { ActivityIndicator, Image, ImageSourcePropType, LayoutChangeEvent, StyleSheet } from "react-native";
+import { ActivityIndicator, Image, ImageSourcePropType, LayoutChangeEvent, StyleSheet, View } from "react-native";
 import { useState, useEffect } from "react";
 
 const DynamicImage = ({ uri, getHeight, isRounded = false, className }:{uri: string, isRounded?: boolean, getHeight?: (height: number) => void, className?: string}) => {
@@ -11,7 +11,10 @@ const DynamicImage = ({ uri, getHeight, isRounded = false, className }:{uri: str
   }, [uri]);
 
   if (!ratio) {
-    return <ActivityIndicator />;
+    return (
+    <View className="bg-gray-300 aspect-[4/3] rounded-lg">
+    </View>
+    );
   }
 
   const onLayout = (event: LayoutChangeEvent) => {

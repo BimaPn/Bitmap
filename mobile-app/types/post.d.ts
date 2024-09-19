@@ -21,4 +21,5 @@ type CategoryProps = {
   id: number
   name: string
   slug: string
+  thumbnail: string
 }
