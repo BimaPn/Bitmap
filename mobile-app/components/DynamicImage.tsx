@@ -1,7 +1,15 @@
-import { ActivityIndicator, Image, ImageSourcePropType, LayoutChangeEvent, StyleSheet, View } from "react-native";
+import {  Image,  LayoutChangeEvent, StyleSheet } from "react-native";
 import { useState, useEffect } from "react";
+import ImageSkeleton from "./skeletons/ImageSkeleton";
 
-const DynamicImage = ({ uri, getHeight, isRounded = false, className }:{uri: string, isRounded?: boolean, getHeight?: (height: number) => void, className?: string}) => {
+type DynamicImageProps = {
+  uri: string
+  isRounded?: boolean
+  getHeight?: (height: number) => void
+  className?: string
+}
+const DynamicImage = ({ uri, getHeight, isRounded = false, className }: DynamicImageProps) => {
+
   const [ratio, setRatio] = useState<null|number>(null);
 
   useEffect(() => {
@@ -11,10 +19,7 @@ const DynamicImage = ({ uri, getHeight, isRounded = false, className }:{uri: str
   }, [uri]);
 
   if (!ratio) {
-    return (
-    <View className="bg-gray-300 aspect-[4/3] rounded-lg">
-    </View>
-    );
+    return <ImageSkeleton />
   }
 
   const onLayout = (event: LayoutChangeEvent) => {
@@ -25,7 +30,7 @@ const DynamicImage = ({ uri, getHeight, isRounded = false, className }:{uri: str
     }
   };
 
-  return (
+  return ratio && (
     <Image
       source={{ uri: uri }}
       style={[styles.image, { aspectRatio: ratio }]}
