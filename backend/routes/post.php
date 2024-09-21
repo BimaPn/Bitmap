@@ -10,6 +10,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/posts/trending', [PostController::class, 'getTrendingPosts']);
     Route::get('/posts/{post}/get', [PostController::class, 'getPost']);
     Route::post('/posts/create', [PostController::class, 'store']);
+    Route::get('/posts/auth', [PostController::class, 'getAuthPosts']);
     // Route::put('/posts/{id}', [PostController::class, 'update']);
     // Route::delete('/posts/{id}', [PostController::class, 'destroy']);
     // Route::post('/posts/{id}/like', [PostController::class, 'like']);

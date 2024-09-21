@@ -22,6 +22,26 @@ class PostController extends Controller
         return response()->json($posts, 200);
     }
 
+    public function getAuthPosts()
+    {
+        $user = auth()->user();
+
+        $posts = $user->posts()->paginate(15);
+
+        $result = $posts->each(function ($post) {
+            $post["creator"] = [
+                "name" => auth()->user()->name,
+                "username" => auth()->user()->username,
+                "avatar" => auth()->user()->avatar
+            ];
+        });
+
+        return response()->json([
+            "message" => "success",
+            "posts" => $result
+        ]);
+    }
+
     public function getPost (Post $post)
     {
         $post->load("creator:id,name,username,avatar")->only(["id","title","description","creator"]);
@@ -91,21 +111,6 @@ class PostController extends Controller
 
         return redirect()->route('posts.index')->with('success', 'Post deleted successfully.');
 
-    }
-    public function like($id)
-    {
-        $post = Post::findOrFail($id);
-        $post->likes()->attach(Auth::id());
-
-        return response()->json(['message' => 'Post liked successfully.'], 200);
-    }
-
-    public function savePost($id)
-    {
-        $post = Post::findOrFail($id);
-        $post->saves()->attach(Auth::id());
-
-        return response()->json(['message' => 'Post saved successfully.'], 200);
     }
 
     public function show($id)

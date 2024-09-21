@@ -18,6 +18,11 @@ class DummySeeder extends Seeder
             'username' => 'richard12',
             'email' => 'richard@gmail.com',
         ]);
+        $user2 = \App\Models\User::factory()->create([
+            'name' => 'Dadangg',
+            'username' => 'dadang07',
+            'email' => 'dadang@gmail.com',
+        ]);
 
         Post::create([
             "title" => fake()->title(),
