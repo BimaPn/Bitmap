@@ -8,7 +8,7 @@ class CategoryController extends Controller
 {
     public function index ()
     {
-        $categories = Category::select(["id","name","thumbnail","slug"])->get();
+        $categories = Category::select(["id","name","description", "thumbnail","slug"])->get();
 
         return response()->json([
             "categories" => $categories
@@ -17,7 +17,7 @@ class CategoryController extends Controller
 
     public function getMostPopular ()
     {
-        $categories = Category::select(["id","name","thumbnail","slug"])->limit(4)->get();
+        $categories = Category::select(["id","name", "description", "thumbnail","slug"])->limit(4)->get();
 
         return response()->json([
             "categories" => $categories

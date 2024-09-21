@@ -120,25 +120,6 @@ class PostController extends Controller
         return response()->json($post, 200);
     }
 
-    public function getPreviewPosts()
-    {
-        $posts = Post::select('id as post_id', 'image_path as image', 'user_id')
-                    ->with(['creator:id,avatar,name,username'])
-                    ->simplePaginate(15);
-
-        return response()->json($posts, 200);
-    }
-    public function search(Request $request)
-    {
-        $query = $request->input('query');
-
-        $posts = Post::where('title', 'LIKE', "%{$query}%")
-                    ->orWhere('description', 'LIKE', "%{$query}%")
-                    ->simplePaginate(15);
-
-        return response()->json($posts, 200);
-    }
-
     public function getUserPosts($userId)
     {
         $posts = Post::where('user_id', $userId)
@@ -149,7 +130,7 @@ class PostController extends Controller
 
     public function getTrendingPosts()
     {
-        $posts = Post::select("id", "media")->latest()->paginate(15);
+        $posts = Post::with("creator:id,name,username,avatar")->latest()->paginate(15);
 
         return response()->json([
             "message" => "success",
