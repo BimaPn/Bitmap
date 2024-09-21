@@ -14,7 +14,6 @@ const UserPosts = () => {
       ApiClient().get(`/api/posts/auth`)
       .then((res) => {
         const posts = res.data.posts
-        console.log(posts)
         setposts(posts)
       })
       .catch((err) => {

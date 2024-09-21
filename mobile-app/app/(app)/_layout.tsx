@@ -1,6 +1,7 @@
 import { Redirect, Stack } from "expo-router"
 import { useSelector } from "react-redux";
 import DetailPostProvider from "../../components/providers/DetailPostProvider";
+import CategoryProvider from "../../components/providers/CategoryProvider";
 
 const LoggedUserLayout = () => {
   const { isAuthenticated } = useSelector((state : any) => state.auth);
@@ -10,13 +11,19 @@ const LoggedUserLayout = () => {
   }
   return (
   <DetailPostProvider>
+    <CategoryProvider> 
+
      <Stack>
         <Stack.Screen
         name="(tabs)" 
         options={{ headerShown: false, contentStyle:{backgroundColor: "#FFFFFF"} }} />
         <Stack.Screen name="search/[query]" options={{ headerShown: false }} />
         <Stack.Screen name="posts/[id]" options={{ headerShown: false }} />
-        <Stack.Screen name="categories/[slug]" options={{ headerShown: false }} />
+
+        <Stack.Screen 
+        name="categories/[slug]" 
+        options={{ headerShown: false }} 
+        />
 
         <Stack.Screen 
         name="categories/index" 
@@ -24,6 +31,7 @@ const LoggedUserLayout = () => {
         headerShown: false,
         }}
         />
+
         <Stack.Screen 
         name="profile/edit" 
         options={{ 
@@ -61,8 +69,12 @@ const LoggedUserLayout = () => {
         }}
         />
 
-        <Stack.Screen name="modals/create" options={{ headerShown:false, presentation:"transparentModal" }} />
+        <Stack.Screen 
+        name="modals/create" 
+        options={{ headerShown:false, presentation:"transparentModal" }} 
+        />
       </Stack>
+    </CategoryProvider>
   </DetailPostProvider>
 
   )

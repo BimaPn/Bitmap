@@ -1,8 +1,10 @@
-import { Link, router } from 'expo-router'
+import { Link } from 'expo-router'
 import { View, Text, Image, TouchableOpacity} from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
 import { useEffect, useState } from 'react'
 import ApiClient from '../../api/axios/ApiClient'
+import LoadingSpinner from '../LoadingSpinner'
+import { useCategory } from '../providers/CategoryProvider'
 
 const Categories = () => {
   const [categories, setcategories] = useState<CategoryProps[] | null>(null)
@@ -20,11 +22,7 @@ const Categories = () => {
   },[])
 
   if(!categories) {
-    return (
-    <View>
-      <Text>Loading...</Text>
-    </View>
-    )
+    return <LoadingSpinner />
   }
   return categories && (
     <View  className='mt-5'>
@@ -36,7 +34,7 @@ const Categories = () => {
       <View className='flex-1 flex flex-row flex-wrap -mx-1'>
         {categories.map((item, i) => ( 
         <View key={i} className='w-1/2 p-1'> 
-          <CategoryPreview uri={item.thumbnail} name={item.name}  />
+          <CategoryPreview category={item}  />
         </View>
         ))} 
       </View>
@@ -45,25 +43,26 @@ const Categories = () => {
 }
 
 type CategoryPreviewType = { 
-  uri: string
-  name: string
-  slug?: string
+  category: CategoryProps
   containerStyles?: string
 }
 
-export const CategoryPreview = (props:CategoryPreviewType) => { 
+export const CategoryPreview = ({category, containerStyles}: CategoryPreviewType) => { 
 
   const {
-    uri,
-    name,
     slug,
-    containerStyles
-  } = props
+    name,
+    thumbnail
+  } = category
+  const { setCategory } = useCategory()
 
   return( 
-    <TouchableOpacity onPress={() => router.push(`categories/test`)} className={`relative ${containerStyles} rounded-2xl overflow-hidden`}>
+    <TouchableOpacity 
+    onPress={() => setCategory(category)} 
+    className={`relative ${containerStyles} rounded-2xl overflow-hidden`}
+    >
       <Image 
-      source={{ uri }} 
+      source={{ uri: thumbnail }} 
       style={{ width:"100%", aspectRatio: 4/3 }} 
       resizeMode='cover'
       className='rounded-2xl'

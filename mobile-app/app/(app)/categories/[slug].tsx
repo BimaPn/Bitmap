@@ -2,19 +2,20 @@ import { View, Text, ScrollView } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { MasonryFlashList } from '@shopify/flash-list'
 import BackHeader from '../../../components/BackHeader'
-import { imagesExample } from '../../../constants/images'
 import Post from '../../../components/Post'
+import { useCategory } from '../../../components/providers/CategoryProvider'
 
 const CategoryDetail = () => {
-  return (
+  const { category } = useCategory()
+  return category && (
     <SafeAreaView className='h-full bg-white'> 
       <ScrollView stickyHeaderIndices={[0]}> 
-        <BackHeader title='Nature' />
+        <BackHeader title={category.name} />
         <View>
           <View className='mx-3 mt-3 mb-4'> 
-            <Text className='text-base'>diverse flora & fauna, and  mesmerizing natural phenomena, immersing you in the great outdoors.</Text>
+            <Text className='text-base'>{category.description}</Text>
           </View>
-          <MasonryFlashList
+        {/*  <MasonryFlashList
             contentContainerStyle={{ 
               paddingHorizontal: 8,
               backgroundColor: "#FFFFFF",
@@ -30,7 +31,7 @@ const CategoryDetail = () => {
               /> 
             )}
             estimatedItemSize={200}
-          />
+          />*/}
         </View>
       </ScrollView>
     </SafeAreaView>
