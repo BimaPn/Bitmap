@@ -37,7 +37,7 @@ const CategoryDetail = () => {
         <BackHeader title={category.name} />
         <View>
           <View className='mx-3 mt-3 mb-4'> 
-            <Text className='text-base'>{category.description}</Text>
+            <Text className='text-base break-words'>{category.description}</Text>
           </View>
           {!posts && (
             <LoadingSpinner />

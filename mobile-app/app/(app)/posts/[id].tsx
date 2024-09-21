@@ -33,7 +33,7 @@ const PostDetail = () => {
   };
 
   return (
-    <SafeAreaView className='-mt-[2px] bg-white'> 
+    <SafeAreaView className='min-h-full -mt-[2px] bg-white'> 
       <ScrollView 
       stickyHeaderIndices={[0]} 
       onScroll={handleScroll} 
@@ -58,7 +58,7 @@ const PostDetail = () => {
             <Text className='font-pmedium text-base'>More to explore</Text>
           </View>
           <View className='px-2'>
-            <PostsRecommendations />
+            <PostsRecommendations postId={id as string} />
           </View>
         </View>
 
