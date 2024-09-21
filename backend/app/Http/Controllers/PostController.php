@@ -11,15 +11,6 @@ use Illuminate\Support\Facades\Validator;
 class PostController extends Controller
 {
 
-    public function index()
-    {
-        // Retrieve all posts
-        $posts = Post::all();
-
-        // Return posts as JSON response
-        return response()->json($posts, 200);
-    }
-
     public function getAuthPosts()
     {
         $user = auth()->user();
@@ -46,7 +37,20 @@ class PostController extends Controller
         return response()->json([
             "post" => $post
         ]);
+    }
 
+    public function getRecommendationPosts (Post $post)
+    {
+        $recommendedPosts = Post::where('category_id', $post->category_id)
+        ->where('id', '!=', $post->id)
+        ->with("creator:id,name,username,avatar")
+        ->inRandomOrder()
+        ->paginate(15);
+
+        return response()->json([
+            "message" => "Success.",
+            "posts" => $recommendedPosts->items()
+        ]);
     }
 
     public function store(StorePostRequest $request)

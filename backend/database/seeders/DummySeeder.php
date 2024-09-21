@@ -35,7 +35,6 @@ class DummySeeder extends Seeder
             "description" => fake()->text(150),
             "media" => url('/storage/images/posts/2.jpg'),
             "user_id" => $user->id,
-            "category_id" => 3
         ]);
         Post::create([
             "title" => fake()->title(),
