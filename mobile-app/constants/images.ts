@@ -7,6 +7,7 @@ import logoSmall from "../assets/images/logo_small.png";
 import empty from "../assets/images/empty.png";
 import background_home from "../assets/images/background-home.png";
 import user from "../assets/images/user.jpg";
+import noResult from "../assets/images/no_result.png";
 
 export const categories =  [ 
   {
@@ -67,4 +68,4 @@ export const imagesExample = [
 
 
 
-export default { profile, thumbnail, cards, path, logo, logoSmall, empty, background_home, user};
+export default { profile, thumbnail, cards, path, logo, logoSmall, empty, background_home, user, noResult};

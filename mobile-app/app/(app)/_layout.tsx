@@ -1,5 +1,6 @@
 import { Redirect, Stack } from "expo-router"
 import { useSelector } from "react-redux";
+import DetailPostProvider from "../../components/providers/DetailPostProvider";
 
 const LoggedUserLayout = () => {
   const { isAuthenticated } = useSelector((state : any) => state.auth);
@@ -8,8 +9,11 @@ const LoggedUserLayout = () => {
     return <Redirect href={`/login`} />
   }
   return (
+  <DetailPostProvider>
      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false, contentStyle:{backgroundColor: "#FFFFFF"} }} />
+        <Stack.Screen
+        name="(tabs)" 
+        options={{ headerShown: false, contentStyle:{backgroundColor: "#FFFFFF"} }} />
         <Stack.Screen name="search/[query]" options={{ headerShown: false }} />
         <Stack.Screen name="posts/[id]" options={{ headerShown: false }} />
         <Stack.Screen name="categories/[slug]" options={{ headerShown: false }} />
@@ -58,8 +62,9 @@ const LoggedUserLayout = () => {
         />
 
         <Stack.Screen name="modals/create" options={{ headerShown:false, presentation:"transparentModal" }} />
-
       </Stack>
+  </DetailPostProvider>
+
   )
 }
 

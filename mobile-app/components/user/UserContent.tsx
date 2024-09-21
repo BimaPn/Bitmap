@@ -20,7 +20,7 @@ const UserContent = () => {
       />
       
       <View className='mt-4'> 
-
+      
       {active === "posts" && ( 
         <UserPosts />
       )}

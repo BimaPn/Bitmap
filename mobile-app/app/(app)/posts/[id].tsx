@@ -10,30 +10,16 @@ import PostsRecommendations from '../../../components/PostsRecommendations';
 import BackButton from '../../../components/BackButton';
 import { LinearGradient } from 'expo-linear-gradient';
 import ApiClient from '../../../api/axios/ApiClient';
+import { useDetailPost } from '../../../components/providers/DetailPostProvider';
 
 
 const PostDetail = () => {
   const { id } = useLocalSearchParams();
 
+  const { post } = useDetailPost()
+
   const [imageHeight, setimageHeight] = useState(500)
   const [scrolled, setscrolled] = useState(false)
-
-  const [post, setpost] = useState<null | PostProps>(null)
-
-  useEffect(() => {
-    const getPost = async () => {
-      ApiClient().get(`/api/posts/${id}/get`)
-      .then((res) => {
-        const post = res.data.post
-        setpost(post)
-      })
-      .catch((err) => {
-        console.log(err.response)
-      })
-    }
-
-    getPost()
-  },[])
 
 
   const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {

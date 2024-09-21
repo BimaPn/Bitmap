@@ -3,10 +3,11 @@ import { imagesExample } from '../../../../constants/images';
 import Post from '../../../../components/Post';
 import { useEffect, useState } from 'react';
 import ApiClient from '../../../../api/axios/ApiClient';
-import { Text, View } from 'react-native';
+import LoadingSpinner from '../../../../components/LoadingSpinner';
+import NoResult from '../../../../components/NoResult';
 
 const Trending = () => {
-  const [posts, setposts] = useState<PostPreviewProps[] | null>(null)
+  const [posts, setposts] = useState<PostProps[] | null>(null)
 
   useEffect(() => {
     const getPosts = async () => {
@@ -23,12 +24,13 @@ const Trending = () => {
   },[])
 
   if(!posts) {
-    return (
-    <View>
-      <Text>Loading</Text>
-    </View>
-    )
+    return <LoadingSpinner />
   }
+
+  if(posts && posts.length < 1) {
+    return <NoResult />
+  }
+
   return posts && (
     <MasonryFlashList
       contentContainerStyle={{ 
@@ -40,8 +42,7 @@ const Trending = () => {
       numColumns={2}
       renderItem={({ item }) => ( 
         <Post
-        id={item.id}
-        media={item.media} 
+        post={item}
         containerStyles='m-1' 
         /> 
       )}
