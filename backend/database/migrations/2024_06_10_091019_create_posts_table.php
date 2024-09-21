@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('description')->nullable();
             $table->string('media');
+            $table->foreignId("category_id")->default(1);
             $table->foreignUuid("user_id");
             $table->timestamps();
         });

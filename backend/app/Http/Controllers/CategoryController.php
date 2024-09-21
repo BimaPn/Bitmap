@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Http\Request;
+// use Illuminate\Http\Request;
 use App\Models\Category;
 
 class CategoryController extends Controller
@@ -21,6 +21,15 @@ class CategoryController extends Controller
 
         return response()->json([
             "categories" => $categories
+        ]);
+    }
+    public function getCategoryPosts (Category $category)
+    {
+        $category->load("posts.creator");
+
+        return response()->json([
+            "message" => "success.",
+            "posts" => $category->posts
         ]);
     }
 }

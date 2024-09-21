@@ -28,37 +28,42 @@ class DummySeeder extends Seeder
             "title" => fake()->title(),
             "description" => fake()->text(150),
             "media" => url('/storage/images/posts/1.jpg'),
-            "user_id" => $user->id
+            "user_id" => $user->id,
         ]);
         Post::create([
             "title" => fake()->title(),
             "description" => fake()->text(150),
             "media" => url('/storage/images/posts/2.jpg'),
-            "user_id" => $user->id
+            "user_id" => $user->id,
+            "category_id" => 3
         ]);
         Post::create([
             "title" => fake()->title(),
             "description" => fake()->text(150),
             "media" => url('/storage/images/posts/3.jpg'),
-            "user_id" => $user->id
+            "user_id" => $user->id,
+            "category_id" => 4
         ]);
         Post::create([
             "title" => fake()->title(),
             "description" => fake()->text(150),
             "media" => url('/storage/images/posts/4.jpg'),
-            "user_id" => $user->id
+            "user_id" => $user->id,
+            "category_id" => 5
         ]);
         Post::create([
             "title" => fake()->title(),
             "description" => fake()->text(150),
             "media" => url('/storage/images/posts/5.jpg'),
-            "user_id" => $user->id
+            "user_id" => $user->id,
+            "category_id" => 6
         ]);
         Post::create([
             "title" => fake()->title(),
             "description" => fake()->text(150),
             "media" => url('/storage/images/posts/6.jpg'),
-            "user_id" => $user->id
+            "user_id" => $user->id,
+            "category_id" => 7
         ]);
     }
 }

@@ -10,9 +10,7 @@ use Illuminate\Support\Facades\Validator;
 
 class PostController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
         // Retrieve all posts
@@ -51,9 +49,6 @@ class PostController extends Controller
 
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StorePostRequest $request)
     {
         $validatedData = $request->validated();
@@ -72,81 +67,23 @@ class PostController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, $id)
-    {
-        $validator = Validator::make($request->all(), [
-            'title' => 'required|string|max:255',
-            'description' => 'nullable|string|max:255',
-            'image_path' => 'required|string|max:255',
-            'category_id' => 'required|exists:categories,id',
-        ]);
-
-        if ($validator->fails()) {
-            return redirect()->back()
-                             ->withErrors($validator)
-                             ->withInput();
-        }
-
-        $post = Post::findOrFail($id);
-        $post->title = $request->title;
-        $post->description = $request->description;
-        $post->image_path = $request->image_path;
-        $post->category_id = $request->category_id;
-
-        $post->save();
-
-        return redirect()->route('posts.index')->with('success', 'Post updated successfully.');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Post $id)
-    {
-        $post = Post::findOrFail($id);
-        $post->delete();
-
-        return redirect()->route('posts.index')->with('success', 'Post deleted successfully.');
-
-    }
-
-    public function show($id)
-    {
-        $post = Post::with('creator')->findOrFail($id);
-
-        return response()->json($post, 200);
-    }
-
     public function getUserPosts($userId)
     {
         $posts = Post::where('user_id', $userId)
-                    ->simplePaginate(15);
+        ->simplePaginate(15);
 
         return response()->json($posts, 200);
     }
 
     public function getTrendingPosts()
     {
-        $posts = Post::with("creator:id,name,username,avatar")->latest()->paginate(15);
+        $posts = Post::with("creator:id,name,username,avatar")
+            ->latest()->paginate(15);
 
         return response()->json([
             "message" => "success",
             "posts" => $posts->items()
         ]);
     }
-    public function getFollowingUserPosts()
-    {
-        $followingUserIds = Auth::user()->follows()->pluck('id');
-        $posts = Post::whereIn('user_id', $followingUserIds)
-                    ->simplePaginate(15);
-
-        return response()->json($posts, 200);
-}
-
-
-
 
 }

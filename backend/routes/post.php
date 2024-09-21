@@ -7,6 +7,7 @@ use App\Http\Controllers\PostController;
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/categories/all', [CategoryController::class, 'index']);
     Route::get('/categories/popular', [CategoryController::class, 'getMostPopular']);
+    Route::get('/categories/{category}/posts', [CategoryController::class, 'getCategoryPosts']);
     Route::get('/posts/trending', [PostController::class, 'getTrendingPosts']);
     Route::get('/posts/{post}/get', [PostController::class, 'getPost']);
     Route::post('/posts/create', [PostController::class, 'store']);
