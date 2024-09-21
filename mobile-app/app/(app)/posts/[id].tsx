@@ -122,7 +122,11 @@ const PostDescription = ({ post }: { post: PostProps }) => {
 const UserInfo = ({ creator }: { creator: PostCreatorProps }) => {
   return ( 
     <View className='flex-row items-center gap-2'> 
-      <Image source={{ uri: creator.avatar }} className='w-12 h-12 rounded-full' resizeMode='cover' />
+      <Image 
+      source={creator.avatar ? { uri: creator.avatar } : images.user}  
+      className='w-12 h-12 rounded-full' 
+      resizeMode='cover' 
+      />
       <View> 
         <Text className='font-medium text-base'>{creator.name}</Text>
         <Text className='text-xs'>98k Followers</Text>
