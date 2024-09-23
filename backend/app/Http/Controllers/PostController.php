@@ -71,6 +71,22 @@ class PostController extends Controller
         ]);
     }
 
+    public function searchPosts (Request $request)
+    {
+        $query = $request->input("query");
+
+        $posts = Post::latest()
+        ->where('title', 'like', '%' . $query . '%')
+        ->with("creator:id,name,username,avatar")
+        ->inRandomOrder()
+        ->paginate(15);
+
+        return response()->json([
+            "message" => $query,
+            "posts" => $posts->items()
+        ]);
+    }
+
     public function getUserPosts($userId)
     {
         $posts = Post::where('user_id', $userId)

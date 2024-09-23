@@ -25,19 +25,19 @@ class DummySeeder extends Seeder
         ]);
 
         Post::create([
-            "title" => fake()->title(),
+            "title" => "Manuk elang",
             "description" => fake()->text(150),
             "media" => url('/storage/images/posts/1.jpg'),
             "user_id" => $user->id,
         ]);
         Post::create([
-            "title" => fake()->title(),
+            "title" => "bima anjay",
             "description" => fake()->text(150),
             "media" => url('/storage/images/posts/2.jpg'),
             "user_id" => $user->id,
         ]);
         Post::create([
-            "title" => fake()->title(),
+            "title" => "test wak",
             "description" => fake()->text(150),
             "media" => url('/storage/images/posts/3.jpg'),
             "user_id" => $user->id,
