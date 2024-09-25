@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePostRequest;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -11,10 +12,8 @@ use Illuminate\Support\Facades\Validator;
 class PostController extends Controller
 {
 
-    public function getAuthPosts()
+    public function getUserPosts(User $user)
     {
-        $user = auth()->user();
-
         $posts = $user->posts()->paginate(15);
 
         $result = $posts->each(function ($post) {
@@ -87,13 +86,6 @@ class PostController extends Controller
         ]);
     }
 
-    public function getUserPosts($userId)
-    {
-        $posts = Post::where('user_id', $userId)
-        ->simplePaginate(15);
-
-        return response()->json($posts, 200);
-    }
 
     public function getTrendingPosts()
     {

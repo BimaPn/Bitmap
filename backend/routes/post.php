@@ -11,7 +11,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/posts/trending', [PostController::class, 'getTrendingPosts']);
     Route::get('/posts/{post}/get', [PostController::class, 'getPost']);
     Route::post('/posts/create', [PostController::class, 'store']);
-    Route::get('/posts/auth', [PostController::class, 'getAuthPosts']);
+    Route::get('/posts/user/{user}', [PostController::class, 'getUserPosts']);
     Route::get('/posts/{post}/recommendation', [PostController::class, 'getRecommendationPosts']);
     Route::get('/posts/search', [PostController::class, 'searchPosts']);
     // Route::put('/posts/{id}', [PostController::class, 'update']);
