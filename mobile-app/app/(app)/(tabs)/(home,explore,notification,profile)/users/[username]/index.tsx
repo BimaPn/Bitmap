@@ -6,9 +6,12 @@ import { icons, images } from '../../../../../../constants'
 import BackButton from '../../../../../../components/BackButton'
 import Logout from '../../../../../../components/Logout'
 import ProfileMenu from '../../../../../../components/ProfileMenu'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import ApiClient from '../../../../../../api/axios/ApiClient'
 import { useCommonRoutes } from '../../../../../../components/providers/CommonRoutesProvider'
+import { UserInfoProps, UserStatisticProps } from '../../../../../../types/auth'
+import LoadingSpinner from '../../../../../../components/LoadingSpinner'
+import FollowButton from '../../../../../../components/FollowButton'
 
 const UserProfileDetailPage = () => {
   const { username } = useLocalSearchParams();
@@ -34,45 +37,51 @@ const UserProfileDetailPage = () => {
 }
 
 const UserInfo = ({username}:{username:string}) => { 
+  const [user, setuser] = useState<UserInfoProps | null>(null)
+
   useEffect(() => {
     const getUserInfo = async () => {
       ApiClient().get(`/api/users/${username}`)
       .then((res) => {
         const result = res.data.user
-        console.log(result)
+        setuser(result)
       })
       .catch((err) => {
         console.log(err.response)
+        router.back()
       })
     }
     getUserInfo()
   },[])
- return( 
+
+  if(!user) {
+    return <LoadingSpinner />
+  }
+
+ return user && ( 
  <> 
     <View className='items-center mb-3'> 
       <Image
-      source={images.user}
+      source={user.avatar ? { uri: user.avatar } : images.user}
       className='w-32 h-32 rounded-full'
       resizeMode='cover'
       />
 
       <View className='mt-4'>  
-        <Text className='text-[22px] font-psemibold'>Emily Johnson</Text>
-        <Text className='text-netral text-center text-[15px] -mt-[3px]'>@emily_43</Text>
+        <Text className='text-[22px] font-psemibold'>{user.name}</Text>
+        <Text className='text-netral text-center text-[15px] -mt-[3px]'>@{user.username}</Text>
       </View>
 
       <View className='pt-2'> 
         <Text className='text-base text-center'>
-        Influencers and content creators can leverage Ahrefs’ Social Media Bio Generator to 
+        {user.bio}
         </Text>
       </View>
 
-      <UserStatistic />
+      <UserStatistic statistic={user.statistic} />
       
       <View className='w-full flex-row items-center justify-center space-x-2'>
-        <TouchableOpacity className='w-[45%] bg-black py-3 rounded-2xl'> 
-          <Text className='text-white font-pmedium text-center text-base'>Follow</Text>
-        </TouchableOpacity>
+        <FollowButton isFollowing={user.isFollowing} username={user.username} />
         <TouchableOpacity className='p-[10px] rounded-xl border border-gray-300'> 
           <Image source={icons.more_dark} className='w-6 h-6' resizeMode='contain' />
         </TouchableOpacity>
@@ -83,20 +92,20 @@ const UserInfo = ({username}:{username:string}) => {
  )
 }
 
-const UserStatistic = () => {
+const UserStatistic = ({ statistic }: { statistic: UserStatisticProps }) => {
   const { layoutPath } = useCommonRoutes()
   return (
     <View className='w-full flex-row items-center justify-evenly mt-4 mb-4'> 
       <View className='w-[25%] items-center'> 
-        <Text className='text-xl font-psemibold'>8</Text>
-        <Text className='text-netral text-sm'>Media</Text>
+        <Text className='text-xl font-psemibold'>{statistic.posts}</Text>
+        <Text className='text-netral text-sm'>Posts</Text>
       </View>
 
       <TouchableOpacity
       onPress={() => router.push(`/${layoutPath}/users/udin/followers`)} 
       className='w-[25%] items-center' 
       > 
-        <Text className='text-xl font-psemibold'>506k</Text>
+        <Text className='text-xl font-psemibold'>{statistic.followers}</Text>
         <Text className='text-netral text-sm'>Followers</Text>
       </TouchableOpacity>
 
@@ -104,7 +113,7 @@ const UserStatistic = () => {
       onPress={() => router.push(`/${layoutPath}/users/udin/following`)} 
       className='w-[25%] items-center' 
       > 
-        <Text className='text-xl font-psemibold'>271</Text>
+        <Text className='text-xl font-psemibold'>{statistic.followings}</Text>
         <Text className='text-netral text-sm'>Following</Text>
       </TouchableOpacity>
     </View> 

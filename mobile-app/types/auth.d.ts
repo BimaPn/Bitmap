@@ -2,11 +2,23 @@ import { ImageSourcePropType } from "react-native"
 
 interface AuthUser { 
   id: string
+  name: string
   username: string
   email: string
   avatar: string
   bio?: string
   access_token: string
+  statistic: UserStatisticProps
+}
+
+type UserStatisticProps = {
+  posts: number,
+  followers: number,
+  followings: number
+}
+
+interface UserInfoProps extends Omit<AuthUser, "access_token"> {
+  isFollowing: boolean
 }
 
 type UpdateUserProps = {

@@ -8,7 +8,7 @@ const UserItem = ({containerStyles}:{containerStyles?: string}) => {
   return (
     <View className={`flex-row justify-between items-center ${containerStyles}`}>
       <TouchableOpacity 
-      onPress={() => router.push(`/(profile)/users/udin`)}
+      onPress={() => router.push(`/(profile)/users/dadang07`)}
       className='flex-row items-center space-x-3' 
       > 
         <Image 

@@ -45,7 +45,7 @@ const useAuth = () => {
       return true
     })
     .catch((err) => {
-      console.log(err)
+      console.log(err.response)
 
       return false 
     })

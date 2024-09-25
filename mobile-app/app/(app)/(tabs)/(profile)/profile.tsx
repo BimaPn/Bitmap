@@ -7,6 +7,7 @@ import ProfileMenu from '../../../../components/ProfileMenu'
 import UserContent from '../../../../components/user/UserContent'
 import { icons, images } from '../../../../constants'
 import { useCommonRoutes } from '../../../../components/providers/CommonRoutesProvider'
+import { UserStatisticProps } from '../../../../types/auth'
 
 const ProfilePage = () => {
   return (
@@ -49,7 +50,7 @@ const UserInfo = () => {
         </View>
       )}
 
-      <UserStatistic />
+      <UserStatistic statistic={user.statistic} />
       
       <View className='w-full flex-row items-center justify-center space-x-2'>
 
@@ -78,20 +79,20 @@ const UserInfo = () => {
  )
 }
 
-const UserStatistic = () => {
+const UserStatistic = ({ statistic }: { statistic: UserStatisticProps }) => {
   const { layoutPath } = useCommonRoutes()
   return (
     <View className='w-full flex-row items-center justify-evenly mt-4 mb-4'> 
       <View className='w-[25%] items-center'> 
-        <Text className='text-xl font-psemibold'>8</Text>
-        <Text className='text-netral text-sm'>Media</Text>
+        <Text className='text-xl font-psemibold'>{statistic.posts}</Text>
+        <Text className='text-netral text-sm'>Posts</Text>
       </View>
 
       <TouchableOpacity
       onPress={() => router.push(`/${layoutPath}/users/udin/followers`)} 
       className='w-[25%] items-center' 
       > 
-        <Text className='text-xl font-psemibold'>506k</Text>
+        <Text className='text-xl font-psemibold'>{statistic.followers}</Text>
         <Text className='text-netral text-sm'>Followers</Text>
       </TouchableOpacity>
 
@@ -99,7 +100,7 @@ const UserStatistic = () => {
       onPress={() => router.push(`/${layoutPath}/users/udin/following`)} 
       className='w-[25%] items-center' 
       > 
-        <Text className='text-xl font-psemibold'>271</Text>
+        <Text className='text-xl font-psemibold'>{statistic.followings}</Text>
         <Text className='text-netral text-sm'>Following</Text>
       </TouchableOpacity>
     </View> 
