@@ -44,7 +44,7 @@ class UserController extends Controller
                 "name" => $following->followable->name,
                 "username" => $following->followable->username,
                 "avatar" => $following->followable->avatar,
-                "isFollowing" => true
+                "isFollowing" => auth()->user()->isFollowing($following->followable)
             ];
         }
 
