@@ -7,10 +7,11 @@ import ProfileMenu from '../../../../components/ProfileMenu'
 import UserContent from '../../../../components/user/UserContent'
 import { icons, images } from '../../../../constants'
 import { useCommonRoutes } from '../../../../components/providers/CommonRoutesProvider'
-import { UserStatisticProps } from '../../../../types/auth'
+import { UserInfoProps, UserStatisticProps } from '../../../../types/auth'
 
 const ProfilePage = () => {
-  return (
+  const { user } = useSelector((state : any) => state.auth);
+  return user && (
     <SafeAreaView> 
       <ScrollView className='h-full bg-white px-3'> 
         <View className='items-end'> 
@@ -18,17 +19,15 @@ const ProfilePage = () => {
             <ProfileMenu /> 
           </Logout>
         </View> 
-        <UserInfo />
-        <UserContent /> 
+        <UserInfo user={user} />
+        <UserContent username={user.username} /> 
       </ScrollView>
     </SafeAreaView> 
   )
 }
 
-const UserInfo = () => { 
-  const { user } = useSelector((state : any) => state.auth);
-
- return user && ( 
+const UserInfo = ({ user }: { user: Omit<UserInfoProps, "isFollowing"> }) => { 
+ return ( 
  <> 
     <View className='items-center mb-3'> 
       <Image

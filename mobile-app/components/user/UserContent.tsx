@@ -8,7 +8,7 @@ const { width } = Dimensions.get('window');
 
 type ActiveButton =  "posts" | "collections"
 
-const UserContent = () => {
+const UserContent = ({ username }:{ username: string }) => {
   const [active, setActive] = useState<ActiveButton>('posts');
 
   return (
@@ -22,11 +22,11 @@ const UserContent = () => {
       <View className='mt-4'> 
       
       {active === "posts" && ( 
-        <UserPosts />
+        <UserPosts username={username} />
       )}
 
       {active === "collections" && ( 
-        <UserCollections />
+        <UserCollections username={username} />
       )}
 
       </View>

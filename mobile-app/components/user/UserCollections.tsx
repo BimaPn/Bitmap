@@ -2,7 +2,7 @@ import { MasonryFlashList } from '@shopify/flash-list'
 import { imagesExample } from '../../constants/images'
 import Media from '../Media'
 
-const UserCollections = () => {
+const UserCollections = ({ username }:{ username: string }) => {
   return (
     <MasonryFlashList
       contentContainerStyle={{ 

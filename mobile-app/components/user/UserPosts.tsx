@@ -6,12 +6,12 @@ import LoadingSpinner from '../LoadingSpinner'
 import NoResult from '../NoResult'
 import Post from '../Post'
 
-const UserPosts = () => {
+const UserPosts = ({username}: { username: string }) => {
   const [posts, setposts] = useState<PostProps[] | null>(null)
 
   useEffect(() => {
     const getPosts = async () => {
-      ApiClient().get(`/api/posts/auth`)
+      ApiClient().get(`/api/posts/user/${username}`)
       .then((res) => {
         const posts = res.data.posts
         setposts(posts)

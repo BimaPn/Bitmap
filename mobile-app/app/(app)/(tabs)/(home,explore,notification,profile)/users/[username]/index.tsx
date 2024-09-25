@@ -28,7 +28,7 @@ const UserProfileDetailPage = () => {
 
         <View className='px-3 pt-3'>
           <UserInfo username={username as string} />
-          <UserContent />
+          <UserContent username={username as string} />
         </View>
 
       </ScrollView>
