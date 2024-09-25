@@ -24,6 +24,9 @@ class DummySeeder extends Seeder
             'email' => 'dadang@gmail.com',
         ]);
 
+        $user->follow($user2);
+        $user2->follow($user);
+
         Post::create([
             "title" => "Manuk elang",
             "description" => fake()->text(150),

@@ -9,10 +9,12 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\File;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Overtrue\LaravelFollow\Traits\Followable;
+use Overtrue\LaravelFollow\Traits\Follower;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, HasApiTokens, HasUuids;
+    use HasFactory, Notifiable, HasApiTokens, HasUuids, Follower, Followable;
 
 
     /**
@@ -56,13 +58,19 @@ class User extends Authenticatable
 
     public function getInfo ()
     {
+        $statistic = [
+            "followers" => $this->followers()->count(),
+            "followings" => $this->followings()->count(),
+            "posts" => $this->posts()->count()
+        ];
         return [
             "id" => $this->id,
             "name" => $this->name,
             "email" => $this->email,
             "username" => $this->username,
             "avatar" => $this->avatar,
-            "bio"=> $this->bio
+            "bio"=> $this->bio,
+            "statistic" => $statistic
         ];
     }
 
@@ -107,5 +115,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getRouteKeyName()
+    {
+       return 'username';
+    }
 
 }
