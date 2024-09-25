@@ -64,7 +64,7 @@ const LoginForm = () => {
     const errorResponse = result.error
 
     if(result.ok) {
-      router.push("/(home)/trending")
+      router.push("/trending")
     }
     if(errorResponse) {
       setloading(false)

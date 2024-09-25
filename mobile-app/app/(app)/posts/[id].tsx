@@ -124,16 +124,15 @@ const UserInfo = ({ creator }: { creator: PostCreatorProps }) => {
     <TouchableOpacity
     onPress={() => router.push(`/users/${creator.username}`)}
     activeOpacity={.9}
-    className='flex-row items-center gap-2' 
+    className='flex-row items-center gap-[10px]' 
     > 
       <Image 
       source={creator.avatar ? { uri: creator.avatar } : images.user}  
-      className='w-12 h-12 rounded-full' 
+      className='w-10 h-10 rounded-full' 
       resizeMode='cover' 
       />
       <View> 
         <Text className='font-medium text-base'>{creator.name}</Text>
-        <Text className='text-xs'>98k Followers</Text>
       </View>
     </TouchableOpacity>
   )

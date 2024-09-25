@@ -30,7 +30,7 @@ const UserFollowing = () => {
   return (
     <SafeAreaView className='bg-white h-full'> 
       <ScrollView stickyHeaderIndices={[0]}> 
-        <BackHeader title={`Followigs`} />
+        <BackHeader title={`Followings`} />
 
         {!users && (
           <LoadingSpinner />

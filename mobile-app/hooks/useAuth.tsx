@@ -23,7 +23,6 @@ const useAuth = () => {
     try {
       const response = await axios.post(`${process.env.EXPO_PUBLIC_API_URL}/api/login`,
       { ...credentials })
-      console.log("success")
       const accessToken = response.data.access_token
       saveToken(accessToken)
       dispatch(setAuth({ accessToken }))

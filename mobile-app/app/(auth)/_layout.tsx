@@ -6,7 +6,7 @@ const AuthLayout = () => {
   const { isAuthenticated } = useSelector((state : any) => state.auth);
 
   if(isAuthenticated) {
-    return <Redirect href={`/home`} />
+    return <Redirect href={`/trending`} />
   }
 
   return (

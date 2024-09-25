@@ -112,7 +112,7 @@ const ProfileEdit = () => {
 
             {(!user.avatar) && (
               <Image
-              source={avatar ? { uri: avatar } : images.user}
+              source={avatar ? { uri: avatar.uri } : images.user}
               resizeMode='cover'
               className='w-32 h-32 rounded-full'
               />

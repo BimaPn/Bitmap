@@ -48,7 +48,7 @@ const Welcome = () => {
     )
   }
   if(!loading && isAuthenticated) {
-    return <Redirect href={`/(home)/trending`} />
+    return <Redirect href={`/trending`} />
   }
 
   return (!loading && !isAuthenticated) && (

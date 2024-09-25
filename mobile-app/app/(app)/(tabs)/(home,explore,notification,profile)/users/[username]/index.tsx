@@ -78,10 +78,10 @@ const UserInfo = ({username}:{username:string}) => {
         </Text>
       </View>
 
-      <UserStatistic statistic={user.statistic} />
+      <UserStatistic statistic={user.statistic} username={user.username} />
       
       <View className='w-full flex-row items-center justify-center space-x-2'>
-        <FollowButton isFollowing={user.isFollowing} username={user.username} />
+        <FollowButton isFollowing={user.isFollowing} username={user.username} width={108} height={48} />
         <TouchableOpacity className='p-[10px] rounded-xl border border-gray-300'> 
           <Image source={icons.more_dark} className='w-6 h-6' resizeMode='contain' />
         </TouchableOpacity>
@@ -92,7 +92,7 @@ const UserInfo = ({username}:{username:string}) => {
  )
 }
 
-const UserStatistic = ({ statistic }: { statistic: UserStatisticProps }) => {
+const UserStatistic = ({ statistic, username }: { statistic: UserStatisticProps, username: string }) => {
   const { layoutPath } = useCommonRoutes()
   return (
     <View className='w-full flex-row items-center justify-evenly mt-4 mb-4'> 
@@ -102,7 +102,7 @@ const UserStatistic = ({ statistic }: { statistic: UserStatisticProps }) => {
       </View>
 
       <TouchableOpacity
-      onPress={() => router.push(`/${layoutPath}/users/udin/followers`)} 
+      onPress={() => router.push(`/${layoutPath}/users/${username}/followers`)} 
       className='w-[25%] items-center' 
       > 
         <Text className='text-xl font-psemibold'>{statistic.followers}</Text>
@@ -110,7 +110,7 @@ const UserStatistic = ({ statistic }: { statistic: UserStatisticProps }) => {
       </TouchableOpacity>
 
       <TouchableOpacity  
-      onPress={() => router.push(`/${layoutPath}/users/udin/following`)} 
+      onPress={() => router.push(`/${layoutPath}/users/${username}/following`)} 
       className='w-[25%] items-center' 
       > 
         <Text className='text-xl font-psemibold'>{statistic.followings}</Text>
