@@ -14,7 +14,7 @@ use Overtrue\LaravelFollow\Traits\Follower;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, HasApiTokens, HasUuids, Follower, Followable;
+    use HasFactory, Notifiable, HasApiTokens, HasUuids, Followable, Follower;
 
 
     /**

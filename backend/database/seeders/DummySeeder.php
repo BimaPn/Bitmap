@@ -23,8 +23,14 @@ class DummySeeder extends Seeder
             'username' => 'dadang07',
             'email' => 'dadang@gmail.com',
         ]);
+        $user3 = \App\Models\User::factory()->create([
+            'name' => 'Dodi',
+            'username' => 'dodii11',
+            'email' => 'dodi@gmail.com',
+        ]);
 
         $user->follow($user2);
+        $user->follow($user3);
         $user2->follow($user);
 
         Post::create([
