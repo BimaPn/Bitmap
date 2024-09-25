@@ -49,7 +49,7 @@ const UserInfo = ({ user }: { user: Omit<UserInfoProps, "isFollowing"> }) => {
         </View>
       )}
 
-      <UserStatistic statistic={user.statistic} />
+      <UserStatistic statistic={user.statistic} username={user.username} />
       
       <View className='w-full flex-row items-center justify-center space-x-2'>
 
@@ -78,7 +78,7 @@ const UserInfo = ({ user }: { user: Omit<UserInfoProps, "isFollowing"> }) => {
  )
 }
 
-const UserStatistic = ({ statistic }: { statistic: UserStatisticProps }) => {
+const UserStatistic = ({ statistic, username }: { statistic: UserStatisticProps, username: string }) => {
   const { layoutPath } = useCommonRoutes()
   return (
     <View className='w-full flex-row items-center justify-evenly mt-4 mb-4'> 
@@ -88,7 +88,7 @@ const UserStatistic = ({ statistic }: { statistic: UserStatisticProps }) => {
       </View>
 
       <TouchableOpacity
-      onPress={() => router.push(`/${layoutPath}/users/udin/followers`)} 
+      onPress={() => router.push(`/${layoutPath}/users/${username}/followers`)} 
       className='w-[25%] items-center' 
       > 
         <Text className='text-xl font-psemibold'>{statistic.followers}</Text>
@@ -96,7 +96,7 @@ const UserStatistic = ({ statistic }: { statistic: UserStatisticProps }) => {
       </TouchableOpacity>
 
       <TouchableOpacity  
-      onPress={() => router.push(`/${layoutPath}/users/udin/following`)} 
+      onPress={() => router.push(`/${layoutPath}/users/${username}/following`)} 
       className='w-[25%] items-center' 
       > 
         <Text className='text-xl font-psemibold'>{statistic.followings}</Text>

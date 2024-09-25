@@ -4,7 +4,8 @@ import ApiClient from '../api/axios/ApiClient'
 
 
 
-const FollowButton = ({ isFollowing, username } : {isFollowing: boolean, username: string}) => {
+const FollowButton = ({ isFollowing, username,width=48, height=20 } : 
+{isFollowing: boolean, username: string, className?: string, width?: number, height?: number}) => {
   const [follow, setfollow] = useState(isFollowing)
   const [loading, setloading] = useState(false)
 
@@ -42,7 +43,12 @@ const FollowButton = ({ isFollowing, username } : {isFollowing: boolean, usernam
     <TouchableOpacity
     activeOpacity={.8}
     onPress={toggleFollow}
-    className={`w-[40%] h-12 rounded-2xl justify-center ${follow ? "bg-gray-200" : "bg-black"} ${loading && "opacity-50"}`}
+    style={{
+      width,
+      height
+    }}
+    disabled={loading}
+    className={`rounded-2xl justify-center ${follow ? "bg-gray-200" : "bg-black"} ${loading && "opacity-50"}`}
     > 
       {!loading && (
         <Text className={`${!follow && "text-white"} font-pmedium text-center text-base`}>

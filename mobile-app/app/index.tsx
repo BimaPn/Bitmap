@@ -25,7 +25,7 @@ const Welcome = () => {
           dispatch(setAuth({ accessToken }))
           const user = await getUser()
 
-            setloading(false)
+          setloading(false)
 
         }else {
           dispatch(clearAuth())

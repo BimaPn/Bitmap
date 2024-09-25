@@ -21,6 +21,13 @@ interface UserInfoProps extends Omit<AuthUser, "access_token"> {
   isFollowing: boolean
 }
 
+type UserItemProps = {
+  name: string
+  username: string
+  avatar?: string
+  isFollowing: boolean
+}
+
 type UpdateUserProps = {
   username: string
   email: string

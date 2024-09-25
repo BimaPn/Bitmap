@@ -44,9 +44,9 @@ const useAuth = () => {
       dispatch(setUser({ user }))
       return true
     })
-    .catch((err) => {
+    .catch( async (err) => {
       console.log(err.response)
-
+      await logout()
       return false 
     })
 
