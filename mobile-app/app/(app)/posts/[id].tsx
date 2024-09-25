@@ -1,4 +1,4 @@
-import { useLocalSearchParams } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import { useEffect, useRef, useState } from 'react';
 import { View, Text, Image, ScrollView, TouchableOpacity, NativeSyntheticEvent, NativeScrollEvent } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -121,7 +121,11 @@ const PostDescription = ({ post }: { post: PostProps }) => {
 
 const UserInfo = ({ creator }: { creator: PostCreatorProps }) => {
   return ( 
-    <View className='flex-row items-center gap-2'> 
+    <TouchableOpacity
+    onPress={() => router.push(`/users/${creator.username}`)}
+    activeOpacity={.9}
+    className='flex-row items-center gap-2' 
+    > 
       <Image 
       source={creator.avatar ? { uri: creator.avatar } : images.user}  
       className='w-12 h-12 rounded-full' 
@@ -131,7 +135,7 @@ const UserInfo = ({ creator }: { creator: PostCreatorProps }) => {
         <Text className='font-medium text-base'>{creator.name}</Text>
         <Text className='text-xs'>98k Followers</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   )
 }
 

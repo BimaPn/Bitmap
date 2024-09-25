@@ -1,16 +1,14 @@
 import { View, Text, Image, ScrollView, TouchableOpacity } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import ProfileMenu from '../../../components/ProfileMenu'
-import UserContent from '../../../components/user/UserContent'
 import { router } from 'expo-router'
-import { icons, images } from '../../../constants'
-import Logout from '../../../components/Logout'
 import { useSelector } from 'react-redux'
-import { useState } from 'react'
-import Modal from '../../../components/Modal'
+import Logout from '../../../../components/Logout'
+import ProfileMenu from '../../../../components/ProfileMenu'
+import UserContent from '../../../../components/user/UserContent'
+import { icons, images } from '../../../../constants'
+import { useCommonRoutes } from '../../../../components/providers/CommonRoutesProvider'
 
 const ProfilePage = () => {
-  const [toggle, settoggle] = useState(false)
   return (
     <SafeAreaView> 
       <ScrollView className='h-full bg-white px-3'> 
@@ -18,13 +16,6 @@ const ProfilePage = () => {
           <Logout> 
             <ProfileMenu /> 
           </Logout>
-          <TouchableOpacity onPress={() => settoggle((prev) => !prev)}>
-            <Text>Toggle Button</Text>
-          </TouchableOpacity>
-          {toggle && (
-            <Modal visible={toggle} onClose={() => settoggle(false)} /> 
-          )}
-
         </View> 
         <UserInfo />
         <UserContent /> 
@@ -58,28 +49,7 @@ const UserInfo = () => {
         </View>
       )}
 
-      <View className='w-full flex-row items-center justify-evenly mt-4 mb-4'> 
-        <View className='w-[25%] items-center'> 
-          <Text className='text-xl font-psemibold'>8</Text>
-          <Text className='text-netral text-sm'>Media</Text>
-        </View>
-
-        <TouchableOpacity
-        onPress={() => router.push(`/users/udin/followers`)} 
-        className='w-[25%] items-center' 
-        > 
-          <Text className='text-xl font-psemibold'>506k</Text>
-          <Text className='text-netral text-sm'>Followers</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity  
-        onPress={() => router.push(`/users/udin/following`)} 
-        className='w-[25%] items-center' 
-        > 
-          <Text className='text-xl font-psemibold'>271</Text>
-          <Text className='text-netral text-sm'>Following</Text>
-        </TouchableOpacity>
-      </View> 
+      <UserStatistic />
       
       <View className='w-full flex-row items-center justify-center space-x-2'>
 
@@ -106,6 +76,34 @@ const UserInfo = () => {
     </View>
  </>
  )
+}
+
+const UserStatistic = () => {
+  const { layoutPath } = useCommonRoutes()
+  return (
+    <View className='w-full flex-row items-center justify-evenly mt-4 mb-4'> 
+      <View className='w-[25%] items-center'> 
+        <Text className='text-xl font-psemibold'>8</Text>
+        <Text className='text-netral text-sm'>Media</Text>
+      </View>
+
+      <TouchableOpacity
+      onPress={() => router.push(`/${layoutPath}/users/udin/followers`)} 
+      className='w-[25%] items-center' 
+      > 
+        <Text className='text-xl font-psemibold'>506k</Text>
+        <Text className='text-netral text-sm'>Followers</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity  
+      onPress={() => router.push(`/${layoutPath}/users/udin/following`)} 
+      className='w-[25%] items-center' 
+      > 
+        <Text className='text-xl font-psemibold'>271</Text>
+        <Text className='text-netral text-sm'>Following</Text>
+      </TouchableOpacity>
+    </View> 
+  )
 }
 
 export default ProfilePage

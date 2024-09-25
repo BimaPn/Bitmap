@@ -8,6 +8,7 @@ import Logout from '../../../../../../components/Logout'
 import ProfileMenu from '../../../../../../components/ProfileMenu'
 import { useEffect } from 'react'
 import ApiClient from '../../../../../../api/axios/ApiClient'
+import { useCommonRoutes } from '../../../../../../components/providers/CommonRoutesProvider'
 
 const UserProfileDetailPage = () => {
   const { username } = useLocalSearchParams();
@@ -66,28 +67,7 @@ const UserInfo = ({username}:{username:string}) => {
         </Text>
       </View>
 
-      <View className='w-full flex-row items-center justify-evenly mt-4 mb-4'> 
-        <View className='w-[25%] items-center'> 
-          <Text className='text-xl font-psemibold'>8</Text>
-          <Text className='text-netral text-sm'>Media</Text>
-        </View>
-
-        <TouchableOpacity  
-        onPress={() => router.push(`/users/udin/followers`)} 
-        className='w-[25%] items-center' 
-        > 
-          <Text className='text-xl font-psemibold'>506k</Text>
-          <Text className='text-netral text-sm'>Followers</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity  
-        onPress={() => router.push(`/users/udin/following`)} 
-        className='w-[25%] items-center' 
-        > 
-          <Text className='text-xl font-psemibold'>271</Text>
-          <Text className='text-netral text-sm'>Following</Text>
-        </TouchableOpacity>
-      </View> 
+      <UserStatistic />
       
       <View className='w-full flex-row items-center justify-center space-x-2'>
         <TouchableOpacity className='w-[45%] bg-black py-3 rounded-2xl'> 
@@ -101,6 +81,34 @@ const UserInfo = ({username}:{username:string}) => {
     </View>
  </>
  )
+}
+
+const UserStatistic = () => {
+  const { layoutPath } = useCommonRoutes()
+  return (
+    <View className='w-full flex-row items-center justify-evenly mt-4 mb-4'> 
+      <View className='w-[25%] items-center'> 
+        <Text className='text-xl font-psemibold'>8</Text>
+        <Text className='text-netral text-sm'>Media</Text>
+      </View>
+
+      <TouchableOpacity
+      onPress={() => router.push(`/${layoutPath}/users/udin/followers`)} 
+      className='w-[25%] items-center' 
+      > 
+        <Text className='text-xl font-psemibold'>506k</Text>
+        <Text className='text-netral text-sm'>Followers</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity  
+      onPress={() => router.push(`/${layoutPath}/users/udin/following`)} 
+      className='w-[25%] items-center' 
+      > 
+        <Text className='text-xl font-psemibold'>271</Text>
+        <Text className='text-netral text-sm'>Following</Text>
+      </TouchableOpacity>
+    </View> 
+  )
 }
 
 export default UserProfileDetailPage

@@ -1,12 +1,14 @@
 import { View, Text, TouchableOpacity, Image } from 'react-native'
 import { images } from '../../constants'
 import { router } from 'expo-router'
+import { useCommonRoutes } from '../providers/CommonRoutesProvider'
 
 const UserItem = ({containerStyles}:{containerStyles?: string}) => {
+  const { layoutPath } = useCommonRoutes()
   return (
     <View className={`flex-row justify-between items-center ${containerStyles}`}>
       <TouchableOpacity 
-      onPress={() => router.push(`/users/udin`)}
+      onPress={() => router.push(`/(profile)/users/udin`)}
       className='flex-row items-center space-x-3' 
       > 
         <Image 

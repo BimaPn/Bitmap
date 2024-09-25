@@ -16,9 +16,9 @@ const CommonRoutesProvider = ({ layout, children, ...props }:{ layout: string, c
   return (
   <CommonRoutesContext.Provider value={{ layoutPath }}> 
     <Stack {...props}>
-      <Stack.Screen name='/users/[username]/index' options={{headerShown:false}} />
-      <Stack.Screen name='/users/[username]/followers' options={{headerShown:false}} />
-      <Stack.Screen name='/users/[username]/following' options={{headerShown:false}} />
+      <Stack.Screen name='users/[username]/index' options={{headerShown:false}} />
+      <Stack.Screen name='users/[username]/followers' options={{headerShown:false}} />
+      <Stack.Screen name='users/[username]/following' options={{headerShown:false}} />
     {children}
     </Stack>
   </CommonRoutesContext.Provider>
