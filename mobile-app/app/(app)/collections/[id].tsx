@@ -3,40 +3,65 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import BackHeader from '../../../components/BackHeader'
 import BackButton from '../../../components/BackButton'
 import { icons, images } from '../../../constants'
-import { Link } from 'expo-router'
+import { Link, router, useLocalSearchParams } from 'expo-router'
 import CollectionPosts from '../../../components/CollectionPosts'
 import ShareButton from '../../../components/collections/ShareButton'
 import { TouchableOpacity } from 'react-native-gesture-handler'
+import { useEffect, useState } from 'react'
+import ApiClient from '../../../api/axios/ApiClient'
 
 const CollectionDetail = () => {
+  const { id } = useLocalSearchParams();
+  
+  const [collection, setcollection] = useState<CollectionInfoProps | null>(null)
+
+  useEffect(() => {
+    const getCollection = async () => {
+      ApiClient().get(`/api/collections/9d19f55e-d0e7-41be-9c90-fa23eadfb4b6/get`)
+      .then((res) => {
+        const result = res.data.collection
+        setcollection(result)
+        console.log(result)
+      })
+      .catch((err) => {
+        console.log(err.response)
+        router.back()
+      })
+    }
+
+    getCollection()
+    },[])
+
   return (
    <SafeAreaView className='h-full bg-white'> 
       <ScrollView stickyHeaderIndices={[0]}> 
         <Topbar />
+        
+        {collection && (
+          <View className='px-4 mt-2'>
 
-        <View className='px-4 mt-2'>
-
-          <View className='gap-[10px]'>
-            <Text className='text-xl font-pmedium'>Ini Judulnya</Text>
-            <Text className='text-gray-900 leading-[22px]'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis porro est eligendi ipsa quibusdam modi?</Text>
-          </View>
-
-          <View className='flex-row justify-between items-center mt-5'>
-            <View className='flex-row items-center gap-[6px]'>
-              <Image 
-              source={images.user}
-              className='w-8 h-8 rounded-full'
-              resizeMode='contain'
-              />
-              <View className='flex-row gap-1'>
-                <Text className='text-gray-600'>By</Text>
-                <Link href={`/users/dadang07`} className='font-pmedium'>Emily Johnson</Link>
-              </View>
+            <View className='gap-[10px]'>
+              <Text className='text-xl font-pmedium'>{collection.name}</Text>
+              <Text className='text-gray-900 leading-[22px]'>{collection.description}</Text>
             </View>
-            <Text className='text-gray-600'>12 Posts</Text>
-          </View>
 
-        </View>
+            <View className={`flex-row justify-between items-center ${collection.description && "mt-5"}`}>
+              <View className='flex-row items-center gap-[6px]'>
+                <Image 
+                source={collection.creator.avatar ? { uri: collection.creator.avatar } : images.user}
+                className='w-8 h-8 rounded-full'
+                resizeMode='contain'
+                />
+                <View className='flex-row gap-1'>
+                  <Text className='text-gray-600'>By</Text>
+                  <Link href={`/(home)/users/${collection.creator.username}`} className='font-pmedium'>{collection.creator.name}</Link>
+                </View>
+              </View>
+              <Text className='text-gray-600'>{collection.postCount} Posts</Text>
+            </View>
+
+          </View>
+        )}
 
         <CollectionPosts />
 
