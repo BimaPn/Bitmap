@@ -105,7 +105,7 @@ class PostController extends Controller
 
         return response()->json([
             "message" => "success",
-            "posts" => $posts
+            "posts" => $posts->items()
         ]);
 
     }
