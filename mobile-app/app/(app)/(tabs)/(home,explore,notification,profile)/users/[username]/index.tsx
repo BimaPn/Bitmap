@@ -12,6 +12,8 @@ import { useCommonRoutes } from '../../../../../../components/providers/CommonRo
 import { UserInfoProps, UserStatisticProps } from '../../../../../../types/auth'
 import LoadingSpinner from '../../../../../../components/LoadingSpinner'
 import FollowButton from '../../../../../../components/FollowButton'
+import { useSelector } from 'react-redux'
+import EditProfileButton from '../../../../../../components/EditProfileButton'
 
 const UserProfileDetailPage = () => {
   const { username } = useLocalSearchParams();
@@ -19,14 +21,11 @@ const UserProfileDetailPage = () => {
     <SafeAreaView> 
       <ScrollView stickyHeaderIndices={[0]} className='h-full bg-white'> 
 
-        <View className='flex-row justify-between items-center px-3'> 
+        <View className='flex-row justify-between items-center px-3 py-4 bg-white'> 
           <BackButton />
-          <Logout> 
-            <ProfileMenu /> 
-          </Logout>
         </View> 
 
-        <View className='px-3 pt-3'>
+        <View className='px-3 pt-4'>
           <UserInfo username={username as string} />
           <UserContent username={username as string} />
         </View>
@@ -39,7 +38,16 @@ const UserProfileDetailPage = () => {
 const UserInfo = ({username}:{username:string}) => { 
   const [user, setuser] = useState<UserInfoProps | null>(null)
 
+  const { user:auth } = useSelector((state : any) => state.auth);
+
   useEffect(() => {
+    if(user?.username === auth.username) {
+      setuser(auth)
+    }else {
+      getUserInfo()
+    }
+  },[])
+
     const getUserInfo = async () => {
       ApiClient().get(`/api/users/${username}`)
       .then((res) => {
@@ -51,8 +59,6 @@ const UserInfo = ({username}:{username:string}) => {
         router.back()
       })
     }
-    getUserInfo()
-  },[])
 
   if(!user) {
     return <LoadingSpinner />
@@ -71,22 +77,29 @@ const UserInfo = ({username}:{username:string}) => {
         <Text className='text-[22px] font-psemibold'>{user.name}</Text>
         <Text className='text-netral text-center text-[15px] -mt-[3px]'>@{user.username}</Text>
       </View>
-
-      <View className='pt-2'> 
-        <Text className='text-base text-center'>
-        {user.bio}
-        </Text>
-      </View>
+      
+      {user.bio && (
+        <View className='pt-2'> 
+          <Text className='text-base text-center'>
+          {user.bio}
+          </Text>
+        </View>
+      )}
 
       <UserStatistic statistic={user.statistic} username={user.username} />
       
       <View className='w-full flex-row items-center justify-center space-x-2'>
-        <FollowButton isFollowing={user.isFollowing} username={user.username} width={108} height={48} />
-        <TouchableOpacity className='p-[10px] rounded-xl border border-gray-300'> 
-          <Image source={icons.more_dark} className='w-6 h-6' resizeMode='contain' />
-        </TouchableOpacity>
+        {auth.username === user.username ? (
+        <EditProfileButton />
+        ) : (
+        <>
+          <FollowButton isFollowing={user.isFollowing} username={user.username} width={108} height={48} />
+          <TouchableOpacity className='p-[10px] rounded-xl border border-gray-300'> 
+            <Image source={icons.more_dark} className='w-6 h-6' resizeMode='contain' />
+          </TouchableOpacity>
+        </>
+        )}
       </View>
-
     </View>
  </>
  )

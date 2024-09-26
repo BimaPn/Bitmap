@@ -102,7 +102,6 @@ const TabsLayout = () => {
       <Tabs.Screen 
       name='(profile)'
       options={{  
-        title:"profile",
         headerShown: false,
         tabBarIcon: ({ color, focused }) => (
           <TabIcon
@@ -115,6 +114,12 @@ const TabsLayout = () => {
           />
         ),
       }}  
+      listeners={({ navigation }) => ({
+        tabPress: (e) => {
+          e.preventDefault()
+          router.push(`/(profile)/users/${user.username}`)
+        },
+      })}
       />
     </Tabs>
 
