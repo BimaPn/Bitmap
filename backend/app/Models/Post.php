@@ -43,7 +43,7 @@ class Post extends Model
 
     public function collections()
     {
-        return $this->belongsToMany(Collection::class);
+        return $this->belongsToMany(Collection::class, "post_collections");
     }
 
 

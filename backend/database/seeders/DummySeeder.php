@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Collection;
 use App\Models\Post;
+use App\Models\PostCollection;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -33,17 +35,30 @@ class DummySeeder extends Seeder
         $user->follow($user3);
         $user2->follow($user);
 
-        Post::create([
+        $collection1 = Collection::create([
+            "name" => "This is what?",
+            "user_id" => $user->id
+        ]);
+
+        $post1 = Post::create([
             "title" => "Manuk elang",
             "description" => fake()->text(150),
             "media" => url('/storage/images/posts/1.jpg'),
             "user_id" => $user->id,
         ]);
-        Post::create([
+        $post2 = Post::create([
             "title" => "bima anjay",
             "description" => fake()->text(150),
             "media" => url('/storage/images/posts/2.jpg'),
             "user_id" => $user->id,
+        ]);
+        PostCollection::create([
+            "collection_id" => $collection1->id,
+            "post_id" => $post1->id
+        ]);
+        PostCollection::create([
+            "collection_id" => $collection1->id,
+            "post_id" => $post2->id
         ]);
         Post::create([
             "title" => "test wak",

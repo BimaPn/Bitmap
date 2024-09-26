@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePostRequest;
+use App\Models\Collection;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -14,7 +15,7 @@ class PostController extends Controller
 
     public function getUserPosts(User $user)
     {
-        $posts = $user->posts()->paginate(15);
+        $posts = $user->posts()->latest()->paginate(15);
 
         $result = $posts->each(function ($post) {
             $post["creator"] = [
@@ -96,6 +97,17 @@ class PostController extends Controller
             "message" => "success",
             "posts" => $posts->items()
         ]);
+    }
+
+    public function getCollectionPosts(Collection $collection)
+    {
+        $posts = $collection->posts()->with("creator:id,name,username,avatar")->latest()->paginate(15);
+
+        return response()->json([
+            "message" => "success",
+            "posts" => $posts
+        ]);
+
     }
 
 }

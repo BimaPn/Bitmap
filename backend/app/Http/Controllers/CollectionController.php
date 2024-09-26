@@ -24,4 +24,16 @@ class CollectionController extends Controller
             "request" => $request->all()
         ]);
     }
+    public function getDetail (Collection $collection)
+    {
+        $collection->load("creator:id,username,name,avatar");
+        $postCount = $collection->posts()->count();
+
+        $collection["postCount"] = $postCount;
+
+        return response()->json([
+            "collection" => $collection
+        ]);
+    }
+
 }

@@ -11,8 +11,13 @@ class Collection extends Model
 
     protected $guarded = ["id"];
 
+    public function creator()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
     public function posts ()
     {
-        return $this->belongsToMany(Post::class);
+        return $this->belongsToMany(Post::class, "post_collections");
     }
 }
