@@ -9,19 +9,21 @@ import ShareButton from '../../../components/collections/ShareButton'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { useEffect, useState } from 'react'
 import ApiClient from '../../../api/axios/ApiClient'
+import LoadingSpinner from '../../../components/LoadingSpinner'
+
+const id = "9d19f55e-d0e7-41be-9c90-fa23eadfb4b6"
 
 const CollectionDetail = () => {
-  const { id } = useLocalSearchParams();
+  // const { id } = useLocalSearchParams();
   
   const [collection, setcollection] = useState<CollectionInfoProps | null>(null)
 
   useEffect(() => {
     const getCollection = async () => {
-      ApiClient().get(`/api/collections/9d19f55e-d0e7-41be-9c90-fa23eadfb4b6/get`)
+      ApiClient().get(`/api/collections/${id}/get`)
       .then((res) => {
         const result = res.data.collection
         setcollection(result)
-        console.log(result)
       })
       .catch((err) => {
         console.log(err.response)
@@ -37,6 +39,10 @@ const CollectionDetail = () => {
       <ScrollView stickyHeaderIndices={[0]}> 
         <Topbar />
         
+        {!collection && (
+          <LoadingSpinner />
+        )}
+
         {collection && (
           <View className='px-4 mt-2'>
 
@@ -63,7 +69,10 @@ const CollectionDetail = () => {
           </View>
         )}
 
-        <CollectionPosts />
+        <View className='px-3 mt-3'>
+          <CollectionPosts collectionId={id} />
+        </View>
+
 
       </ScrollView>
    </SafeAreaView>
