@@ -18,6 +18,7 @@ const LoggedUserLayout = () => {
         name="(tabs)" 
         options={{ headerShown: false, contentStyle:{backgroundColor: "#FFFFFF"} }} />
         <Stack.Screen name="posts/[id]" options={{ headerShown: false }} />
+        <Stack.Screen name="collections/[id]" options={{ headerShown: false }} />
 
         <Stack.Screen 
         name="categories/[slug]" 

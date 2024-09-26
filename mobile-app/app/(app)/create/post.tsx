@@ -20,7 +20,7 @@ const Create = () => {
 
   useEffect(() => {
     const getCategories = async () => {
-      ApiClient().get(`/api/categories/get`)
+      ApiClient().get(`/api/categories/all`)
       .then((res) => {
         const result = res.data.categories
         setcategories(result)
@@ -116,11 +116,11 @@ const CreatePost = ({categories}:{categories: CategoryProps[]}) => {
     .then((res) => {
       Toast.show({
         type: 'success',
-        text1: 'Post Created!',
+        text1: 'Post created!',
         text2: 'Successfully created a post!'
       });
 
-      router.push("home/trending")
+      router.push("trending")
     })
     .catch((err) => {
       const errorResponse = err.response.data.errors
