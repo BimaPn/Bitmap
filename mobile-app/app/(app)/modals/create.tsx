@@ -7,7 +7,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 
 const Create = () => {
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
-  const { dismissAll } = useBottomSheetModal();
+  const { dismiss } = useBottomSheetModal();
 
   const [urlTarget, seturlTarget] = useState<null | string>(null)
 
@@ -21,7 +21,7 @@ const Create = () => {
 
   const pathNavigate = (url: string) => {
     seturlTarget(url)
-    dismissAll()
+    dismiss()
   }
 
   const closeModal = (urlRedirect?: string) => {
@@ -59,10 +59,10 @@ const Create = () => {
 
                 <TouchableOpacity  
                 className="gap-[6px]" 
-                onPress={() => pathNavigate("create/collection")}
+                onPress={() => router.push("create/collection")}
                 > 
                   <View className="w-20 aspect-square justify-center items-center bg-gray-200 rounded-lg">
-                     <Ionicons name="grid" size={38} color="black" /> 
+                     <Ionicons name="grid" size={36} color="black" /> 
                   </View>
                   <Text className="text-center font-pmedium">Collection</Text>
                 </TouchableOpacity>

@@ -45,9 +45,7 @@ const LoggedUserLayout = () => {
         />
         <Stack.Screen 
         name="create/collection" 
-        options={{ 
-        headerShown: false,
-        }}
+        options={{ headerShown:false, presentation:"transparentModal" }} 
         />
 
         <Stack.Screen 
