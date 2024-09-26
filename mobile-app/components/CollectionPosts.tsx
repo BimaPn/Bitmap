@@ -1,25 +1,25 @@
 import { MasonryFlashList } from '@shopify/flash-list'
 import { useEffect, useState } from 'react'
-import ApiClient from '../../api/axios/ApiClient'
-import LoadingSpinner from '../LoadingSpinner'
-import NoResult from '../NoResult'
-import Post from '../Post'
+import ApiClient from '../api/axios/ApiClient'
+import LoadingSpinner from './LoadingSpinner'
+import NoResult from './NoResult'
+import Post from './Post'
 
-const UserPosts = ({username}: { username: string }) => {
-  const [posts, setposts] = useState<PostProps[] | null>(null)
+const CollectionPosts = () => {
+  const [posts, setposts] = useState<PostProps[] | null>([])
 
   useEffect(() => {
-    const getPosts = async () => {
-      ApiClient().get(`/api/posts/user/${username}`)
-      .then((res) => {
-        const posts = res.data.posts
-        setposts(posts)
-      })
-      .catch((err) => {
-        console.log(err.response)
-      })
-    }
-    getPosts()
+    // const getPosts = async () => {
+    //   ApiClient().get(`/api/posts/user/${username}`)
+    //   .then((res) => {
+    //     const posts = res.data.posts
+    //     setposts(posts)
+    //   })
+    //   .catch((err) => {
+    //     console.log(err.response)
+    //   })
+    // }
+    // getPosts()
   },[])
 
   if(!posts) {
@@ -50,4 +50,4 @@ const UserPosts = ({username}: { username: string }) => {
   )
 }
 
-export default UserPosts
+export default CollectionPosts

@@ -3,7 +3,8 @@ import CommonRoutesProvider from "../../../../components/providers/CommonRoutesP
 
 const ProfileLayout = () => {
   return (
-  <CommonRoutesProvider layout="(profile)" initialRouteName='profile'> 
+  <CommonRoutesProvider layout="(profile)"> 
+    <Stack.Screen name="null" options={{ headerShown: false }} />
   </CommonRoutesProvider>
   )
 }

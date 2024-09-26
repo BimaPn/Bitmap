@@ -23,8 +23,10 @@ import like from "../assets/icons/like.png";
 import download from "../assets/icons/download.png";
 import bookmark from "../assets/icons/bookmark.png";
 import share from "../assets/icons/share.png";
+import share_dots from "../assets/icons/share_dots.png";
 
 export default {
+  share_dots,
   share,
   like,
   download,
