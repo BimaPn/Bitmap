@@ -5,5 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/collections/{collection}/get', [CollectionController::class, 'getDetail']);
+    Route::get('/collections/recommendations/get', [CollectionController::class, 'getCollectionRecommendations']);
+    Route::get('/users/{user}/collections', [CollectionController::class, 'getUserCollections']);
     Route::post('/collections/create', [CollectionController::class, 'store']);
 });

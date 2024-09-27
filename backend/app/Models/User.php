@@ -92,6 +92,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Post::class);
     }
+    public function collections()
+    {
+        return $this->hasMany(Collection::class);
+    }
 
     /**
      * The attributes that should be cast.

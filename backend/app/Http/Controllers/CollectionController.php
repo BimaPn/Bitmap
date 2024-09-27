@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCollectionRequest;
 use App\Models\Collection;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class CollectionController extends Controller
@@ -33,6 +34,35 @@ class CollectionController extends Controller
 
         return response()->json([
             "collection" => $collection
+        ]);
+    }
+
+    public function getUserCollections (User $user)
+    {
+        $collections = $user->collections()
+        ->withCount('posts')
+        ->with(['posts' => function ($query) {
+            $query->limit(3);
+        }])
+        ->latest()
+        ->paginate(15);
+
+
+        return response()->json([
+            "collections" => $collections->items()
+        ]);
+    }
+
+    public function getCollectionRecommendations ()
+    {
+        $collections = Collection::inRandomOrder()
+        ->with("posts:id,media")
+        ->limit(5)
+        ->get();
+
+        return response()->json([
+            "message" => "success.",
+            "collections" => $collections
         ]);
     }
 
