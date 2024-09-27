@@ -1,51 +1,61 @@
 import { View, Text, Image, FlatList, Dimensions } from 'react-native'
 import { categories } from '../../constants/images'
+import { useEffect, useState } from 'react';
+import ApiClient from '../../api/axios/ApiClient';
+import LoadingSpinner from '../LoadingSpinner';
+import NoResult from '../NoResult';
+import CollectionItem from '../collections/CollectionItem';
 
 const { width } = Dimensions.get('window');
 
 const Collections = () => {
+
+  const [collections, setcollections] = useState<CollectionItemProps[] | null>(null)
+
+  useEffect(() => {
+    const getCollections = async () => {
+      ApiClient().get(`/api/collections/recommendations`)
+      .then((res) => {
+        const result = res.data.collections
+        setcollections(result)
+      })
+      .catch((err) => {
+        console.log(err.response)
+      })
+    }
+    getCollections()
+    },[])
+
   return (
-    <View className='mt-5 mb-8 pl-3'>
+    <View className='mt-6 mb-8 pl-3'>
       <View className='flex-row items-center justify-between mb-[10px]'> 
-        <Text className='text-lg font-pmedium'>Popular Collections</Text>
+        <Text className='text-lg font-pmedium'>Collections For You</Text>
       </View>
 
-      <View className='flex-1 flex flex-row flex-wrap -mx-1'>
-      </View>
-      <FlatList
-      data={[1,2,3,4]} 
-      horizontal
-      keyExtractor={(_, i) => `${i}`}
-      renderItem={({item}) => ( 
-        <CollectionPreview />
+      {!collections && (
+        <LoadingSpinner />
       )}
-      showsHorizontalScrollIndicator={false}
-      />
+      {collections && collections.length < 1 && (
+        <NoResult />
+      )}
+
+      {collections && (
+        <FlatList
+        data={collections} 
+        horizontal
+        keyExtractor={(item) => item.id}
+        renderItem={({item}) => ( 
+          <View style={{width: width*.8}} className='mr-4'>
+            <CollectionItem {...item} />
+          </View>
+        )}
+        showsHorizontalScrollIndicator={false}
+        />
+      )}
 
     </View>
   )
 }
 
-const CollectionPreview = () => {
-  return ( 
-    <View style={{width: width*.8}} className='mr-4'>
-      <View className='flex-1 flex-row justify-between items-center aspect-[16/10] rounded-2xl overflow-hidden space-x-[6px]'>
-        <View className='w-1/2 h-full' >
-          <Image source={{ uri: categories[0].image }} className='w-full h-full' resizeMode='cover' />
-        </View>
-        <View className='w-1/2 h-full space-y-[6px]'>
-          <Image source={{ uri: categories[1].image }} className='w-full h-1/2' resizeMode='cover' />
-          <Image source={{ uri: categories[2].image }} className='w-full h-1/2' resizeMode='cover' />
-        </View> 
-      </View>
-
-      <View className='mt-2'>
-        <Text className='font-pmedium text-base'>Beauty of Nature</Text>
-        <Text className='text-netral text-[13px]'>55 Photos</Text>
-      </View>
-
-    </View>
-  )
-}
 
 export default Collections
