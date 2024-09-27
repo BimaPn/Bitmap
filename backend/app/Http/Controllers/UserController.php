@@ -53,6 +53,25 @@ class UserController extends Controller
         ]);
     }
 
+    public function usersSearch (Request $request)
+    {
+        $query = $request->input("query");
+
+        $users = User::where('username', 'like', '%' . $query . '%')
+        ->where('name', 'like', '%' . $query . '%')
+        ->paginate(15);
+
+
+        $result = $users->each(function ($user) {
+            $user["isFollowing"] = auth()->user()->isFollowing($user);
+        });
+
+        return response()->json([
+            "message" => $query,
+            "users" => $users->items()
+        ]);
+    }
+
     public function follow (User $user)
     {
         $auth = Auth::user();

@@ -6,6 +6,7 @@ use App\Http\Requests\StoreCollectionRequest;
 use App\Models\Collection;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class CollectionController extends Controller
 {
@@ -34,6 +35,23 @@ class CollectionController extends Controller
 
         return response()->json([
             "collection" => $collection
+        ]);
+    }
+
+    public function search (Request $request)
+    {
+        $query = $request->input("query");
+
+        $collections = Collection::where('name', 'like', '%' . $query . '%')
+        ->withCount('posts')
+        ->with(['posts' => function ($query) {
+            $query->limit(3);
+        }])
+        ->paginate(15);
+
+        return response()->json([
+            "message" => "success.",
+            "collections" => $collections->items()
         ]);
     }
 
