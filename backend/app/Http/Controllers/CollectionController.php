@@ -56,6 +56,7 @@ class CollectionController extends Controller
     public function getCollectionRecommendations ()
     {
         $collections = Collection::inRandomOrder()
+        ->withCount("posts")
         ->with("posts:id,media")
         ->limit(5)
         ->get();
