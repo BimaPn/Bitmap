@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native'
+import { View} from 'react-native'
 import React, { useEffect, useState } from 'react'
 import ApiClient from '../../api/axios/ApiClient'
 import { UserItemProps } from '../../types/auth'

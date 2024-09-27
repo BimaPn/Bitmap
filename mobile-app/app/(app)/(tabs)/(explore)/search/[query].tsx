@@ -65,7 +65,7 @@ const SearchContent = ({ query }: { query: string }) => {
           )}
 
           {type === "Collections" && (
-          <CollectionSearch />
+          <CollectionSearch query={query} />
           )}
   
         </View>
