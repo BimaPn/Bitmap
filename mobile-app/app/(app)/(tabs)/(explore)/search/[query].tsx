@@ -61,7 +61,7 @@ const SearchContent = ({ query }: { query: string }) => {
           )}
 
           {type === "Users" && (
-          <UserSearch />
+          <UserSearch query={query} />
           )}
 
           {type === "Collections" && (

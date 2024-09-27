@@ -1,58 +1,51 @@
 import { View, Text } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import ApiClient from '../../api/axios/ApiClient'
+import { UserItemProps } from '../../types/auth'
+import UserItem from '../user/UserItem'
+import LoadingSpinner from '../LoadingSpinner'
+import NoResult from '../NoResult'
 
-const UserSearch = () => {
-  return (
+const UserSearch = ({ query }:{ query: string }) => {
+    const [users, setusers] = useState<UserItemProps[] | null>(null)
+
+  useEffect(() => {
+    const getUsers = async () => {
+      ApiClient().get(`/api/users/search/get?query=${query}`)
+      .then((res) => {
+        const result = res.data.users
+        setusers(result)
+      })
+      .catch((err) => {
+        console.log(err.response.data)
+      })
+    }
+    getUsers()
+  },[])
+
+  if(!users) {
+    return <LoadingSpinner />
+  }
+
+  if(users && users.length < 1) {
+    return <NoResult />
+  }
+
+  return users && (
     <View>
-      <Text>UserSearch</Text>
+    {(users && users.length > 0) && (
+      <View className='px-3 mt-3'> 
+        {users.map((item, i) => ( 
+          <UserItem 
+          {...item}
+          containerStyles='mb-4'
+          key={i} 
+          />
+        ))}
+      </View>
+    )}
     </View>
   )
 }
-
-    // <MasonryFlashList
-    //   contentContainerStyle={{ 
-    //     paddingHorizontal: 8,
-    //     backgroundColor: "#FFFFFF",
-    //   }}
-    //   data={posts}
-    //   keyExtractor={(item) => item.id}
-    //   numColumns={2}
-    //   renderItem={({ item }) => ( 
-    //     <Post 
-    //     post={item} 
-    //     containerStyles='m-1' 
-    //     />
-    //   )}
-    //   ListHeaderComponent={() => (
-    //     <>
-    //       <View className="flex-row mb-4 mt-10 pr-1">
-    //         <BackButton containerStyles='!p-2 !mt-[0]'/> 
-    //         <View className="flex-1">
-    //           <Search initialQuery={query as string}/>
-    //         </View>
-    //       </View>
-    //
-    //       <View className='flex-row gap-2 px-3 mb-6'>
-    //         <TouchableOpacity className='!w-fit px-5 py-2 rounded-full bg-gray-200 border border-black'> 
-    //           <Text className='-mt-[2px]'>Posts</Text>
-    //         </TouchableOpacity>
-    //         <TouchableOpacity className='!w-fit px-5 py-2 rounded-full bg-gray-200'> 
-    //           <Text className='-mt-[2px]'>Users</Text>
-    //         </TouchableOpacity>
-    //         <TouchableOpacity className='!w-fit px-5 py-2 rounded-full bg-gray-200'> 
-    //           <Text className='-mt-[2px]'>Collections</Text>
-    //         </TouchableOpacity>
-    //       </View>
-    //
-    //       {!posts && (
-    //         <LoadingSpinner />
-    //       )}
-    //       {posts && posts.length < 1 && (
-    //         <NoResult />
-    //       )}
-    //     </>
-    //   )}
-    //   estimatedItemSize={200}
-    // />
 
 export default UserSearch
