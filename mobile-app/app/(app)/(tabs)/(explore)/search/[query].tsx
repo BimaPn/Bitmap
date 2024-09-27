@@ -1,4 +1,4 @@
-import { View, SafeAreaView } from 'react-native'
+import { View, SafeAreaView, TouchableOpacity, Text, ScrollView } from 'react-native'
 import { useLocalSearchParams } from 'expo-router';
 import { MasonryFlashList } from '@shopify/flash-list';
 import BackButton from '../../../../../components/BackButton';
@@ -8,65 +8,70 @@ import ApiClient from '../../../../../api/axios/ApiClient';
 import NoResult from '../../../../../components/NoResult';
 import LoadingSpinner from '../../../../../components/LoadingSpinner';
 import Post from '../../../../../components/Post';
+import PostSearch from '../../../../../components/search/PostSearch';
+import UserSearch from '../../../../../components/search/UserSearch';
+import CollectionSearch from '../../../../../components/search/CollectionSearch';
 
 const Query = () => {
   const { query } = useLocalSearchParams();
 
-  const [posts, setposts] = useState<PostProps[] | null>(null)
-
-  useEffect(() => {
-    setposts(null)
-    const getData = async () => {
-      ApiClient().get(`/api/posts/search?query=${query}`)
-      .then((res) => {
-        const result = res.data.posts
-        setposts(result)
-      })
-      .catch((err) => {
-        console.log(err.response)
-      })
-    }
-    getData()
-  },[query])
-
   return  (
     <SafeAreaView className="bg-white h-full">
 
-    <MasonryFlashList
-      contentContainerStyle={{ 
-        paddingHorizontal: 8,
-        backgroundColor: "#FFFFFF",
-      }}
-      data={posts}
-      keyExtractor={(item) => item.id}
-      numColumns={2}
-      renderItem={({ item }) => ( 
-        <Post 
-        post={item} 
-        containerStyles='m-1' 
-        />
-      )}
-      ListHeaderComponent={() => (
-        <>
-          <View className="flex-row mb-4 mt-10 pr-1">
+        <ScrollView>
+          <View className="flex-row mb-5 mt-10 pr-3 pl-1">
             <BackButton containerStyles='!p-2 !mt-[0]'/> 
             <View className="flex-1">
               <Search initialQuery={query as string}/>
             </View>
           </View>
-          {!posts && (
-            <LoadingSpinner />
-          )}
-          {posts && posts.length < 1 && (
-            <NoResult />
-          )}
-        </>
-      )}
-      estimatedItemSize={200}
-    />
 
+          <SearchContent query={query as string} />
+        </ScrollView>
     </SafeAreaView>
   )
 }
+
+
+type SearchType = "Posts" | "Users" | "Collections"
+
+const types = ["Posts", "Users", "Collections"]
+
+const SearchContent = ({ query }: { query: string }) => {
+  const [type, settype] = useState<SearchType>("Posts")
+  return (
+    <View>
+        <View className='flex-row gap-2 px-3 mb-6'>
+          {types.map((item, i) => (
+            <TouchableOpacity 
+            key={i}
+            onPress={() => settype(item as SearchType)}
+            activeOpacity={.9}
+            className={`!w-fit px-5 py-2 rounded-full bg-gray-200 ${item === type && "border border-black" }`}
+            > 
+              <Text className='-mt-[2px]'>{item}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+
+        <View className='px-3'>
+        
+          {type === "Posts" && (
+          <PostSearch query={query} />
+          )}
+
+          {type === "Users" && (
+          <UserSearch />
+          )}
+
+          {type === "Collections" && (
+          <CollectionSearch />
+          )}
+  
+        </View>
+    </View>
+  )
+}
+
 
 export default Query

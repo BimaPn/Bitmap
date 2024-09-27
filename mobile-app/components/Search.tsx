@@ -26,8 +26,8 @@ const Search = (props:SearchType) => {
       );
     }
 
-    if (pathname.startsWith("/explore/search")) router.setParams({ query });
-    else router.navigate(`/explore/search/${query}`)
+    if (pathname.startsWith("/(explore)/search")) router.setParams({ query });
+    else router.navigate(`/(explore)/search/${query}`)
   }
   return (
     <View className={`space-y-2 ${otherStyles}`}>
