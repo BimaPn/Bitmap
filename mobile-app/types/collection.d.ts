@@ -11,3 +11,14 @@ type CollectionCreatorProps = {
   name: string
   avatar: string
 }
+
+type CollectionItemProps = {
+  id: string
+  name: string
+  posts_count: number
+  posts: CollectionItemPostProps[]
+}
+
+type CollectionItemPostProps = {
+  media: string
+}
