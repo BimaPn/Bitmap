@@ -11,6 +11,7 @@ import BackButton from '../../../components/BackButton';
 import { LinearGradient } from 'expo-linear-gradient';
 import ApiClient from '../../../api/axios/ApiClient';
 import { useDetailPost } from '../../../components/providers/DetailPostProvider';
+import LikeButton from '../../../components/LikeButton';
 
 
 const PostDetail = () => {
@@ -106,7 +107,7 @@ const PostDescription = ({ post }: { post: PostProps }) => {
 
       <View className='flex-row justify-between items-center'> 
         <UserInfo creator={post.creator} /> 
-        <PostActions />
+        <PostActions isLiked={post.isLiked} postId={post.id} />
       </View>
 
       <View className='space-y-[7px] mt-5'> 
@@ -138,15 +139,15 @@ const UserInfo = ({ creator }: { creator: PostCreatorProps }) => {
   )
 }
 
-const PostActions = () => {
+const PostActions = ({ isLiked, postId }:{ isLiked: boolean, postId: string }) => {
   return (
     <View className='flex-row items-center gap-[19px]'>
       <TouchableOpacity> 
         <Image source={icons.download} className='w-[22px] h-[22px]' resizeMode='contain' />
       </TouchableOpacity>
-      <TouchableOpacity> 
-        <Image source={icons.like} className='w-[25px] h-[25px] ml-[2px] -mb-[1px]' resizeMode='contain' />
-      </TouchableOpacity>
+      <View className='w-fit -mt-[1px]'>
+      <LikeButton isLiked={isLiked} postId={postId} />
+      </View>
       <TouchableOpacity> 
         <Image source={icons.bookmark} className='w-[23px] h-[23px]' resizeMode='contain' />
       </TouchableOpacity>

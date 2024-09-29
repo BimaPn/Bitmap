@@ -20,6 +20,7 @@ import picture from "../assets/icons/picture.png";
 import collections from "../assets/icons/collections.png";
 import camera from "../assets/icons/camera.png";
 import like from "../assets/icons/like.png";
+import like_fill from "../assets/icons/like_fill.png";
 import download from "../assets/icons/download.png";
 import bookmark from "../assets/icons/bookmark.png";
 import share from "../assets/icons/share.png";
@@ -29,6 +30,7 @@ export default {
   share_dots,
   share,
   like,
+  like_fill,
   download,
   bookmark,
   picture,

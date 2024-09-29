@@ -4,6 +4,7 @@ type PostProps = {
   media: string
   description?: string
   creator: PostCreatorProps
+  isLiked: boolean
 }
 
 type PostCreatorProps = {
