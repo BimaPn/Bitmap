@@ -5,6 +5,8 @@ import { useEffect, useState } from 'react';
 import ApiClient from '../../../../api/axios/ApiClient';
 import LoadingSpinner from '../../../../components/LoadingSpinner';
 import NoResult from '../../../../components/NoResult';
+import { View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Trending = () => {
   const [posts, setposts] = useState<PostProps[] | null>(null)
@@ -23,31 +25,33 @@ const Trending = () => {
     getPosts()
   },[])
 
-  if(!posts) {
-    return <LoadingSpinner />
-  }
-
-  if(posts && posts.length < 1) {
-    return <NoResult />
-  }
-
-  return posts && (
-    <MasonryFlashList
-      contentContainerStyle={{ 
-        paddingHorizontal: 12,
-        backgroundColor: "#FFFFFF",
-      }}
-      data={posts}
-      keyExtractor={(item) => item.id}
-      numColumns={2}
-      renderItem={({ item }) => ( 
-        <Post
-        post={item}
-        containerStyles='m-1' 
-        /> 
+  return (
+    <View className='h-full bg-white'>
+      {!posts && (
+      <LoadingSpinner />
       )}
-      estimatedItemSize={200}
-    />
+      {posts && posts.length < 1 && (
+        <NoResult />
+      )}
+      {posts && posts.length > 0 && (
+      <MasonryFlashList
+        contentContainerStyle={{ 
+          paddingHorizontal: 12,
+        }}
+        data={posts}
+        keyExtractor={(item) => item.id}
+        numColumns={2}
+        renderItem={({ item }) => ( 
+          <Post
+          post={item}
+          containerStyles='m-1' 
+          /> 
+        )}
+        estimatedItemSize={200}
+      />
+      )}
+    </View>
+
   )
 }
 

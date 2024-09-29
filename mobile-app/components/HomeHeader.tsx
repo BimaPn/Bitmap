@@ -6,17 +6,17 @@ const HomeHeader = () => {
   const [pathActive, setPathActive] = useState<"trending"|"following">("trending")
   const path = usePathname()
   useEffect(() => {
-    if(path.includes("/home/trending")) {
+    if(path.includes("/trending")) {
       setPathActive("trending")
     }
-    if(path.includes("/home/following")) {
+    if(path.includes("/following")) {
       setPathActive("following")
     }
   },[path])
   return ( 
     <View className='flex-row space-x-5'> 
       <TouchableOpacity 
-      onPress={() => router.push("/home/trending")} 
+      onPress={() => router.push("/trending")} 
       className="relative font-pmedium text-base"  
       > 
         <Text className="font-pmedium text-[15px]">Trending</Text>
@@ -27,7 +27,7 @@ const HomeHeader = () => {
 
       <TouchableOpacity 
       className="relative" 
-      onPress={() => router.push("/home/following")}
+      onPress={() => router.push("/following")}
       > 
         <Text className="font-pmedium text-[15px]">Following</Text>
         {pathActive === "following" && ( 
