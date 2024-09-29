@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PostLikeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 
@@ -15,6 +16,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/posts/collection/{collection}', [PostController::class, 'getCollectionPosts']);
     Route::get('/posts/{post}/recommendation', [PostController::class, 'getRecommendationPosts']);
     Route::get('/posts/search', [PostController::class, 'searchPosts']);
+    Route::post('/posts/{post}/like', [PostLikeController::class, 'like']);
+    Route::post('/posts/{post}/unlike', [PostLikeController::class, 'unlike']);
     // Route::put('/posts/{id}', [PostController::class, 'update']);
     // Route::delete('/posts/{id}', [PostController::class, 'destroy']);
     // Route::post('/posts/{id}/like', [PostController::class, 'like']);

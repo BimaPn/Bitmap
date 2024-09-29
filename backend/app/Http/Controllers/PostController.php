@@ -23,6 +23,7 @@ class PostController extends Controller
                 "username" => auth()->user()->username,
                 "avatar" => auth()->user()->avatar
             ];
+            $post["isLiked"] = $post->isAuthLiked();
         });
 
         return response()->json([
@@ -34,6 +35,7 @@ class PostController extends Controller
     public function getPost (Post $post)
     {
         $post->load("creator:id,name,username,avatar")->only(["id","title","description","creator"]);
+
         return response()->json([
             "post" => $post
         ]);
@@ -47,9 +49,13 @@ class PostController extends Controller
         ->inRandomOrder()
         ->paginate(15);
 
+        $result = $recommendedPosts->each(function ($post) {
+            $post["isLiked"] = $post->isAuthLiked();
+        });
+
         return response()->json([
             "message" => "Success.",
-            "posts" => $recommendedPosts->items()
+            "posts" => $result
         ]);
     }
 
@@ -81,9 +87,13 @@ class PostController extends Controller
         ->inRandomOrder()
         ->paginate(15);
 
+        $result = $posts->each(function ($post) {
+            $post["isLiked"] = $post->isAuthLiked();
+        });
+
         return response()->json([
             "message" => $query,
-            "posts" => $posts->items()
+            "posts" => $result
         ]);
     }
 
@@ -93,9 +103,13 @@ class PostController extends Controller
         $posts = Post::with("creator:id,name,username,avatar")
             ->latest()->paginate(15);
 
+        $result = $posts->each(function ($post) {
+            $post["isLiked"] = $post->isAuthLiked();
+        });
+
         return response()->json([
             "message" => "success",
-            "posts" => $posts->items()
+            "posts" => $result
         ]);
     }
 
@@ -103,9 +117,13 @@ class PostController extends Controller
     {
         $posts = $collection->posts()->with("creator:id,name,username,avatar")->latest()->paginate(15);
 
+        $result = $posts->each(function ($post) {
+            $post["isLiked"] = $post->isAuthLiked();
+        });
+
         return response()->json([
             "message" => "success",
-            "posts" => $posts->items()
+            "posts" => $result
         ]);
 
     }

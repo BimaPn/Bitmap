@@ -97,6 +97,11 @@ class User extends Authenticatable
         return $this->hasMany(Collection::class);
     }
 
+    public function postsLiked ()
+    {
+        return $this->belongsToMany(Post::class, "post_likes");
+    }
+
     /**
      * The attributes that should be cast.
      *

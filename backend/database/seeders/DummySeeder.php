@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Collection;
 use App\Models\Post;
 use App\Models\PostCollection;
+use App\Models\PostLike;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -40,11 +41,17 @@ class DummySeeder extends Seeder
             "user_id" => $user->id
         ]);
 
+
+
         $post1 = Post::create([
             "title" => "Manuk elang",
             "description" => fake()->text(150),
             "media" => url('/storage/images/posts/1.jpg'),
             "user_id" => $user->id,
+        ]);
+        PostLike::create([
+            "user_id" => $user->id,
+            "post_id" => $post1->id
         ]);
         $post2 = Post::create([
             "title" => "bima anjay",

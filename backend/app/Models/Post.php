@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Support\Facades\Auth;
 
 
 class Post extends Model
@@ -18,8 +19,6 @@ class Post extends Model
     {
         parent::boot();
     }
-
-
 
     // public function comments()
     // {
@@ -44,6 +43,19 @@ class Post extends Model
     public function collections()
     {
         return $this->belongsToMany(Collection::class, "post_collections");
+    }
+
+    public function usersLiked ()
+    {
+        return $this->belongsToMany(User::class, "post_likes");
+    }
+
+    public function isAuthLiked ()
+    {
+        $auth = Auth::user();
+
+        return PostLike::where("user_id",$auth->id)
+            ->where("post_id", $this->id)->exists();
     }
 
 
