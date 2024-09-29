@@ -53,6 +53,11 @@ const LoggedUserLayout = () => {
         name="modals/create" 
         options={{ headerShown:false, presentation:"transparentModal" }} 
         />
+
+        <Stack.Screen 
+        name="modals/saved" 
+        options={{ headerShown:false, presentation:"transparentModal" }} 
+        />
       </Stack>
     </CategoryProvider>
   </DetailPostProvider>

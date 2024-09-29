@@ -148,7 +148,7 @@ const PostActions = ({ isLiked, postId }:{ isLiked: boolean, postId: string }) =
       <View className='w-fit -mt-[1px]'>
       <LikeButton isLiked={isLiked} postId={postId} />
       </View>
-      <TouchableOpacity> 
+      <TouchableOpacity onPress={() => router.push("/modals/saved")}> 
         <Image source={icons.bookmark} className='w-[23px] h-[23px]' resizeMode='contain' />
       </TouchableOpacity>
     </View>
