@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -102,6 +103,19 @@ class UserController extends Controller
 
         return response()->json([
             "success"=> false
+        ]);
+    }
+    public function getFollowingsPosts (User $user)
+    {
+        $followings = $user->followings()->with('followable')->get()->pluck("followable_id");
+
+        $posts = Post::whereIn('user_id', $followings)
+        ->with("creator:id,name,username,avatar")
+        ->paginate(15);
+
+        return response()->json([
+            "message" => "success",
+            "posts" => $posts->items()
         ]);
     }
 }
