@@ -6,15 +6,16 @@ import { Feather } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { router } from 'expo-router';
 import UserCollectionsModal from '../../../components/UserCollectionsModal';
+import { useDetailPost } from '../../../components/providers/DetailPostProvider';
 
 const examples = [1,2,3,4,5,7,8,9,54,32,511,23, 45, 23]
 
 const Saved = () => {
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
-
-
   const snapPoints = useMemo(() => ['60%'], []);
+
+  const { post } = useDetailPost()
 
   const { dismiss } = useBottomSheetModal();
 
@@ -41,6 +42,8 @@ const Saved = () => {
     }
   }
 
+  if(!post) return router.replace('/trending')
+
   return (
     <View>
         <BottomSheetModal
@@ -55,7 +58,7 @@ const Saved = () => {
               <Text className="font-pmedium text-lg text-center">Save to collection</Text>
             </View>
 
-            <UserCollectionsModal />
+            <UserCollectionsModal postId={post.id as string} />
 
         </BottomSheetScrollView>
         <TouchableOpacity 
