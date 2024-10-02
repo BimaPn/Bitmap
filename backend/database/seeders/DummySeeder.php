@@ -3,10 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\Collection;
+use App\Models\CollectionPost;
 use App\Models\Post;
-use App\Models\PostCollection;
 use App\Models\PostLike;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DummySeeder extends Seeder
@@ -59,11 +58,11 @@ class DummySeeder extends Seeder
             "media" => url('/storage/images/posts/2.jpg'),
             "user_id" => $user->id,
         ]);
-        PostCollection::create([
+        CollectionPost::create([
             "collection_id" => $collection1->id,
             "post_id" => $post1->id
         ]);
-        PostCollection::create([
+        CollectionPost::create([
             "collection_id" => $collection1->id,
             "post_id" => $post2->id
         ]);

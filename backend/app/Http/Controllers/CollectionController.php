@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCollectionRequest;
 use App\Models\Collection;
+use App\Models\CollectionPost;
+use App\Models\Post;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -82,6 +84,19 @@ class CollectionController extends Controller
         return response()->json([
             "message" => "success.",
             "collections" => $collections
+        ]);
+    }
+
+    public function addPost (Collection $collection, Post $post)
+    {
+
+        CollectionPost::create([
+            "post_id" => $post->id,
+            "collection_id" => $collection->id
+        ]);
+
+        return response()->json([
+            "message" => "success."
         ]);
     }
 

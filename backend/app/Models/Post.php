@@ -42,7 +42,7 @@ class Post extends Model
 
     public function collections()
     {
-        return $this->belongsToMany(Collection::class, "post_collections");
+        return $this->belongsToMany(Collection::class, "collection_posts");
     }
 
     public function usersLiked ()
